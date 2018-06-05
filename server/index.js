@@ -35,10 +35,14 @@ app.use(auth.router)
 let trips = require('./routes/Trips')
 let thingstodo = require('./routes/ThingsToDo')
 let destinations = require('./routes/Destinations')
+let googleApi = require('./routes/Api')
 
+app.use(googleApi.router)
 app.use(trips.router)
 app.use(destinations.router)
 app.use(thingstodo.router)
+
+
 
 app.get('*', (req, res, next) => {
   res.status(404).send({
