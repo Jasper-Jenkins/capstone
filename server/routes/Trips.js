@@ -1,6 +1,6 @@
 let router = require('express').Router()
 var Trip = require('../models/Trip')
-var User = require('../models/User')
+//var User = require('../models/User')
 
 //GET BY ID
 router.get('/api/trips/:id', (req, res, next)=>{
