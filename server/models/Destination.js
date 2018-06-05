@@ -1,16 +1,15 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
-var schemaName = 'ThingsToDo'
+var schemaName = 'Destination'
 var ObjectId = Schema.Types.ObjectId
 
-let todoSchema = new Schema ({
+let destinationSchema = new Schema({
   title: {type: String, required: true},
   description: {type: String},
   author: {type: String},
-  gallery: [{type: String}],
-  categories: [{type: String, enum: [''], required: true}],
+  photo: {type: String},
   place_id: {type: String, required: true},
-  rating: {type: Number},
+  published: {type: Boolean, default: false},
   userId: {
     type: ObjectId,
     ref: 'User',
@@ -20,11 +19,7 @@ let todoSchema = new Schema ({
     type: ObjectId,
     ref: 'Trip',
     required: true
-  },
-  destinationId: {
-    type: ObjectId,
-    ref: 'Destination'
   }
 })
 
-module.exports = mongoose.model(schemaName, todoSchema)
+module.exports = mongoose.model(schemaName, destinationSchema)

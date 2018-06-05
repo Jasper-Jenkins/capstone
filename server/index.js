@@ -32,8 +32,13 @@ app.use(auth.router)
 
 
 //routers here
+let trips = require('./routes/Trips')
+let thingstodo = require('./routes/ThingsToDo')
+let destinations = require('./routes/Destinations')
 
-
+app.use(trips.router)
+app.use(destinations.router)
+app.use(thingstodo.router)
 
 app.get('*', (req, res, next) => {
   res.status(404).send({
