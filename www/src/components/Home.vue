@@ -52,7 +52,8 @@ export default {
   },
   methods: {
     findDestination() {
-      this.$store.dispatch("findDestination", this.destination); // incomplete only has a title at the moment
+      console.log(this.destination)
+      this.$store.dispatch("findDestination", this.destination.title); // incomplete only has a title at the moment
     }
   }
 };

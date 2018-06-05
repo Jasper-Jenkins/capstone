@@ -7,14 +7,7 @@ var baseUrl = production ? '//kanban-ramsey-maddy.herokuapp.com/' : '//localhost
 
 vue.use(vuex)
 
-// API Key: AIzaSyDwdoKeSFC0xUN1VI8Ud78ZfpadFV7jUwU
-
-
-var api = axios.create({
-    baseURL: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=',
-    timeout: 3000,
-    withCredentials: true
-})
+// Google places API Key: AIzaSyA2l-r77x24uatF20-TRoAEceNL_fRKjcg
 
 var server = axios.create({
   baseURL: baseUrl,
@@ -84,8 +77,9 @@ export default new vuex.Store({
         })
     },
     findDestination({commit, dispatch}, destination){
-        api.get(''+destination+ '&key=AIzaSyDwdoKeSFC0xUN1VI8Ud78ZfpadFV7jUwU')
+        server.get('/api/locations/' +destination)
         .then(res=>{
+            console.log(res)
             commit('setApiResults', res.data)
             dispatch('getUserResults', res.data)
         })
