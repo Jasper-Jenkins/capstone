@@ -1,23 +1,67 @@
 <template>
-  <div class="hello">
-    
+  <div class="home">
+    <!-- <h1>/test</h1> -->
+     <div>
+       <form @submit.prevent="findDestination">
+            <input type="text" name="destination" id="destination" placeholder="Enter destination" v-model="destination.title">
+       
+            <button type="submit">Find your slice of heaven</button>
+        </form>    
+     </div> 
+  
+  <!-- <button @click='logout'>Logout</button>      -->
+  <!-- <ul>
+    <li v-for="destination in destinations" :key="destination.id">
+     <router-link :to="{name: 'Destination', params:{destinationId: destination._id}}">
+       {{destination.title}}
+      </router-link>
+    </li>
+  </ul> -->
+   <!-- <ul>
+    <li v-for="destination in destinations" :key="destination.id">
+     <router-link :to="{name: 'Destination', params:{place_id: destination._id}}">
+       {{destination.title}}
+      </router-link>
+ 
+    </li>
+  </ul> -->
   </div>
 </template>
 
 <script>
+import router from "../router";
+import destination from "./Destination";
+
 export default {
-  name: 'Home',
-  data () {
+  name: "Home",
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      destination: {
+        title: ""
+      }
+    };
+  },
+  components: {
+    destination
+  },
+  mounted() {
+    if (!this.$store.state.user._id) {
+      // if no user id kick to the Login page
+      router.push({ name: "User" });
+    }
+  },
+  methods: {
+    findDestination() {
+      this.$store.dispatch("findDestination", this.destination); // incomplete only has a title at the moment
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {

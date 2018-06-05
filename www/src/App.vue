@@ -1,14 +1,41 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <!-- <img src="./assets/logo.png"> -->
+    <nav class="navbar navbar-light top-header">
+      <div>
+        <router-link :to="{ name: 'Home'}" class="navbar-brand">
+            <a>Home</a>
+        </router-link>
+      </div>
+      <div>
+      </div>
+      <a class="navbar-brand" @click="login" v-if="!(user._id)">Sign In/Login</a>
+      <div v-if="user._id" class="d-flex flex-column">
+        <a class="navbar-brand">User: {{user.displayName}}</a>
+        <a class="navbar-brand" @click="signOut">Sign out</a>
+      </div>
+    </nav>
     <router-view/>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  export default {
+    name: 'App',
+    computed: {
+      user() {
+        return this.$store.state.user
+      }
+    },
+    methods: {
+      login() {
+        this.$router.push({ name: 'User' })
+      },
+      signOut() {
+        this.$store.dispatch('signOut')
+      }
+    }
+  }
 </script>
 
 <style>
