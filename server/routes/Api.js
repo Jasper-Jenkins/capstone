@@ -10,11 +10,10 @@ var api = axios.default.create({
 })
 
 router.get('/api/locations/:query', (req, res) => {
-    console.log(req.params.query)
   api.get('' + req.params.query + '&key=AIzaSyCb7mDvm7G1Aa7Pu3LklOArn99tbDJZj00')
     .then(place => {
       place
-      res.send(place.data)
+      res.status(200).send(place.data)
     })
 })
 
