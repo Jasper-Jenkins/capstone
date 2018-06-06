@@ -105,6 +105,16 @@ export default new vuex.Store({
        .catch(res=>{
             console.log(res)
         })
+    },
+    addDestination({dispatch, commit, state}, destination) {
+      var newDestination = {
+        title: destination.name,
+        place_id: destination.place_id
+      }
+      server.post('/api/trips/'+state.activeTrip._id+'/destinations', newDestination)
+       .then(res => {
+         commit('setDestinations')
+       })
     }
   }
 })
