@@ -1,7 +1,6 @@
 var router = require('express').Router()
 
 let axios = require('axios')
-//import axios from 'axios'
 
 var api = axios.default.create({
   baseURL: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=',

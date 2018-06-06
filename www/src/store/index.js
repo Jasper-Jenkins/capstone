@@ -80,7 +80,7 @@ export default new vuex.Store({
         server.get('/api/locations/' +destination)
         .then(res=>{
             console.log(res)
-            commit('setApiResults', res.data)
+            commit('setApiResults', res.data.results)
             dispatch('getUserResults', res.data)
         })
         .catch(res=>{

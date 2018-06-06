@@ -10,6 +10,9 @@
         <button class="btn btn-primary btn-success" type="submit">Add</button>
       </form>
     </div>
+    <div>
+      <p v-for="result in apiResults"><strong>{{result.name}}</strong> - {{result.formatted_address}} <button @click="addDestination(result)">+</button></p>
+    </div>
   </div>
 </template>
 
@@ -33,6 +36,9 @@
       },
       getDestination() {
         this.$store.dispatch('findDestination', this.query)
+      },
+      addDestination(result) {
+        this.$store.dispatch('addDestination', result)
       }
     }
   };
