@@ -24,7 +24,7 @@ export default new Router({
       component: Plan
     },
     {
-      path:'/destination/:destinationId',
+      path:'/destination',
       name: 'Destination',
       component: Destination
     }

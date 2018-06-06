@@ -2,7 +2,7 @@
   <div class="user-destinations">
     <h2>Destinations</h2>
     <div>
-      <a @click="selectActiveDest"><p v-for="destination in destinations">{{destination.title}}</p></a>
+      <a v-for="destination in destinations" @click="selectActiveDest(destination)"><p>{{destination.title}}</p></a>
     </div>
   </div>
 </template>
@@ -21,8 +21,8 @@
       }
     },
     methods: {
-      selectActiveDest() {
-        this.$store.dispatch()
+      selectActiveDest(dest) {
+        this.$store.dispatch('selectActiveDest', dest)
       }
     }
   }
@@ -30,6 +30,5 @@
 </script>
 
 <style>
-
 
 </style>

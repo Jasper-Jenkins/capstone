@@ -17,18 +17,23 @@
     <div>
       <users-destinations></users-destinations>
     </div>
+    <div>
+      <add-todo></add-todo>
+    </div>
   </div>
 </template>
 
 <script>
 import addDestination from "./AddDestination";
 import usersDestinations from "./UserDestinations"
+import addTodo from './AddTodo'
 
 export default {
   name: "Plan",
   components: {
     addDestination,
-    usersDestinations
+    usersDestinations,
+    addTodo
   },
   data() {
     return {

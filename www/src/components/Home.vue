@@ -6,22 +6,32 @@
         <input type="text" name="destination" id="destination" placeholder="Enter destination" v-model="destination.title">
         <button type="submit">Find your slice of heaven</button>
       </form>
-    </div>
-    <div>
-      <p v-for="userResult in userResults" :key="userResult._id">
-        <strong>{{userResult.name}}</strong> - {{userResult.formatted_address}}
-        <button @click="addDestination(userResult)">+</button>
-      </p>
-    </div>
-    <!-- <button @click='logout'>Logout</button>      -->
-    <!-- <ul>
+      <div>
+        <p v-for="userResult in userResults" :key="userResult._id">
+          <strong>{{userResult.name}}</strong> - {{userResult.formatted_address}}
+          <button @click="addDestination(userResult)">+</button>
+            <a @click="selectActiveDest(userResult)">
+               {{userResult.title}}
+            </a>
+            
+        </p>
+      </div>
+      <div>
+        <p v-for="result in apiResults">
+          <strong>{{result.name}}</strong> - {{result.formatted_address}}
+          <button @click="addDestination(result)">+</button>
+        </p>
+      </div>
+
+      <!-- <button @click='logout'>Logout</button>      -->
+      <!-- <ul>
     <li v-for="destination in destinations" :key="destination.id">
      <router-link :to="{name: 'Destination', params:{destinationId: destination._id}}">
        {{destination.title}}
       </router-link>
     </li>
   </ul> -->
-    <!-- <ul>
+      <!-- <ul>
     <li v-for="destination in destinations" :key="destination.id">
      <router-link :to="{name: 'Destination', params:{place_id: destination._id}}">
        {{destination.title}}
@@ -29,6 +39,7 @@
  
     </li>
   </ul> -->
+    </div>
   </div>
 </template>
 
@@ -38,6 +49,7 @@
 
   export default {
     name: "Home",
+
     data() {
       return {
         destination: {
@@ -51,8 +63,12 @@
     computed: {
       userResults() {
         return this.$store.state.userResults
+      },
+      apiResults() {
+        return this.$store.state.apiResults
       }
     },
+
     mounted() {
       if (!this.$store.state.user._id) {
         // if no user id kick to the Login page
@@ -66,6 +82,10 @@
       },
       addDestination(result) {
         this.$store.dispatch('addDestination', result)
+      },
+      selectActiveDest(userResult) {
+        this.$store.dispatch('selectActiveDest', userResult)
+        this.$router.push('Destination')
       }
     }
   };

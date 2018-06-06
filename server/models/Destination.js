@@ -10,6 +10,8 @@ let destinationSchema = new Schema({
   photo: {type: String},
   place_id: {type: String, required: true},
   published: {type: Boolean, default: false},
+  long: {type: String},
+  lat:{type: String},
   userId: {
     type: ObjectId,
     ref: 'User',
