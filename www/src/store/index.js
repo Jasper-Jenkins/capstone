@@ -19,8 +19,13 @@ export default new vuex.Store({
   state: {
     user: {},
     apiResults: [],
-    userResults: [],
-    activeTrip: {}
+    userResults: [{
+      title: "Grand Canyon",
+      formatted_address: "1234 Easy Street"
+    }],
+    
+    activeTrip: {},
+    destinations: []
   },
   mutations: {
     setUser(state, user) {
@@ -29,11 +34,14 @@ export default new vuex.Store({
     setActiveTrip(state, trip) {
       state.activeTrip = trip
     },
-    setApiResults(state, results){
-       state.apiResults = results 
+    setApiResults(state, results) {
+      state.apiResults = results
     },
-    setUserResults(state, results){
-        state.userResults = results
+    setUserResults(state, results) {
+      state.userResults = results
+    },
+    setDestinations(state, destinations) {
+      state.destinations = destinations
     }
   },
   actions: {
@@ -76,45 +84,57 @@ export default new vuex.Store({
           console.log(res.data)
         })
     },
-    findDestination({commit, dispatch}, destination){
-        server.get('/api/locations/' +destination)
-        .then(res=>{
-            console.log(res)
-            commit('setApiResults', res.data.results)
-            dispatch('getUserResults', res.data)
+    findDestination({ commit, dispatch }, destination) {
+      server.get('/api/locations/' + destination)
+        .then(res => {
+          console.log(res)
+          commit('setApiResults', res.data.results)
+          dispatch('getUserResults', res.data)
         })
-        .catch(res=>{
-            console.log(res)
-        })
-    },
-    getUserResults({commit, dispatch}, searchResults){
-        server.get('/api/destinations/'+searchResults._id+"/place")
-        .then(res=>{
-            commit('setUserResults', res.data)
-            
-        })
-        .catch(res=>{
-            console.log(res)
+        .catch(res => {
+          console.log(res)
         })
     },
-    createTrip({dispatch, commit}, trip) {
-      server.post('/api/trips', trip) 
-       .then(res => {
-         commit('setActiveTrip', res.data)
-       })
-       .catch(res=>{
-            console.log(res)
+    // findUserDestination({commit, dispatch}, destination){
+    //   server.get('/')
+    // },
+    getUserResults({ commit, dispatch }, searchResults) {
+      console.log(searchResults, 'search')
+      var search = searchResults.results[0]
+      server.get('/api/destinations/' + search.place_id + "/place")
+        .then(res => {
+          console.log(res.data)
+          commit('setUserResults', res.data)
+        })
+        .catch(res => {
+          console.log(res)
         })
     },
-    addDestination({dispatch, commit, state}, destination) {
+    createTrip({ dispatch, commit }, trip) {
+      server.post('/api/trips', trip)
+        .then(res => {
+          commit('setActiveTrip', res.data)
+        })
+        .catch(res => {
+          console.log(res)
+        })
+    },
+    addDestination({ dispatch, commit, state }, destination) {
       var newDestination = {
         title: destination.name,
-        place_id: destination.place_id
+        place_id: destination.place_id,
+        tripId: state.activeTrip._id
       }
-      server.post('/api/trips/'+state.activeTrip._id+'/destinations', newDestination)
-       .then(res => {
-         commit('setDestinations')
-       })
+      server.post('/api/destinations', newDestination)
+        .then(res => {
+          dispatch('getTripDestinations', res.data.tripId)
+        })
+    },
+    getTripDestinations({ dispatch, commit }, id) {
+      server.get('/api/trips/' + id + '/destinations')
+        .then(res => {
+          commit('setDestinations', res.data)
+        })
     }
   }
 })

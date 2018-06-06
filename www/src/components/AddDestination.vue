@@ -1,7 +1,6 @@
 <template>
   <div class="add-destination">
     <div>
-      <h3>Destinations</h3>
       <button @click="toggleCreate">+</button>
     </div>
     <div v-if="toggleForm">

@@ -15,11 +15,13 @@ router.get('/api/destinations/:userId/user', (req,res) => {
 //get all published
 router.get('/api/destinations/:placeId/place', (req, res) => {
   Destination.find({
-    published: true,
     place_id: req.params.placeId
   })
-    .then(destination => {
-      res.status(200).send(destination)
+    .then(destinations => {
+      var pubDest = destinations.filter(destination => {
+        return destination.published == true
+      })
+      res.status(200).send(pubDest)
     })
     .catch(err => {
       res.status(400).send(err)
@@ -37,8 +39,8 @@ router.get('/api/destinations/:id', (req, res, next) => {
     })
 })
 
+//get by trip Id
 router.get('/api/trips/:id/destinations', (req, res, next) => {
-
   Destination.find({ tripId: req.params.id })
     .then(trips => {
       console.log(trips)
@@ -52,9 +54,7 @@ router.get('/api/trips/:id/destinations', (req, res, next) => {
 //ADD
 router.post('/api/destinations', (req, res, next) => {
   var destination = req.body
-
   destination.userId = req.session.uid
-
   Destination.create(destination)
     .then(newDestination => {
       res.status(200).send(newDestination)

@@ -14,15 +14,21 @@
     <div>
       <add-destination></add-destination>
     </div>
+    <div>
+      <users-destinations></users-destinations>
+    </div>
   </div>
 </template>
 
 <script>
 import addDestination from "./AddDestination";
+import usersDestinations from "./UserDestinations"
+
 export default {
   name: "Plan",
   components: {
-    addDestination
+    addDestination,
+    usersDestinations
   },
   data() {
     return {
