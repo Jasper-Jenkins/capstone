@@ -88,7 +88,10 @@ export default new vuex.Store({
       'food',
       'point_of_interest',
       'place_of_worship'
-    ]
+    ],
+    userTodos: [],
+    googleTodos: [],
+    todos: []
   },
   mutations: {
     setUser(state, user) {
@@ -108,6 +111,15 @@ export default new vuex.Store({
     },
     setActiveDest(state, destination) {
       state.activeDest = destination
+    },
+    setUserTodos(state, todos) {
+      state.userTodos = todos
+    },
+    setGoogleTodos(state, todos) {
+      state.googleTodos = todos
+    },
+    setNewTodo(state, todo) {
+      state.todos.push(todo)
     }
   },
   actions: {
@@ -189,7 +201,9 @@ export default new vuex.Store({
       var newDestination = {
         title: destination.name,
         place_id: destination.place_id,
-        tripId: state.activeTrip._id
+        tripId: state.activeTrip._id,
+        long: destination.geometry.location.lng,
+        lat: destination.geometry.location.lat,
       }
       server.post('/api/destinations', newDestination)
         .then(res => {
@@ -205,6 +219,46 @@ export default new vuex.Store({
     selectActiveDest({ dispatch, commit }, dest) {
       console.log('works', dest)
       commit('setActiveDest', dest)
-    }
+    },
+    findTodos({dispatch, commit, state}, category) {
+      server.get('/api/thingstodo/'+state.activeDest.place_id+'/' + category)
+        .then(res => {
+          commit('setUserTodos', res.data)
+          dispatch('getGoogleTodos', category)
+        })
+    },
+    getGoogleTodos({dispatch, commit, state}, category) {
+      var search = {
+        categories: category,
+        coords: state.activeDest.lat + ',' + state.activeDest.long
+      }
+      server.post('/api/nearby/places', search) 
+       .then(res => {
+         console.log(res.data.results)
+         commit('setGoogleTodos', res.data.results)
+       })
+    },
+    addTodo({dispatch, commit, state}, todo) {
+      todo.destinationId = state.activeDest._id
+      todo.tripId = state.activeTrip._id
+      server.post('/api/thingstodo', todo)
+       .then(res => {
+         commit('setNewTodo', res.data)
+       })
+    },
+    addGoogleTodo({dispatch,commit, state}, todo) {
+      var newTodo = {
+        place_id: todo.place_id,
+        title: todo.name,
+        categories: todo.types,
+        destinationId: state.activeDest._id,
+        tripId: state.activeTrip._id
+      }
+      debugger
+      server.post('/api/thingstodo', newTodo)
+       .then(res => {
+         commit('setNewTodo', res.data)
+       })
+    } 
   }
 })

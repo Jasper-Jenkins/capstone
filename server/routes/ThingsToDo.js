@@ -12,6 +12,24 @@ router.get('/api/thingstodo/:id', (req, res, next) => {
     })
 })
 
+//get by category and place id
+router.get('/api/thingstodo/:placeId/:category', (req, res) => {
+  ToDo.find({
+    place_id: req.params.placeId
+  })
+   .then(thingstodo => {
+     var filterTodos = thingstodo.filter(todo => {
+       if (todo.categories.includes(req.params.category)) {
+         return todo.published
+       }
+     })
+     res.status(200).send(filterTodos)
+   })
+   .catch(err => {
+     res.status(400).send(err)
+   })
+})
+
 router.get('/api/destinations/:destinationId/thingstodo', (req, res, next) => {
   ToDo.find({ destinationId: req.params.destinationId })
     .then(thingstodo => {
@@ -24,9 +42,9 @@ router.get('/api/destinations/:destinationId/thingstodo', (req, res, next) => {
 //ADD
 router.post('/api/thingstodo', (req, res, next) => {
   console.log(req.body)
-  //   debugger
-  var task = req.body
-  ToDo.create(task)
+  var todo = req.body
+  todo.userId = req.session.uid
+  ToDo.create(todo)
     .then(newThingToDo => {
       res.status(200).send(newThingToDo)
     })

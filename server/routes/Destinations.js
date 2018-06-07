@@ -1,8 +1,9 @@
 var router = require('express').Router()
 var Destination = require('../models/Destination')
+var ThingToDo = require('../models/ThingToDo')
 
-router.get('/api/destinations/:userId/user', (req,res) => {
-   Destination.find({
+router.get('/api/destinations/:userId/user', (req, res) => {
+  Destination.find({
     userId: req.params.userId
   })
     .then(destination => {
@@ -80,6 +81,23 @@ router.delete('/api/destinations/:id', (req, res, next) => {
   Destination.findByIdAndRemove(req.params.id)
     .then(data => {
       res.send("Successfully Deleted destination")
+    })
+    .catch(err => {
+      res.status(400).send(err)
+    })
+})
+
+//make a destination public
+router.put('/api/destination/public/:id', (req, res) => {
+  Destination.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then(destination => {
+      ThingToDo.update({destinationId: destination._id}, {published: req.body.published}, { multi: true })
+       .then(todos => {
+         res.status(200).send({todos, destination})
+       })
+       .catch(err => {
+         res.status(400).send({message: 'doesnt work', err})
+       })
     })
     .catch(err => {
       res.status(400).send(err)
