@@ -1,23 +1,23 @@
 <template>
   <div class="home">
     <!-- <h1>/test</h1> -->
-    <div>
+    <div class="container-fluid">
       <form @submit.prevent="getResults">
         <input type="text" name="destination" id="destination" placeholder="Enter destination" v-model="destination.title">
         <button type="submit">Find your slice of heaven</button>
       </form>
-      <div>
-        <p v-for="userResult in userResults" :key="userResult._id">
-          <strong>{{userResult.name}}</strong> - {{userResult.formatted_address}}
+      <div class="row">
+        <div class="col-3 userResults text-center" v-for="userResult in userResults" :key="userResult._id">
+         <img :src="userResult.photo" alt=""> <strong>{{userResult.name}}</strong> - {{userResult.formatted_address}}
 
           <!-- <button @click="addDestination(userResult)">+</button> -->
           <a @click="selectActiveDest(userResult)">
             {{userResult.title}}
           </a>
-        </p>
+        </div>
       </div>
-      <div>
-        <p v-for="result in apiResults">
+      <div class="row">
+        <div class="col-3 googleResults text-center" v-for="result in apiResults" :key="result._id">
             <img :src="result.photo" alt="">
           <strong>{{result.name}}</strong> - {{result.formatted_address}}
           <select v-model="trip">
@@ -25,7 +25,7 @@
             <option v-for="trip in trips" :key="trip._id" :value="trip">{{trip.title}}</option>
           </select>
           <button @click="addDestination(result)">+</button>
-        </p>
+        </div>      
       </div>
 
       <!-- <button @click='logout'>Logout</button>      -->
@@ -124,5 +124,13 @@
 
   a {
     color: #42b983;
+  }
+  userResults img {
+    height: 50px;
+    width: auto;
+  }
+  googleResults img {
+    height: 50px;
+    width: auto;
   }
 </style>

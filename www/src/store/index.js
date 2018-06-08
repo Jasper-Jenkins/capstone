@@ -185,7 +185,7 @@ export default new vuex.Store({
     // },
     getUserResults({ commit, dispatch }, searchResults) {
       console.log(searchResults, 'search')
-      var search = searchResults.results[0]
+      var search = searchResults[0]
       server.get('/api/destinations/' + search.place_id + "/place")
         .then(res => {
           console.log(res.data)
@@ -212,6 +212,7 @@ export default new vuex.Store({
           tripId: state.activeTrip._id,
           long: destination.geometry.location.lng,
           lat: destination.geometry.location.lat,
+          photo: destination.photo
         }
       }
       else {
@@ -221,6 +222,7 @@ export default new vuex.Store({
           tripId: state.activeTrip._id,
           long: destination.long,
           lat: destination.lat,
+          photo: destination.photo
         }
       }
       server.post('/api/destinations', newDestination)
@@ -306,6 +308,12 @@ export default new vuex.Store({
     },
     selectActiveTrip({dispatch, commit}, trip) {
       commit("setActiveTrip", trip)
+    },
+    getDestTodos({dispatch, commit}, id) {
+      server.get('/api/destinations/'+id+'/thingstodo')
+       .then(res => {
+         commit('setUserTodos', res.data)
+       })
     }
   }
 })

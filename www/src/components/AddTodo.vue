@@ -1,5 +1,5 @@
 <template>
-  <div class="add-tado">
+  <div class="add-todo">
     <div class="find">
       <select name="Category" class="form-control" id="" v-model="category">
         <option disabled>Select a Category</option>
@@ -8,7 +8,7 @@
       <button @click="searchTodos">Find</button>
     </div>
     <div class="userResults">
-      <p v-for="todo in userTodos">{{todo.title}} <button @click="addTodo(todo)">+</button></p>
+      <p v-for="todo in userTodos">{{todo.title}}<button @click="addTodo(todo)">+</button></p>
     </div>
     <div class="googleResults">
       <p v-for="todo in googleTodos">{{todo.name}} <button @click="addGoogleTodo(todo)">+</button></p>

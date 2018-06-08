@@ -3,7 +3,7 @@
     <div>
       {{activeDest.title}}
       
-      {{activeDest.description}}
+      <img :src="activeDest.photo" alt="">
     </div>
     <select v-model="trip">
       <option disabled value=''>Add Destinatio to Trip: </option>
@@ -12,7 +12,6 @@
     <button @click="addDestination(activeDest)">Add destination to trip: </button>
   <!-- <router-link :to="{name: 'Home'}">Go Home</router-link> -->
   </div>
- 
 </template>
 
 <script>
@@ -20,9 +19,7 @@
     name: 'Destination',
     data() {
       return {
-        destination: {
-
-        },
+        destination: {},
         trip: {}
       }
     },
@@ -39,6 +36,7 @@
        addDestination(result) {
         this.$store.dispatch('selectActiveTrip', this.trip)
         this.$store.dispatch('addDestination', result)
+        alert("Destination added to your trip")
       },
     }
   }
