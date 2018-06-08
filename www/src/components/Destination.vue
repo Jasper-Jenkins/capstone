@@ -1,14 +1,16 @@
 <template>
   <div class="destination">
     <div>
-      {{destinationResults.title}}
+      {{activeDest.title}}
+      
+      {{activeDest.description}}
     </div>
     <select v-model="trip">
       <option disabled value=''>Add Destinatio to Trip: </option>
       <option v-for="trip in trips" :key="trip._id" :value="trip">{{trip.title}}</option>
     </select>
-    <button @click="addDestination">Add destination to trip: </button>
-  <router-link :to="{name: 'Home'}">Go Home</router-link>
+    <button @click="addDestination(activeDest)">Add destination to trip: </button>
+  <!-- <router-link :to="{name: 'Home'}">Go Home</router-link> -->
   </div>
  
 </template>
@@ -25,7 +27,7 @@
       }
     },
     computed: {
-      destinationResults() {
+      activeDest() {
         return this.$store.state.activeDest
       },
       trips() {

@@ -1,12 +1,12 @@
 <template>
-  <div class="">
+  <div class="user-destination">
 
   </div>
 </template>
 
 <script>
   export default {
-    name: '',
+    name: 'userDestination',
     data() {
       return {
 

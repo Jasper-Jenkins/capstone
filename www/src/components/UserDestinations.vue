@@ -2,7 +2,7 @@
   <div class="user-destinations">
     <h2>Destinations</h2>
     <div>
-      <router-link v-for="destination in destinations" @click.native="selectActiveDest(destination)" :to={ name: 'myDestination', params: { id: destination._id }}><p>{{destination.title}}</p></router-link>
+      <router-link v-for="destination in destinations" @click.native="selectActiveDest(destination)" :to="{ name: 'myDestination', params: { id: destination._id }}" :key="destination._id"><p>{{destination.title}}</p></router-link>
     </div>
   </div>
 </template>

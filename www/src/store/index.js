@@ -173,7 +173,7 @@ export default new vuex.Store({
       server.get('/api/locations/' + destination)
         .then(res => {
           console.log(res)
-          commit('setApiResults', res.data.results)
+          commit('setApiResults', res.data)
           dispatch('getUserResults', res.data)
         })
         .catch(res => {
@@ -205,12 +205,23 @@ export default new vuex.Store({
         })
     },
     addDestination({ dispatch, commit, state }, destination) {
-      var newDestination = {
-        title: destination.name,
-        place_id: destination.place_id,
-        tripId: state.activeTrip._id,
-        long: destination.geometry.location.lng,
-        lat: destination.geometry.location.lat,
+      if(destination['geometry']) {
+        var newDestination = {
+          title: destination.name,
+          place_id: destination.place_id,
+          tripId: state.activeTrip._id,
+          long: destination.geometry.location.lng,
+          lat: destination.geometry.location.lat,
+        }
+      }
+      else {
+        var newDestination = {
+          title: destination.title,
+          place_id: destination.place_id,
+          tripId: state.activeTrip._id,
+          long: destination.long,
+          lat: destination.lat,
+        }
       }
       server.post('/api/destinations', newDestination)
         .then(res => {

@@ -13,7 +13,16 @@ let apiKey = 'AIzaSyCb7mDvm7G1Aa7Pu3LklOArn99tbDJZj00'
 router.get('/api/locations/:query', (req, res) => {
   api.get('textsearch/json?query=' + req.params.query + '&key=' +apiKey)
     .then(place => {
-      res.status(200).send(place.data)
+      var newPlace = place.data.results.map(local => {
+        return {
+          formatted_address: local.formatted_address,
+          geometry: local.geometry,
+          name: local.name,
+          place_id: local.place_id,
+          photo: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" +local.photos[0].photo_reference+ "&key=" + apiKey
+        }
+      })
+      res.status(200).send(newPlace)
     })
 })
 

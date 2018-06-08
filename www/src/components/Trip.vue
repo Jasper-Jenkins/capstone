@@ -11,12 +11,12 @@
 
   export default {
     name: 'Trip',
+    mounted() {
+      this.$store.dispatch('getTripDestinations', this.$route.params.id)
+    },
     components: {
       addDestination,
       usersDestinations
-    },
-    mounted() {
-      this.$store.dispatch('getTripDestinations', this.$route.params.id)
     },
     data() {
       return {
@@ -24,9 +24,6 @@
       }
     },
     computed: {
-      destinations() {
-        return this.$store.state.destinations
-      }
     },
     methods: {}
   }

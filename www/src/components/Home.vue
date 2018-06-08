@@ -18,6 +18,7 @@
       </div>
       <div>
         <p v-for="result in apiResults">
+            <img :src="result.photo" alt="">
           <strong>{{result.name}}</strong> - {{result.formatted_address}}
           <select v-model="trip">
             <option disabled value=''>Add Destination to Trip: </option>
