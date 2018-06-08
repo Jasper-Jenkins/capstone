@@ -2,10 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import User from '@/components/Login'
-import Plan from '@/components/Plan'
 import Destination from '@/components/Destination'
 import Trip from '@/components/Trip'
 import MyTrips from '@/components/MyTrips'
+import MyDestination from '@/components/UserDestination'
 Vue.use(Router)
 
 export default new Router({
@@ -21,11 +21,6 @@ export default new Router({
       component: User
     },
     {
-      path: '/plan-trip',
-      name: 'Plan',
-      component: Plan
-    },
-    {
       path:'/destination',
       name: 'Destination',
       component: Destination
@@ -39,6 +34,11 @@ export default new Router({
       path: '/mytrips',
       name: 'myTrips',
       component: MyTrips
+    },
+    {
+      path: '/mydestination',
+      name: 'myDestination',
+      component: MyDestination
     }
   ]
 })

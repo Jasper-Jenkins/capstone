@@ -9,7 +9,7 @@ let destinationSchema = new Schema({
   author: {type: String},
   photo: {type: String},
   place_id: {type: String, required: true},
-  published: {type: Boolean, default: false},
+  published: {type: Boolean, default: true},
   long: {type: String},
   lat:{type: String},
   userId: {

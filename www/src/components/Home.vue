@@ -9,16 +9,20 @@
       <div>
         <p v-for="userResult in userResults" :key="userResult._id">
           <strong>{{userResult.name}}</strong> - {{userResult.formatted_address}}
-          <button @click="addDestination(userResult)">+</button>
-            <a @click="selectActiveDest(userResult)">
-               {{userResult.title}}
-            </a>
-            
+
+          <!-- <button @click="addDestination(userResult)">+</button> -->
+          <a @click="selectActiveDest(userResult)">
+            {{userResult.title}}
+          </a>
         </p>
       </div>
       <div>
         <p v-for="result in apiResults">
           <strong>{{result.name}}</strong> - {{result.formatted_address}}
+          <select v-model="trip">
+            <option disabled value=''>Add Destination to Trip: </option>
+            <option v-for="trip in trips" :key="trip._id" :value="trip">{{trip.title}}</option>
+          </select>
           <button @click="addDestination(result)">+</button>
         </p>
       </div>
@@ -54,7 +58,8 @@
       return {
         destination: {
           title: ""
-        }
+        },
+       trip: {}
       };
     },
     components: {
@@ -66,7 +71,13 @@
       },
       apiResults() {
         return this.$store.state.apiResults
-      }
+      },
+       trips() {
+       
+         var trips = this.$store.state.userTrips
+         console.log(trips, "this trips")
+        return trips
+        },
     },
 
     mounted() {
@@ -74,6 +85,7 @@
         // if no user id kick to the Login page
         router.push({ name: "User" });
       }
+       this.$store.dispatch('getUsersTrips')
     },
     methods: {
       getResults() {
@@ -81,6 +93,7 @@
         this.$store.dispatch("findDestination", this.destination.title); // incomplete only has a title at the moment
       },
       addDestination(result) {
+        this.$store.dispatch('selectActiveTrip', this.trip)
         this.$store.dispatch('addDestination', result)
       },
       selectActiveDest(userResult) {

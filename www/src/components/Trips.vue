@@ -2,7 +2,7 @@
   <div class="trips">
     <div class="row">
       <div class="col-md-10 offset-1 card" v-for="trip in trips">
-        <router-link :to="{ name: 'Trip', params: { id: trip._id }}">
+        <router-link @click.native="selectActiveTrip(trip)" :to="{ name: 'Trip', params: { id: trip._id }}">
           <h2>{{trip.title}}</h2>
           <p>{{trip.description}}</p>
         </router-link>
@@ -24,7 +24,11 @@
         return this.$store.state.userTrips
       }
     },
-    methods: {}
+    methods: {
+      selectActiveTrip(trip) {
+        this.$store.dispatch('selectActiveTrip', trip)
+      }
+    }
   }
 
 </script>

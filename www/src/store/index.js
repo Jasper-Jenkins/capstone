@@ -120,10 +120,13 @@ export default new vuex.Store({
       state.googleTodos = todos
     },
     setNewTodo(state, todo) {
-      state.todos.push(todo)
+      state.todos.unshift(todo)
     },
     setUserTrips(state, trips) {
       state.userTrips = trips
+    },
+    setActiveTrip(state, trip) {
+      state.activeTrip = trip
     }
   },
   actions: {
@@ -289,6 +292,9 @@ export default new vuex.Store({
        .catch(res => {
         console.log(res)
       })
+    },
+    selectActiveTrip({dispatch, commit}, trip) {
+      commit("setActiveTrip", trip)
     }
   }
 })
