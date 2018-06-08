@@ -91,14 +91,15 @@ export default new vuex.Store({
     ],
     userTodos: [],
     googleTodos: [],
-    todos: []
+    todos: [],
+    userTrips: []
   },
   mutations: {
     setUser(state, user) {
       state.user = user
     },
-    setActiveTrip(state, trip) {
-      state.activeTrip = trip
+    addTrip(state, trip) {
+      state.userTrips.unshift(trip)
     },
     setApiResults(state, results) {
       state.apiResults = results
@@ -120,6 +121,9 @@ export default new vuex.Store({
     },
     setNewTodo(state, todo) {
       state.todos.push(todo)
+    },
+    setUserTrips(state, trips) {
+      state.userTrips = trips
     }
   },
   actions: {
@@ -191,7 +195,7 @@ export default new vuex.Store({
     createTrip({ dispatch, commit }, trip) {
       server.post('/api/trips', trip)
         .then(res => {
-          commit('setActiveTrip', res.data)
+          commit('addTrip', res.data)
         })
         .catch(res => {
           console.log(res)
@@ -209,11 +213,17 @@ export default new vuex.Store({
         .then(res => {
           dispatch('getTripDestinations', res.data.tripId)
         })
+        .catch(res => {
+          console.log(res)
+        })
     },
     getTripDestinations({ dispatch, commit }, id) {
       server.get('/api/trips/' + id + '/destinations')
         .then(res => {
           commit('setDestinations', res.data)
+        })
+        .catch(res => {
+          console.log(res)
         })
     },
     selectActiveDest({ dispatch, commit }, dest) {
@@ -226,6 +236,9 @@ export default new vuex.Store({
           commit('setUserTodos', res.data)
           dispatch('getGoogleTodos', category)
         })
+        .catch(res => {
+          console.log(res)
+        })
     },
     getGoogleTodos({dispatch, commit, state}, category) {
       var search = {
@@ -237,6 +250,9 @@ export default new vuex.Store({
          console.log(res.data.results)
          commit('setGoogleTodos', res.data.results)
        })
+       .catch(res => {
+        console.log(res)
+      })
     },
     addTodo({dispatch, commit, state}, todo) {
       todo.destinationId = state.activeDest._id
@@ -245,6 +261,9 @@ export default new vuex.Store({
        .then(res => {
          commit('setNewTodo', res.data)
        })
+       .catch(res => {
+        console.log(res)
+      })
     },
     addGoogleTodo({dispatch,commit, state}, todo) {
       var newTodo = {
@@ -254,11 +273,22 @@ export default new vuex.Store({
         destinationId: state.activeDest._id,
         tripId: state.activeTrip._id
       }
-      debugger
       server.post('/api/thingstodo', newTodo)
        .then(res => {
          commit('setNewTodo', res.data)
        })
-    } 
+       .catch(res => {
+        console.log(res)
+      })
+    },
+    getUsersTrips({dispatch, commit, state}) {
+      server.get('/api/trips/user/' + state.user._id) 
+       .then(res => {
+         commit('setUserTrips', res.data)
+       })
+       .catch(res => {
+        console.log(res)
+      })
+    }
   }
 })

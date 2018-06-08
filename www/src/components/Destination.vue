@@ -2,7 +2,6 @@
   <div class="destination">
     <div>
       {{destinationResults.title}}
-
     </div>
   </div>
 </template>

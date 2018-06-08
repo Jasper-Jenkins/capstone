@@ -20,6 +20,9 @@
     <div>
       <add-todo></add-todo>
     </div>
+    <div>
+      <create-todo></create-todo>
+    </div>
   </div>
 </template>
 
@@ -27,13 +30,15 @@
 import addDestination from "./AddDestination";
 import usersDestinations from "./UserDestinations"
 import addTodo from './AddTodo'
+import createTodo from './CreateTodo'
 
 export default {
   name: "Plan",
   components: {
     addDestination,
     usersDestinations,
-    addTodo
+    addTodo,
+    createTodo
   },
   data() {
     return {
