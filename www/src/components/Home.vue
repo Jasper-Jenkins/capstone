@@ -2,6 +2,9 @@
   <div class="home">
     <!-- <h1>/test</h1> -->
     <div class="container-fluid">
+<mytrip></mytrip>
+    </div>
+    <div class="container-fluid">
       <form @submit.prevent="getResults">
         <input type="text" name="destination" id="destination" placeholder="Enter destination" v-model="destination.title">
         <button type="submit">Find your slice of heaven</button>
@@ -51,6 +54,8 @@
 <script>
   import router from "../router";
   import destination from "./Destination";
+  import mytrip from './MyTrip'
+
 
   export default {
     name: "Home",
@@ -64,7 +69,8 @@
       };
     },
     components: {
-      destination
+      destination,
+      mytrip
     },
     computed: {
       userResults() {
@@ -92,6 +98,7 @@
       getResults() {
         console.log(this.destination)
         this.$store.dispatch("findDestination", this.destination.title); // incomplete only has a title at the moment
+        this.title = ""
       },
       addDestination(result) {
         this.$store.dispatch('selectActiveTrip', this.trip)

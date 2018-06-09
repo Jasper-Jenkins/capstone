@@ -6,6 +6,9 @@
         <router-link :to="{ name: 'Home'}" class="navbar-brand">
             <a>Home</a>
         </router-link>
+        <router-link :to="{ name: 'myTrips'}" class="navbar-brand">
+            <a>My Trips</a>
+        </router-link>
       </div>
       <div>
       </div>

@@ -1,12 +1,13 @@
 <template>
   <div class="destination">
+    
     <div>
       {{activeDest.title}}
       
       <img :src="activeDest.photo" alt="">
     </div>
     <select v-model="trip">
-      <option disabled value=''>Add Destinatio to Trip: </option>
+      <option disabled value=''>Add Destination to Trip: </option>
       <option v-for="trip in trips" :key="trip._id" :value="trip">{{trip.title}}</option>
     </select>
     <button @click="addDestination(activeDest)">Add destination to trip: </button>
