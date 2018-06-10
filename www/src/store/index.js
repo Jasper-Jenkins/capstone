@@ -180,9 +180,6 @@ export default new vuex.Store({
           console.log(res)
         })
     },
-    // findUserDestination({commit, dispatch}, destination){
-    //   server.get('/')
-    // },
     getUserResults({ commit, dispatch }, searchResults) {
       console.log(searchResults, 'search')
       var search = searchResults[0]
@@ -203,6 +200,26 @@ export default new vuex.Store({
         .catch(res => {
           console.log(res)
         })
+    },
+    deleteTrip({commit, dispatch, state}, trip){
+      server.delete('/api/trips/' + trip._id)
+      .then(res=>{
+     //   debugger
+    //    commit('setUserTrips', res.data)
+        dispatch('getUsersTrips')
+      })
+      .catch(res=>{
+        console.log(res)
+      })
+    },
+    getUsersTrips({dispatch, commit, state}) {
+      server.get('/api/trips/user/' + state.user._id) 
+       .then(res => {
+         commit('setUserTrips', res.data)
+       })
+       .catch(res => {
+        console.log(res)
+      })
     },
     addDestination({ dispatch, commit, state }, destination) {
       if(destination['geometry']) {
@@ -298,15 +315,7 @@ export default new vuex.Store({
         console.log(res)
       })
     },
-    getUsersTrips({dispatch, commit, state}) {
-      server.get('/api/trips/user/' + state.user._id) 
-       .then(res => {
-         commit('setUserTrips', res.data)
-       })
-       .catch(res => {
-        console.log(res)
-      })
-    },
+  
     selectActiveTrip({dispatch, commit}, trip) {
       commit("setActiveTrip", trip)
     },

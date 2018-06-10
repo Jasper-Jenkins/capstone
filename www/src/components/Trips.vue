@@ -6,6 +6,7 @@
           <h2>{{trip.title}}</h2>
           <p>{{trip.description}}</p>
         </router-link>
+        <button @click="deleteTrip(trip)">Cancel this trip</button>
       </div>
     </div>
   </div>
@@ -27,6 +28,9 @@
     methods: {
       selectActiveTrip(trip) {
         this.$store.dispatch('selectActiveTrip', trip)
+      },
+      deleteTrip(trip){
+        this.$store.dispatch('deleteTrip', trip)
       }
     }
   }

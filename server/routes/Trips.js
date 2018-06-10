@@ -53,7 +53,7 @@ router.put('/api/trips/:id', (req, res, next) => {
 router.delete('/api/trips/:id', (req, res, next) => {
   Trip.findByIdAndRemove(req.params.id)
     .then(data => {
-      res.send("Successfully Deleted trip")
+      res.send({message:"Successfully Deleted trip", data})
     })
     .catch(err => {
       res.status(400).send(err)

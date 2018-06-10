@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style>
-toDo {
+.toDo {
   background-color: lightseagreen;
 }
 </style>

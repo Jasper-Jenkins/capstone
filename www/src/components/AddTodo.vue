@@ -8,10 +8,10 @@
       <button @click="searchTodos">Find</button>
     </div>
     <div class="userResults">
-      <p v-for="todo in userTodos">{{todo.title}}<button @click="addTodo(todo)">Add to todos from other users</button></p>
+      <p v-for="todo in userTodos">{{todo.title}}<button @click="addTodo(todo)">Other users todo</button></p>
     </div>
     <div class="googleResults">
-      <p v-for="todo in googleTodos">{{todo.name}} <button @click="addGoogleTodo(todo)">Suggested todos from google</button></p>
+      <p v-for="todo in googleTodos">{{todo.name}} <button @click="addGoogleTodo(todo)">Googles to do</button></p>
     </div>
   </div>
 </template>

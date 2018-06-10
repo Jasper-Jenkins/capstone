@@ -18,20 +18,27 @@
         </div>
       </div>
       <div class="row">
-        
+        <div class="col-12">
+         <h4> Looking for destination ideas? Here are some ideas from other travelers.</h4>
+        </div>
         <div class="col userResults text-center" v-for="userResult in userResults" :key="userResult._id">
           
           <a @click="selectActiveDest(userResult)"> <img :src="userResult.photo" alt=""> <strong>{{userResult.title}}</strong></a>
         </div>
       </div>
       <div class="row">
+        <div class="col-12">
+        <h4>Find a destination for your trip on the web!</h4>
+        </div>
         <div class="col googleResults text-center" v-for="result in apiResults" :key="result._id">
-            <img :src="result.photo" alt="">
-            <strong>{{result.name}}</strong> 
-          <select v-model="trip" placeholder='Add to trip'>
-            <option disabled value=''>Add Destination to Trip: </option>
-            <option v-for="trip in trips" :key="trip._id" :value="trip">{{trip.title}}</option>
-          </select>
+          <img :src="result.photo" alt="">
+          <strong>{{result.name}}</strong> 
+          
+            <select v-model="trip">
+              <option disabled value=''>Add Destination to Trip: </option>
+              <option v-for="trip in trips" :key="trip._id" :value="trip">{{trip.title}}</option>
+            </select>
+         
           <button @click="addDestination(result)">+</button>
         </div>      
       </div>
@@ -121,6 +128,8 @@ a {
 }
 .userResults {
 background-color: lightseagreen;
+border: 1px solid black;
+margin:5px;
 }
 .userResults img{
   height:100px;
@@ -128,6 +137,8 @@ background-color: lightseagreen;
 }
 .googleResults {
 background-color: lightseagreen;
+border: 1px solid black;
+margin:5px;
 }
 .googleResults img {
   height: 100px;
