@@ -1,5 +1,6 @@
 <template>
   <div class="add-destination">
+    <div>Add Destination Component</div>
     <div>
       <button @click="toggleCreate">+</button>
     </div>
@@ -43,5 +44,5 @@
   };
 </script>
 
-<style>
+<style scoped>
 </style>

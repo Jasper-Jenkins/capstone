@@ -15,7 +15,7 @@
 <script>
 
 export default {
-    name: 'myTrips',
+    name: 'myTrip',
     data() {
       return {
         trip: {

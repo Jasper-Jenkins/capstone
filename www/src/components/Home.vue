@@ -2,28 +2,33 @@
   <div class="home">
     <!-- <h1>/test</h1> -->
     <div class="container-fluid">
-<mytrip></mytrip>
+      <div class="row">
+        <div class="col">
+          <mytrip></mytrip>
+        </div>
+      </div>
     </div>
     <div class="container-fluid">
-      <form @submit.prevent="getResults">
-        <input type="text" name="destination" id="destination" placeholder="Enter destination" v-model="destination.title">
-        <button type="submit">Find your slice of heaven</button>
-      </form>
       <div class="row">
-        <div class="col-3 userResults text-center" v-for="userResult in userResults" :key="userResult._id">
-         <img :src="userResult.photo" alt=""> <strong>{{userResult.name}}</strong> - {{userResult.formatted_address}}
-
-          <!-- <button @click="addDestination(userResult)">+</button> -->
-          <a @click="selectActiveDest(userResult)">
-            {{userResult.title}}
-          </a>
+        <div class="col">
+          <form @submit.prevent="getResults">
+            <input type="text" name="destination" id="destination" placeholder="Enter destination" v-model="destination.title">
+            <button type="submit">Find your slice of heaven</button>
+          </form>
         </div>
       </div>
       <div class="row">
-        <div class="col-3 googleResults text-center" v-for="result in apiResults" :key="result._id">
+        
+        <div class="col userResults text-center" v-for="userResult in userResults" :key="userResult._id">
+          
+          <a @click="selectActiveDest(userResult)"> <img :src="userResult.photo" alt=""> <strong>{{userResult.title}}</strong></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col googleResults text-center" v-for="result in apiResults" :key="result._id">
             <img :src="result.photo" alt="">
-          <strong>{{result.name}}</strong> - {{result.formatted_address}}
-          <select v-model="trip">
+            <strong>{{result.name}}</strong> 
+          <select v-model="trip" placeholder='Add to trip'>
             <option disabled value=''>Add Destination to Trip: </option>
             <option v-for="trip in trips" :key="trip._id" :value="trip">{{trip.title}}</option>
           </select>
@@ -31,113 +36,101 @@
         </div>      
       </div>
 
-      <!-- <button @click='logout'>Logout</button>      -->
-      <!-- <ul>
-    <li v-for="destination in destinations" :key="destination.id">
-     <router-link :to="{name: 'Destination', params:{destinationId: destination._id}}">
-       {{destination.title}}
-      </router-link>
-    </li>
-  </ul> -->
-      <!-- <ul>
-    <li v-for="destination in destinations" :key="destination.id">
-     <router-link :to="{name: 'Destination', params:{place_id: destination._id}}">
-       {{destination.title}}
-      </router-link>
- 
-    </li>
-  </ul> -->
-    </div>
+   </div>
   </div>
 </template>
 
 <script>
-  import router from "../router";
-  import destination from "./Destination";
-  import mytrip from './MyTrip'
+import router from "../router";
+import destination from "./Destination";
+import mytrip from "./MyTrip";
 
+export default {
+  name: "Home",
 
-  export default {
-    name: "Home",
-
-    data() {
-      return {
-        destination: {
-          title: ""
-        },
-       trip: {}
-      };
-    },
-    components: {
-      destination,
-      mytrip
-    },
-    computed: {
-      userResults() {
-        return this.$store.state.userResults
+  data() {
+    return {
+      destination: {
+        title: ""
       },
-      apiResults() {
-        return this.$store.state.apiResults
-      },
-       trips() {
-       
-         var trips = this.$store.state.userTrips
-         console.log(trips, "this trips")
-        return trips
-        },
+      trip: {}
+    };
+  },
+  components: {
+    destination,
+    mytrip
+  },
+  computed: {
+    userResults() {
+      return this.$store.state.userResults;
     },
-
-    mounted() {
-      if (!this.$store.state.user._id) {
-        // if no user id kick to the Login page
-        router.push({ name: "User" });
-      }
-       this.$store.dispatch('getUsersTrips')
+    apiResults() {
+      return this.$store.state.apiResults;
     },
-    methods: {
-      getResults() {
-        console.log(this.destination)
-        this.$store.dispatch("findDestination", this.destination.title); // incomplete only has a title at the moment
-        this.title = ""
-      },
-      addDestination(result) {
-        this.$store.dispatch('selectActiveTrip', this.trip)
-        this.$store.dispatch('addDestination', result)
-      },
-      selectActiveDest(userResult) {
-        this.$store.dispatch('selectActiveDest', userResult)
-        this.$router.push('Destination')
-      }
+    trips() {
+      var trips = this.$store.state.userTrips;
+      console.log(trips, "this trips");
+      return trips;
     }
-  };
+  },
+
+  mounted() {
+    if (!this.$store.state.user._id) {
+      // if no user id kick to the Login page
+      router.push({ name: "User" });
+    }
+    this.$store.dispatch("getUsersTrips");
+  },
+  methods: {
+    getResults() {
+      console.log(this.destination);
+      this.$store.dispatch("findDestination", this.destination.title); // incomplete only has a title at the moment
+      this.title = "";
+    },
+    addDestination(result) {
+      this.$store.dispatch("selectActiveTrip", this.trip);
+      this.$store.dispatch("addDestination", result);
+    },
+    selectActiveDest(userResult) {
+      this.$store.dispatch("selectActiveDest", userResult);
+      this.$router.push("Destination");
+    }
+  }
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h1,
-  h2 {
-    font-weight: normal;
-  }
+h1,
+h2 {
+  font-weight: normal;
+}
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
+ul {
+  list-style-type: none;
+  padding: 0;
+}
 
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
 
-  a {
-    color: #42b983;
-  }
-  userResults img {
-    height: 50px;
-    width: auto;
-  }
-  googleResults img {
-    height: 50px;
-    width: auto;
-  }
+a {
+  color: #42b983;
+}
+.userResults {
+background-color: lightseagreen;
+}
+.userResults img{
+  height:100px;
+  width:auto;
+}
+.googleResults {
+background-color: lightseagreen;
+}
+.googleResults img {
+  height: 100px;
+  width: auto;
+}
 </style>

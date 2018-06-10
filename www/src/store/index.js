@@ -275,6 +275,7 @@ export default new vuex.Store({
       todo.tripId = state.activeTrip._id
       server.post('/api/thingstodo', todo)
        .then(res => {
+         debugger
          commit('setNewTodo', res.data)
        })
        .catch(res => {
