@@ -3,6 +3,15 @@ var Schema = mongoose.Schema
 var schemaName = 'ThingsToDo'
 var ObjectId = Schema.Types.ObjectId
 
+let commentSchema = new Schema({
+  author: { type: String },
+  comment: { type: String, required: true },
+  photo: { type: String },
+  userId: { type: String },
+  long: { type: String },
+  lat: { type: String }
+})
+
 let todoSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String },
@@ -28,7 +37,13 @@ let todoSchema = new Schema({
     type: ObjectId,
     ref: 'Destination',
     required: true
-  }
+  },
+  comments: [commentSchema]
+})
+
+todoSchema.pre('save', function(next) {
+  this.markModified('comments')
+  next()
 })
 
 module.exports = mongoose.model(schemaName, todoSchema)

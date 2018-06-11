@@ -367,6 +367,16 @@ export default new vuex.Store({
       commit('setUserResults', [])
       commit('setUserTodos', [])
       commit('setGoogleTodos', [])
+    },
+    addComment({ dispatch, commit }, todo) {
+      server.put('/api/thingstodo/' + todo._id, todo)
+        .then(res => {
+          debugger
+          commit('setEditTodo', res.data.thingtodo)
+        })
+        .catch(res => {
+          console.log(res)
+        })
     }
   }
 })

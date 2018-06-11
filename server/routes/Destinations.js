@@ -80,10 +80,10 @@ router.put('/api/destinations/:id', (req, res, next) => {
 router.delete('/api/destinations/:id', (req, res, next) => {
   Destination.findByIdAndRemove(req.params.id)
     .then(data => {
-          ThingToDo.deleteMany({"tripId": req.params.id})
-           .then(data => {
-             res.status(200).send({message: "successfully deleted", data})
-           })
+      ThingToDo.deleteMany({ "tripId": req.params.id })
+        .then(data => {
+          res.status(200).send({ message: "successfully deleted", data })
+        })
     })
     .catch(err => {
       res.status(400).send(err)
@@ -96,13 +96,13 @@ router.delete('/api/destinations/:id', (req, res, next) => {
 router.put('/api/destination/public/:id', (req, res) => {
   Destination.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then(destination => {
-      ThingToDo.update({destinationId: destination._id}, {published: req.body.published}, { multi: true })
-       .then(todos => {
-         res.status(200).send({todos, destination})
-       })
-       .catch(err => {
-         res.status(400).send({message: 'doesnt work', err})
-       })
+      ThingToDo.update({ destinationId: destination._id }, { published: req.body.published }, { multi: true })
+        .then(todos => {
+          res.status(200).send({ todos, destination })
+        })
+        .catch(err => {
+          res.status(400).send({ message: 'doesnt work', err })
+        })
     })
     .catch(err => {
       res.status(400).send(err)
