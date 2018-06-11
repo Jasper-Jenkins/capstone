@@ -210,6 +210,15 @@ export default new vuex.Store({
         console.log(res)
       })
     },
+     deleteDest({commit, dispatch, state}, dest){
+      server.delete('/api/destinations/' + dest._id)
+      .then(res=>{
+        dispatch('getTripDestinations')
+      })
+      .catch(res=>{
+        console.log(res)
+      })
+    },
     getUsersTrips({dispatch, commit, state}) {
       server.get('/api/trips/user/' + state.user._id) 
        .then(res => {
