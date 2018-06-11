@@ -2,17 +2,21 @@
   <div class="user-destination">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-4">
-          <todos></todos>
+        <div class="col">
+          {{currentDest.title}}
         </div>
-        <div class="col-4"></div>
-        <div class="col-4"></div>
       </div>
       <div class="row">
         <div class="col-4">
-          <create-todo v-if="displayCreate"></create-todo>
-          <add-todo v-if=""></add-todo>
+          <todos></todos>
         </div>
+        <div class="col-4">
+          <button @click="toggleCreate">Create New Todo</button>
+          <button @click="toggleAdd">Add Todo</button>
+          <create-todo v-if="displayCreate"></create-todo>
+          <add-todo v-if="displayAdd"></add-todo>
+        </div>
+        <div class="col-4"></div>
       </div>
     </div>
   </div>
@@ -34,10 +38,26 @@
       createTodo
     },
     data() {
-      return {};
+      return {
+        displayAdd: false,
+        displayCreate: false
+      };
     },
-    computed: {},
-    methods: {}
+    computed: {
+      currentDest() {
+        return this.$store.state.activeDest
+      }
+    },
+    methods: {
+      toggleCreate() {
+        this.displayCreate = !this.displayCreate
+        this.displayAdd = false
+      },
+      toggleAdd() {
+        this.displayAdd = !this.displayAdd
+        this.displayCreate = false
+      }
+    }
   };
 </script>
 

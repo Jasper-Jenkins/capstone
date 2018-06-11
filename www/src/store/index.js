@@ -122,6 +122,12 @@ export default new vuex.Store({
     setNewTodo(state, todo) {
       state.todos.unshift(todo)
     },
+    setTodo(state, todo) {
+      var index = state.todos.findIndex(item => {
+        return item._id == todo._id
+      })
+      state.todos.splice(index, 1)
+    },
     setUserTrips(state, trips) {
       state.userTrips = trips
     },
@@ -201,36 +207,40 @@ export default new vuex.Store({
           console.log(res)
         })
     },
-    deleteTrip({commit, dispatch, state}, trip){
+    deleteTrip({ commit, dispatch, state }, trip) {
       server.delete('/api/trips/' + trip._id)
-      .then(res=>{
-        dispatch('getUsersTrips')
-  //      dispatch('deleteDestination', state.destinations)
-      })
-      .catch(res=>{
-        console.log(res)
-      })
+        .then(res => {
+          dispatch('getUsersTrips')
+          //      dispatch('deleteDestination', state.destinations)
+        })
+        .catch(res => {
+          console.log(res)
+        })
     },
-     deleteDest({commit, dispatch, state}, dest){
-      server.delete('/api/destinations/' + dest._id)
-      .then(res=>{
-        dispatch('getTripDestinations')
-      })
-      .catch(res=>{
-        console.log(res)
-      })
-    },
-    getUsersTrips({dispatch, commit, state}) {
-      server.get('/api/trips/user/' + state.user._id) 
-       .then(res => {
-         commit('setUserTrips', res.data)
-       })
-       .catch(res => {
-        console.log(res)
-      })
+
+    // createTodo({ dispatch, commit }, todo) {
+    //   server.post('/api/trips', todo)
+    //     .then(res => {
+    //       commit('addTodo', res.data)
+    //     })
+    //     .catch(res => {
+    //       console.log(res)
+    //     })
+    // },
+
+
+
+    getUsersTrips({ dispatch, commit, state }) {
+      server.get('/api/trips/user/' + state.user._id)
+        .then(res => {
+          commit('setUserTrips', res.data)
+        })
+        .catch(res => {
+          console.log(res)
+        })
     },
     addDestination({ dispatch, commit, state }, destination) {
-      if(destination['geometry']) {
+      if (destination['geometry']) {
         var newDestination = {
           title: destination.name,
           place_id: destination.place_id,
@@ -258,16 +268,15 @@ export default new vuex.Store({
           console.log(res)
         })
     },
-    deleteDest({commit, dispatch, state}, dest){
-      debugger
-      server.delete('/api/destinations/'+ dest.tripId)
-      .then(res=>{
-        console.log(res)
-        dispatch('getTripDestinations', dest.tripId )
-      })
-      .catch(res=>{
-        console.log(res)
-      })  
+    deleteDest({ commit, dispatch, state }, dest) {
+      server.delete('/api/destinations/' + dest._id)
+        .then(res => {
+          console.log(res)
+          dispatch('getTripDestinations', dest.tripId)
+        })
+        .catch(res => {
+          console.log(res)
+        })
     },
     getTripDestinations({ dispatch, commit }, id) {
       server.get('/api/trips/' + id + '/destinations')
@@ -282,8 +291,8 @@ export default new vuex.Store({
       console.log('works', dest)
       commit('setActiveDest', dest)
     },
-    findTodos({dispatch, commit, state}, category) {
-      server.get('/api/thingstodo/'+state.activeDest.place_id+'/' + category)
+    findTodos({ dispatch, commit, state }, category) {
+      server.get('/api/thingstodo/' + state.activeDest.place_id + '/' + category)
         .then(res => {
           commit('setUserTodos', res.data)
           dispatch('getGoogleTodos', category)
@@ -292,33 +301,33 @@ export default new vuex.Store({
           console.log(res)
         })
     },
-    getGoogleTodos({dispatch, commit, state}, category) {
+    getGoogleTodos({ dispatch, commit, state }, category) {
       var search = {
         categories: category,
         coords: state.activeDest.lat + ',' + state.activeDest.long
       }
-      server.post('/api/nearby/places', search) 
-       .then(res => {
-         console.log(res.data.results)
-         commit('setGoogleTodos', res.data.results)
-       })
-       .catch(res => {
-        console.log(res)
-      })
+      server.post('/api/nearby/places', search)
+        .then(res => {
+          console.log(res.data.results)
+          commit('setGoogleTodos', res.data.results)
+        })
+        .catch(res => {
+          console.log(res)
+        })
     },
-    addTodo({dispatch, commit, state}, todo) {
+    addTodo({ dispatch, commit, state }, todo) {
       todo.destinationId = state.activeDest._id
       todo.tripId = state.activeTrip._id
+      todo.place_id = state.activeDest.place_id
       server.post('/api/thingstodo', todo)
-       .then(res => {
-         debugger
-         commit('setNewTodo', res.data)
-       })
-       .catch(res => {
-        console.log(res)
-      })
+        .then(res => {
+          commit('setNewTodo', res.data)
+        })
+        .catch(res => {
+          console.log(res)
+        })
     },
-    addGoogleTodo({dispatch,commit, state}, todo) {
+    addGoogleTodo({ dispatch, commit, state }, todo) {
       var newTodo = {
         place_id: todo.place_id,
         title: todo.name,
@@ -327,21 +336,31 @@ export default new vuex.Store({
         tripId: state.activeTrip._id
       }
       server.post('/api/thingstodo', newTodo)
-       .then(res => {
-         commit('setNewTodo', res.data)
-       })
-       .catch(res => {
-        console.log(res)
-      })
+        .then(res => {
+          commit('setNewTodo', res.data)
+        })
+        .catch(res => {
+          console.log(res)
+        })
     },
-    selectActiveTrip({dispatch, commit}, trip) {
+    selectActiveTrip({ dispatch, commit }, trip) {
       commit("setActiveTrip", trip)
     },
-    getDestTodos({dispatch, commit}, id) {
-      server.get('/api/destinations/'+id+'/thingstodo')
-       .then(res => {
-         commit('setUserTodos', res.data)
-       })
+    getDestTodos({ dispatch, commit }, id) {
+      server.get('/api/destinations/' + id + '/thingstodo')
+        .then(res => {
+          commit('setUserTodos', res.data)
+        })
+    },
+    deleteTodo({ commit, dispatch }, todo) {
+      var temp = todo
+      server.delete('/api/thingstodo/' + todo._id)
+        .then(res => {
+          commit('setTodo', temp)
+        })
+        .catch(res => {
+          console.log(res)
+        })
     }
   }
 })

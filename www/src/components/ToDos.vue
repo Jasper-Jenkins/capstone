@@ -4,8 +4,8 @@
     <div>ToDos Component</div>
     <p>This will end up displaying the users current todos for the destination they clicked on!</p>
     <div v-for="todo in todos" :key="todo._id">
-        {{todo.title}}
-        
+      {{todo.title}}
+      <button @click="deleteTodo(todo)">Delete todo</button>
     </div>
   </div>
 </template>
@@ -28,7 +28,9 @@
       }
     },
     methods: {
-     
+      deleteTodo(todo) {
+        this.$store.dispatch('deleteTodo', todo)
+      }
     }
   }
 

@@ -41,6 +41,9 @@
       addImg() {
         this.todo.gallery.unshift(this.todo.img)
         this.todo.img = ''
+      },
+      addTodo() {
+        this.$store.dispatch('addTodo', this.todo)
       }
     }
   }

@@ -77,16 +77,6 @@ router.put('/api/destinations/:id', (req, res, next) => {
 })
 
 //DESTROY
-// router.delete('/api/destinations/:id', (req, res, next) => {
-//   Destination.findByIdAndRemove(req.params.id)
-//     .then(data => {
-//       res.send("Successfully Deleted destination")
-//     })
-//     .catch(err => {
-//       res.status(400).send(err)
-//     })
-// })
-
 router.delete('/api/destinations/:id', (req, res, next) => {
   Destination.findByIdAndRemove(req.params.id)
     .then(data => {
