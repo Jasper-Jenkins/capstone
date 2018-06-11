@@ -3,45 +3,46 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-4">
-            <todos></todos>
+          <todos></todos>
         </div>
         <div class="col-4"></div>
         <div class="col-4"></div>
       </div>
       <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4 toDo">
-          <add-todo></add-todo>
+        <div class="col-4">
+          <create-todo v-if="displayCreate"></create-todo>
+          <add-todo v-if=""></add-todo>
         </div>
-        <div class="col-4"></div>
-        </div>
-    </div>  
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import todos from "./ToDos"
-import addTodo from "./AddTodo";
+  import todos from "./ToDos"
+  import addTodo from "./AddTodo";
+  import createTodo from "./CreateTodo"
 
-export default {
-  mounted() {
-    this.$store.dispatch("getDestTodos", this.$route.params.id);
-  },
-  name: "userDestination",
-  components: {
-    todos,
-    addTodo
-  },
-  data() {
-    return {};
-  },
-  computed: {},
-  methods: {}
-};
+  export default {
+    mounted() {
+      this.$store.dispatch("getDestTodos", this.$route.params.id);
+    },
+    name: "userDestination",
+    components: {
+      todos,
+      addTodo,
+      createTodo
+    },
+    data() {
+      return {};
+    },
+    computed: {},
+    methods: {}
+  };
 </script>
 
 <style>
-.toDo {
-  background-color: lightseagreen;
-}
+  .toDo {
+    background-color: lightseagreen;
+  }
 </style>

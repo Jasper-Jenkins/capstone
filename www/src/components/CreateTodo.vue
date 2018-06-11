@@ -4,7 +4,16 @@
     <form v-on:submit.prevent="addTodo" class="form">
       <input class="input" type="text" name="title" placeholder=" title" id="email" v-model="todo.title">
       <input class="input" type="text" name="description" placeholder=" description" id="email" v-model="todo.description">
-      <input class="input" type="text" name="title" placeholder=" Where to?" id="email" v-model="todo.description">
+      <button class="btn btn-primary btn-success" type="submit">Add</button>
+    </form>
+    <button @click=toggleImg>Add image</button>
+    <div class="row">
+      <div class="col" v-for="img in todo.gallery">
+        <img :src="img" alt="">
+      </div>
+    </div>
+    <form v-if="newImg" v-on:submit.prevent="addImg">
+      <input type="url" name="img" placeholder="Image Url" id="img" v-model="todo.img">
       <button class="btn btn-primary btn-success" type="submit">Add</button>
     </form>
   </div>
@@ -15,20 +24,28 @@
     name: 'createTodo',
     data() {
       return {
+        newImg: false,
         todo: {
           title: '',
           description: '',
-
+          img: '',
+          gallery: []
         }
       }
     },
     computed: {},
-    methods: {}
+    methods: {
+      toggleImg() {
+        this.newImg = !this.newImg
+      },
+      addImg() {
+        this.todo.gallery.unshift(this.todo.img)
+        this.todo.img = ''
+      }
+    }
   }
 
 </script>
 
 <style scoped>
-
-
 </style>

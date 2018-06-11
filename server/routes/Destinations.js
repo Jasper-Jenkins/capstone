@@ -87,6 +87,21 @@ router.delete('/api/destinations/:id', (req, res, next) => {
     })
 })
 
+router.delete('/api/trips/:id', (req, res, next) => {
+  Destination.findByIdAndRemove(req.params.id)
+    .then(data => {
+          ThingToDo.deleteMany({"tripId": req.params.id})
+           .then(data => {
+             res.status(200).send({message: "successfully deleted", data})
+           })
+    })
+    .catch(err => {
+      res.status(400).send(err)
+    })
+})
+
+
+
 //make a destination public
 router.put('/api/destination/public/:id', (req, res) => {
   Destination.findByIdAndUpdate(req.params.id, req.body, { new: true })

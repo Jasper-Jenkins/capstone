@@ -1,5 +1,7 @@
 let router = require('express').Router()
 var Trip = require('../models/Trip')
+let Destination = require('../models/Destination')
+let Todo = require('../models/ThingToDo')
 //var User = require('../models/User')
 
 //GET BY ID
@@ -53,7 +55,13 @@ router.put('/api/trips/:id', (req, res, next) => {
 router.delete('/api/trips/:id', (req, res, next) => {
   Trip.findByIdAndRemove(req.params.id)
     .then(data => {
-      res.send({message:"Successfully Deleted trip", data})
+      Destination.deleteMany({"tripId": req.params.id})
+        .then(data => {
+          Todo.deleteMany({"tripId": req.params.id})
+           .then(data => {
+             res.status(200).send({message: "successfully deleted", data})
+           })
+        })
     })
     .catch(err => {
       res.status(400).send(err)

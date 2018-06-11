@@ -13,7 +13,7 @@ let todoSchema = new Schema({
   }],
   place_id: { type: String, required: true },
   rating: { type: Number },
-  published: {type: Boolean, default: false},
+  published: { type: Boolean, default: true },
   userId: {
     type: ObjectId,
     ref: 'User',
@@ -26,7 +26,8 @@ let todoSchema = new Schema({
   },
   destinationId: {
     type: ObjectId,
-    ref: 'Destination'
+    ref: 'Destination',
+    required: true
   }
 })
 
