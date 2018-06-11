@@ -1,5 +1,6 @@
 <template>
   <div class="add-todo toDo">
+   
     <div class="find">
       <select name="Category" class="form-control" id="" v-model="category">
         <option disabled>Select a Category</option>
@@ -17,6 +18,8 @@
 </template>
 
 <script>
+
+
   export default {
     name: 'addTodo',
     data() {
@@ -24,6 +27,7 @@
         category: ''
       }
     },
+   
     computed: {
       categories() {
         return this.$store.state.categories

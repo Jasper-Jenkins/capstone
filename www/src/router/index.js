@@ -6,6 +6,7 @@ import Destination from '@/components/Destination'
 import Trip from '@/components/Trip'
 import MyTrips from '@/components/MyTrips'
 import MyDestination from '@/components/UserDestination'
+import ToDos from '@/components/ToDos'
 Vue.use(Router)
 
 export default new Router({
@@ -39,6 +40,11 @@ export default new Router({
       path: '/mydestination',
       name: 'myDestination',
       component: MyDestination
+    },
+    {
+      path: '/todos',
+      name: 'ToDos',
+      component: ToDos
     }
   ]
 })

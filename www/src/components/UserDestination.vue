@@ -2,6 +2,13 @@
   <div class="user-destination">
     <div class="container-fluid">
       <div class="row">
+        <div class="col-4">
+            <todos></todos>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+      </div>
+      <div class="row">
         <div class="col-4"></div>
         <div class="col-4 toDo">
           <add-todo></add-todo>
@@ -13,6 +20,7 @@
 </template>
 
 <script>
+import todos from "./ToDos"
 import addTodo from "./AddTodo";
 
 export default {
@@ -21,6 +29,7 @@ export default {
   },
   name: "userDestination",
   components: {
+    todos,
     addTodo
   },
   data() {

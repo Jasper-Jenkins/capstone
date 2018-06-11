@@ -23,12 +23,12 @@
         </div>
         <div class="col userResults text-center" v-for="userResult in userResults" :key="userResult._id">
           
-          <a @click="selectActiveDest(userResult)"> <img :src="userResult.photo" alt=""> <strong>{{userResult.title}}</strong></a>
+         <img :src="userResult.photo" alt=""> <a @click="selectActiveDest(userResult)">  <strong>{{userResult.title}}</strong></a>
         </div>
       </div>
       <div class="row">
         <div class="col-12">
-        <h4>Find a destination for your trip on the web!</h4>
+        <h4>Add new destinations here! </h4>
         </div>
         <div class="col googleResults text-center" v-for="result in apiResults" :key="result._id">
           <img :src="result.photo" alt="">
@@ -129,7 +129,8 @@ a {
 .userResults {
 background-color: lightseagreen;
 border: 1px solid black;
-margin:5px;
+margin: 5px;
+padding: 10px;
 }
 .userResults img{
   height:100px;
@@ -139,6 +140,7 @@ margin:5px;
 background-color: lightseagreen;
 border: 1px solid black;
 margin:5px;
+padding: 10px;
 }
 .googleResults img {
   height: 100px;

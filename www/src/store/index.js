@@ -204,8 +204,6 @@ export default new vuex.Store({
     deleteTrip({commit, dispatch, state}, trip){
       server.delete('/api/trips/' + trip._id)
       .then(res=>{
-     //   debugger
-    //    commit('setUserTrips', res.data)
         dispatch('getUsersTrips')
       })
       .catch(res=>{
@@ -315,7 +313,6 @@ export default new vuex.Store({
         console.log(res)
       })
     },
-  
     selectActiveTrip({dispatch, commit}, trip) {
       commit("setActiveTrip", trip)
     },

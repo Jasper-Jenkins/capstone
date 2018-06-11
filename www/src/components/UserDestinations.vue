@@ -1,5 +1,6 @@
 <template>
-  <div class="user-destinations">
+  <div class="user-destinations tracking">
+    <p>UserDestinations component</p>
     <h2>Destinations</h2>
     <div>
       <router-link v-for="destination in destinations" @click.native="selectActiveDest(destination)" :to="{ name: 'myDestination', params: { id: destination._id }}" :key="destination._id"><p>{{destination.title}}</p></router-link>
@@ -29,6 +30,8 @@
 
 </script>
 
-<style>
-
+<style scoped>
+.tracking {
+  background-color:khaki;
+}
 </style>
