@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col">
-         <h1> {{currentTrip.title}}</h1>
+          <h1> {{currentTrip.title}}</h1>
         </div>
       </div>
       <div class="row">

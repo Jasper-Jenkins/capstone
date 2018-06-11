@@ -361,6 +361,12 @@ export default new vuex.Store({
         .catch(res => {
           console.log(res)
         })
+    },
+    clearResults({ dispatch, commit }) {
+      commit('setApiResults', [])
+      commit('setUserResults', [])
+      commit('setUserTodos', [])
+      commit('setGoogleTodos', [])
     }
   }
 })

@@ -43,7 +43,18 @@
         this.todo.img = ''
       },
       addTodo() {
-        this.$store.dispatch('addTodo', this.todo)
+        var newTodo = {
+          title: this.todo.title,
+          description: this.todo.description,
+          gallery: this.todo.gallery
+        }
+        this.$store.dispatch('addTodo', newTodo)
+        this.todo = {
+          title: '',
+          description: '',
+          img: '',
+          gallery: []
+        }
       }
     }
   }

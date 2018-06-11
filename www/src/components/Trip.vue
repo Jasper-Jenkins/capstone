@@ -1,6 +1,6 @@
 <template>
   <div class="trip">
-  
+
     <add-destination></add-destination>
     <!-- <users-destinations></users-destinations> -->
   </div>
@@ -12,9 +12,9 @@
 
   export default {
     name: 'Trip',
-    // mounted() {
-    //   this.$store.dispatch('getTripDestinations', this.$route.params.id)
-    // },
+    mounted() {
+      this.$store.dispatch('clearResults')
+    },
     components: {
       addDestination,
       // usersDestinations

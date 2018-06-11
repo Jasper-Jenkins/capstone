@@ -30,6 +30,7 @@
   export default {
     mounted() {
       this.$store.dispatch("getDestTodos", this.$route.params.id);
+      this.$store.dispatch('clearResults')
     },
     name: "userDestination",
     components: {
