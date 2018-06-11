@@ -205,6 +205,7 @@ export default new vuex.Store({
       server.delete('/api/trips/' + trip._id)
       .then(res=>{
         dispatch('getUsersTrips')
+  //      dispatch('deleteDestination', state.destinations)
       })
       .catch(res=>{
         console.log(res)
@@ -256,6 +257,17 @@ export default new vuex.Store({
         .catch(res => {
           console.log(res)
         })
+    },
+    deleteDest({commit, dispatch, state}, dest){
+      debugger
+      server.delete('/api/destinations/'+ dest.tripId)
+      .then(res=>{
+        console.log(res)
+        dispatch('getTripDestinations', dest.tripId )
+      })
+      .catch(res=>{
+        console.log(res)
+      })  
     },
     getTripDestinations({ dispatch, commit }, id) {
       server.get('/api/trips/' + id + '/destinations')

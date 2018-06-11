@@ -5,7 +5,7 @@
     <p>This will end up displaying the users current todos for the destination they clicked on!</p>
     <div v-for="todo in todos" :key="todo._id">
         {{todo.title}}
-        <button @click="deleteDest(todo)">Delete</button>
+        
     </div>
   </div>
 </template>
@@ -28,9 +28,7 @@
       }
     },
     methods: {
-      deleteDest(todo){
-        this.$state.dispatch('deleteDest', todo)
-      }
+     
     }
   }
 
