@@ -2,7 +2,7 @@
   <div class="current-todos">
     <!-- This will be the display for a users current todos at each destination -->
     <div>ToDos Component</div>
-    <p>This will end up displaying the users current todos for the destination they clicked on!</p>
+    <p>Fun activities for your destination!</p>
     <div v-for="todo in todos" :key="todo._id">
       {{todo.title}}
       <button @click="toggleComment">Add Comment</button>
@@ -33,14 +33,15 @@
     },
     computed: {
       todos() {
-        var todos = this.$store.state.todos
-        console.log(todos, "todos are computing and should be empty for now")
+        var todos = this.$store.state.userTodos
+        console.log(this.$store.state.userTodos, "todos are computing and should be empty for now")
         return todos
       }
     },
     methods: {
       deleteTodo(todo) {
         this.$store.dispatch('deleteTodo', todo)
+     
       },
       toggleComment() {
         this.newComment = !this.newComment

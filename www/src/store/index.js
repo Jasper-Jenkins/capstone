@@ -123,10 +123,10 @@ export default new vuex.Store({
       state.todos.unshift(todo)
     },
     setTodo(state, todo) {
-      var index = state.todos.findIndex(item => {
+      var index = state.userTodos.findIndex(item => {
         return item._id == todo._id
       })
-      state.todos.splice(index, 1)
+      state.userTodos.splice(index, 1)
     },
     setUserTrips(state, trips) {
       state.userTrips = trips
@@ -348,7 +348,7 @@ export default new vuex.Store({
     },
     getDestTodos({ dispatch, commit }, id) {
       server.get('/api/destinations/' + id + '/thingstodo')
-        .then(res => {
+        .then(res => {     
           commit('setUserTodos', res.data)
         })
     },
@@ -365,7 +365,6 @@ export default new vuex.Store({
     clearResults({ dispatch, commit }) {
       commit('setApiResults', [])
       commit('setUserResults', [])
-      commit('setUserTodos', [])
       commit('setGoogleTodos', [])
     },
     addComment({ dispatch, commit }, todo) {
