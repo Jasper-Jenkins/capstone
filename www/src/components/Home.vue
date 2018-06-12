@@ -3,23 +3,31 @@
     <!-- <h1>/test</h1> -->
     <div class="container-fluid">
       <div class="row">
-        <div class="col">
+         
+        <!-- <div class="col-6 mx-auto mt-2" style="width: 200px;"> -->
+            <div class="col-6">
           <mytrip></mytrip>
         </div>
-      </div>
-    </div>
-    <div class="container-fluid">
+        <div class="col-6 mt-2">
+    <h4>Select Existing Trip</h4>
+    <select v-model="trip">
+        <option disabled value=''>Add Destination to Trip: </option>
+        <option v-for="trip in trips" :key="trip._id" :value="trip">{{trip.title}}</option>
+      </select>
+    <div class="mb-2 mt-2"></div>
+  </div>
+  </div>
       <div class="row">
-        <div class="col">
+        <div class="col-12">
           <form @submit.prevent="getResults">
-            <input type="text" name="destination" id="destination" placeholder="Enter destination" v-model="destination.title">
-            <button type="submit">Find your slice of heaven</button>
+            <input type="text" name="destination" id="destination" placeholder=" Where To?" v-model="destination.title">
+            <button class="btn btn-primary btn-success btn-sm" type="submit">Search</button>
           </form>
         </div>
       </div>
       <div class="row">
         <div class="col-12">
-          <h4> Looking for destination ideas? Here are some ideas from other travelers.</h4>
+          <h4>Looking for destination ideas? Here are some ideas from other travelers.</h4>
         </div>
         <div class="col userResults text-center" v-for="userResult in userResults" :key="userResult._id">
 
@@ -35,14 +43,20 @@
         </div>
         <div class="col googleResults text-center" v-for="result in apiResults" :key="result._id">
           <img :src="result.photo" alt="">
+          <div></div>
           <strong>{{result.name}}</strong>
+          <div></div>
+          <!-- <strong>{{result.description}}</strong> // default hardcode != provdided by google || user
+          <strong>{{place.id_reviews}}</strong> -->
+          <!-- then a button, modal pop up google map for location -->
 
-          <select v-model="trip">
+
+
+          <!-- <select v-model="trip">
             <option disabled value=''>Add Destination to Trip: </option>
             <option v-for="trip in trips" :key="trip._id" :value="trip">{{trip.title}}</option>
-          </select>
-
-          <button @click="addDestination(result)">+</button>
+          </select> -->
+          <button class="btn btn-primary btn-success btn-sm" @click="addDestination(result)">Add To Trip</button>
         </div>
       </div>
 
@@ -130,10 +144,11 @@
   }
 
   .userResults {
-    background-color: lightseagreen;
-    border: 1px solid black;
+    background-color: rgb(52, 122, 252);
+    /* border: 1px solid black; */
     margin: 5px;
     padding: 10px;
+  
   }
 
   .userResults img {
@@ -142,14 +157,19 @@
   }
 
   .googleResults {
-    background-color: lightseagreen;
-    border: 1px solid black;
+    background-color: rgb(233, 236, 217);
+    /* border: 1px solid black; */
     margin: 5px;
     padding: 10px;
+    text: white;
   }
 
   .googleResults img {
     height: 100px;
     width: auto;
+  }
+
+  .logobg {
+    background-image: url()
   }
 </style>
