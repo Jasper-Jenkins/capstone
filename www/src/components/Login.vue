@@ -1,34 +1,34 @@
 <template>
   <div class="user">
     <div class="login" v-if="showLogin">
-      <h1>Loginz</h1>
+      <h1>Login</h1>
       <form v-on:submit.prevent="login" class="form">
-        <input class="input" type="email" name="email" placeholder=" email" id="email" v-model="user.email">
-        <input class="input" type="password" name="password" placeholder=" pazzword" id="name" v-model="user.password">
-        <button class="btn btn-primary btn-success" type="submit">Loginz</button>
+        <input class="input" type="email" name="email" placeholder=" e-mail" id="email" v-model="user.email">
+        <input class="input" type="password" name="password" placeholder=" password" id="name" v-model="user.password">
+        <button class="btn btn-primary btn-success" type="submit">Login</button>
       </form>
       <br>
       <div>
       </div>
       <br>
-      <p class="user">Not a uzer ?
-        <em @click="toggle">Regizer</em>
+      <p class="user">Not a user?
+        <em @click="toggle"><button type="button" class="btn btn-danger">Register</button></em>
       </p>
     </div>
     <div class="register" v-if="!showLogin">
-      <h1>Regizer</h1>
+      <h1>Register</h1>
       <form v-on:submit.prevent="register">
         <input class="input" type="email" name="email" placeholder=" email" id="email" v-model="user.email">
         <input class="input" type="text" name="name" placeholder="nam" id="name" v-model="user.displayName">
-        <input class="input" type="password" name="password" placeholder="pazzword" id="name" v-model="user.password">
-        <button class="btn btn-primary btn-success" type="submit">Regizer</button>
+        <input class="input" type="password" name="password" placeholder="password" id="name" v-model="user.password">
+        <button class="btn btn-primary btn-danger" type="submit">Register</button>
       </form>
       <br>
       <div>
       </div>
       <br>
-      <p>Alredy uzer?
-        <em @click="toggle">Loginz</em>
+      <p>Already a user?
+        <em @click="toggle"><button class="btn btn-primary btn-success" type="submit">Login</button></em>
       </p>
     </div>
   </div>

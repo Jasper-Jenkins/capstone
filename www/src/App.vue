@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <!-- <img src="./assets/logo.png"> -->
-    <nav class="navbar navbar-light top-header">
+    <nav class="navbar navbar-dark bg-primary top-header">
       <div>
         <router-link :to="{ name: 'Home'}" class="navbar-brand">
             <a>Home</a>
@@ -10,9 +9,7 @@
             <a>My Trips</a>
         </router-link>
       </div>
-      <div>
-      </div>
-      <a class="navbar-brand" @click="login" v-if="!(user._id)">Sign In/Login</a>
+      <a class="navbar-brand" @click="login" v-if="!(user._id)"><button type="button" class="btn btn-outline-light">Sign In/Login</button></a>
       <div v-if="user._id" class="d-flex flex-column">
         <a class="navbar-brand">User: {{user.displayName}}</a>
         <a class="navbar-brand" @click="signOut">Sign out</a>
@@ -48,6 +45,6 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0px;
 }
 </style>
