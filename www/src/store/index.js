@@ -120,13 +120,14 @@ export default new vuex.Store({
       state.googleTodos = todos
     },
     setNewTodo(state, todo) {
-      state.todos.unshift(todo)
+      state.userTodos.unshift(todo)
     },
-    setTodo(state, todo) {
+    setComment(state, todo) {
       var index = state.userTodos.findIndex(item => {
         return item._id == todo._id
       })
       state.userTodos.splice(index, 1)
+      state.userTodos.unshift(todo)
     },
     setUserTrips(state, trips) {
       state.userTrips = trips
@@ -329,12 +330,13 @@ export default new vuex.Store({
     },
     addGoogleTodo({ dispatch, commit, state }, todo) {
       var newTodo = {
-        place_id: todo.place_id,
+        place_id: state.activeDest.place_id,
         title: todo.name,
         categories: todo.types,
         destinationId: state.activeDest._id,
         tripId: state.activeTrip._id
       }
+      debugger
       server.post('/api/thingstodo', newTodo)
         .then(res => {
           commit('setNewTodo', res.data)
@@ -370,7 +372,7 @@ export default new vuex.Store({
     addComment({ dispatch, commit }, todo) {
       server.put('/api/thingstodo/' + todo._id, todo)
         .then(res => {
-          commit('setNewTodo', res.data.thingtodo)
+          commit('setComment', res.data.thingtodo)
         })
         .catch(res => {
           console.log(res)
