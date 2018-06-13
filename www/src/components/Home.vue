@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12">
+        <div class="col-12 mt-2">
           <h4>Looking for destination ideas? Here are some ideas from other travelers.</h4>
         </div>
         <div class="col userResults text-center" v-for="userResult in userResults" :key="userResult._id">
@@ -38,8 +38,8 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12">
-          <h4>Add new destinations here! </h4>
+        <div class="col-12 mt-2">
+          <h4>Add new destinations below! </h4>
         </div>
         <div class="col googleResults text-center" v-for="result in apiResults" :key="result._id">
           <img :src="result.photo" alt="">
