@@ -134,6 +134,15 @@ export default new vuex.Store({
     },
     setActiveTrip(state, trip) {
       state.activeTrip = trip
+    },
+    setRemoveTodo(state, todo) {
+      var index = state.userTodos.findIndex(item => {
+        return item._id == todo._id
+      })
+      state.userTodos.splice(index, 1);
+    },
+    setTodos(state, todos){
+      state.todos = todos
     }
   },
   actions: {
@@ -295,7 +304,7 @@ export default new vuex.Store({
     findTodos({ dispatch, commit, state }, category) {
       server.get('/api/thingstodo/' + state.activeDest.place_id + '/' + category)
         .then(res => {
-          commit('setUserTodos', res.data)
+          commit('setTodos', res.data)
           dispatch('getGoogleTodos', category)
         })
         .catch(res => {
@@ -336,7 +345,6 @@ export default new vuex.Store({
         destinationId: state.activeDest._id,
         tripId: state.activeTrip._id
       }
-      debugger
       server.post('/api/thingstodo', newTodo)
         .then(res => {
           commit('setNewTodo', res.data)
@@ -350,15 +358,18 @@ export default new vuex.Store({
     },
     getDestTodos({ dispatch, commit }, id) {
       server.get('/api/destinations/' + id + '/thingstodo')
-        .then(res => {     
+        .then(res => {
           commit('setUserTodos', res.data)
+        })
+        .catch(res => {
+          console.log(res)
         })
     },
     deleteTodo({ commit, dispatch }, todo) {
       var temp = todo
       server.delete('/api/thingstodo/' + todo._id)
         .then(res => {
-          commit('setTodo', temp)
+          commit('setRemoveTodo', temp)
         })
         .catch(res => {
           console.log(res)

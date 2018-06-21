@@ -2,7 +2,7 @@
   <div class="destination">
     
     <div>
-      {{activeDest.title}}
+      <h2>{{activeDest.title}}</h2>
       
       <img :src="activeDest.photo" alt="">
     </div>

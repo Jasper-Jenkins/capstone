@@ -35,7 +35,7 @@
         return this.$store.state.categories
       },
       userTodos() {
-        return this.$store.state.userTodos
+        return this.$store.state.todos
       },
       googleTodos() {
         return this.$store.state.googleTodos

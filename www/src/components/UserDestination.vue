@@ -16,7 +16,6 @@
           <create-todo v-if="displayCreate"></create-todo>
           <add-todo v-if="displayAdd"></add-todo>
         </div>
-        <div class="col-4"></div>
       </div>
     </div>
   </div>
