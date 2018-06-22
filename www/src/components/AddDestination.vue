@@ -1,17 +1,23 @@
 <template>
   <div class="add-destination tracker">
     <div class="row">
+<<<<<<< HEAD
       <div class="col-12">
         <h1> {{currentTrip.title}}</h1>
+=======
+      <div class="col">
+        <h1>Current Trip</h1>
+        <h1>"{{currentTrip.title}}"</h1>
+>>>>>>> 43aa43acdd035b197db6c790eb6d84dd17f3b5dd
       </div>
     </div>
     <div class="row">
       <div class="col-12">
         <div>Add Destination Component</div>
       </div>
-      <div class="col">
+      <div class="col mb-2">
         <div>
-          <button @click="toggleCreate">+</button>
+          <button @click="toggleCreate">Add More Destinations</button>
         </div>
         <div v-if="toggleForm">
           <form v-on:submit.prevent="getDestination" class="form">
@@ -65,15 +71,5 @@
 </script>
 
 <style scoped>
-  .results {
-    z-index: 1;
-    position: absolute;
-    display: block;
-    width: 30vh;
-    border: 1px black;
-  }
-
   
-
-
 </style>

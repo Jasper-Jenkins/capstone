@@ -1,15 +1,17 @@
 <template>
-  <div class="trip jumbotron">
+  <div class="trip">
     <div class="container-fluid">
+
+      <div class="row justify-content-center">
+        <div class="col-9 add-destination mb-2">
+          <add-destination></add-destination>
+        </div>       
+      </div>
+
       <div class="row justify-content-center mb-2">
         <div class="col-9 toDo">
           <users-destinations></users-destinations>
         </div> 
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-9 add-destination">
-          <add-destination></add-destination>
-        </div>       
       </div>
     </div>
   </div>
