@@ -1,12 +1,12 @@
 <template>
   <div class="row justify-content-center"> 
   <div class="create-trip col-md-9 ">
-  <center><button class="btn btn-primary btn-success mt-2 mb-2" @click="newTrip">Start New Trip</button></center>
+  <center><button class="btn btn-primary btn-success mt-3 mb-2" @click="newTrip">Start New Trip</button></center>
     <div class="create-trip" v-if="toggleForm">
       <form v-on:submit.prevent="createTrip" class="form bgform">
         <input class="input" type="text" name="title" placeholder=" Title" id="email" v-model="trip.title">
-        <input class="input" type="text" name="description" placeholder=" Description" id="name" v-model="trip.description">
-        <button class="btn btn-primary btn-success mb-1" type="submit">Create</button>
+        <input class="input mt-2" type="text" name="description" placeholder=" Description" id="name" v-model="trip.description">
+        <button class="btn btn-primary btn-success mb-2 mt-2" type="submit">Create</button>
       </form>
     </div>
     
