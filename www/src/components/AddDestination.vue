@@ -73,12 +73,4 @@
     position: absolute;
     display: inline;
   }
-<<<<<<< HEAD
-
-=======
-  .results-container {
-    width: 100%;
-    margin: auto;
-  }
->>>>>>> b92e3c2c225dd957d143d73c26a04d7c0402f121
 </style>

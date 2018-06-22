@@ -1,12 +1,3 @@
-
-
-
-
-
-
-
-
-
 <script>
   import router from "../router";
   import destination from "./Destination";
