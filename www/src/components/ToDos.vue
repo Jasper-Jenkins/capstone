@@ -6,6 +6,7 @@
     <div v-for="todo in todos" :key="todo._id">
       {{todo.title}}
       <comment :todo="todo"></comment>
+      
       <button @click="deleteTodo(todo)">Delete todo</button>
     </div>
   </div>

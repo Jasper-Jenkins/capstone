@@ -1,35 +1,35 @@
 <template>
   <div class="add-destination tracker">
-      <div class="row">
-        <div class="col">
-          <h1> {{currentTrip.title}}</h1>
+    <div class="row">
+      <div class="col">
+        <h1> {{currentTrip.title}}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div>Add Destination Component</div>
+      </div>
+      <div class="col">
+        <div>
+          <button @click="toggleCreate">+</button>
+        </div>
+        <div v-if="toggleForm">
+          <form v-on:submit.prevent="getDestination" class="form">
+            <input class="input" type="text" name="title" placeholder=" Where to?" id="email" v-model="query">
+            <button class="btn btn-primary btn-success" type="submit">Search</button>
+          </form>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12">
-          <div>Add Destination Component</div>
-        </div>
-        <div class="col">
-
-          <div>
-            <button @click="toggleCreate">+</button>
-          </div>
-          <div v-if="toggleForm">
-            <form v-on:submit.prevent="getDestination" class="form">
-              <input class="input" type="text" name="title" placeholder=" Where to?" id="email" v-model="query">
-              <button class="btn btn-primary btn-success" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col addDestination text-center" v-for="result in apiResults" :key="result._id">
-          <div class="width-holder"></div>
+    </div>
+    <div class="result-col">
+      <div class="row results">
+        <div class="col result text-center" v-for="result in apiResults" :key="result._id">
           <strong>{{result.name}}</strong>
           <span>- {{result.formatted_address}} </span>
           <button @click="addDestination(result)">+</button>
         </div>
       </div>
+    </div>
 
   </div>
 </template>
@@ -73,14 +73,12 @@
 </script>
 
 <style scoped>
-  .addDestination {
-    border: 1px solid black;
-    background-color: turquoise;
-    margin: 5px;
-
+  .results {
+    z-index: 1;
+    position: absolute;
   }
 
-  .width-holder {
-    width: 300px;
+  .result-col {
+    
   }
 </style>
