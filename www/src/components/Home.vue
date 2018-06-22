@@ -2,33 +2,39 @@
   <div class="home">
     <!-- <h1>/test</h1> -->
     <div class="container-fluid jumbotron bghome">
-      <!-- <div class="card carditall"> -->
-        <div class="textcolor">
-      <div class="row">
-         <!-- <div class="col-6 mx-auto mt-2" style="width: 200px;"> -->
-            <div class="col-6">
+
+      
+    
+  <div class="textcolor mgmenu">
+          <div class="row justify-content-center bgmenu">
+      
+            
+            <div class="col-3 justify-content-center">
               <create-trip></create-trip>
-            </div>
+              </div>
 
-        <div class="col-6 mt-2">
-    <h4>Select Existing Trip</h4>
-    <select v-model="trip">
-        <option disabled value=''>Add Destination to Trip: </option>
-        <option v-for="trip in trips" :key="trip._id" :value="trip">{{trip.title}}</option>
-      </select>
-    <div class="mb-2 mt-2"></div>
-        </div>
-  </div>
-<!-- above here is the create toggle and select existing trip, below is the search bar -->
+            <div class="col-3">
+                <h4>Select Existing Trip</h4>
+                <select v-model="trip">
+                    <option disabled value=''>Add Destination to Trip: </option>
+                    <option v-for="trip in trips" :key="trip._id" :value="trip">{{trip.title}}</option>
+                  </select>
+                  </div>
+               
+            <div class="col-3 mt-2 justify-content-center">
+                <form @submit.prevent="getResults">
+                  <input type="text" name="destination" id="destination" placeholder=" Where To?" v-model="destination.title">
+                  <button class="btn btn-primary btn-success btn-sm" type="submit">Search</button>
+                </form>
+                </div>
+             
+              
+              </div>
+    </div>
 
-      <div class="row justify-content-center">
-        <div class="col-12 justify-content-center">
-          <form @submit.prevent="getResults">
-            <input type="text" name="destination" id="destination" placeholder=" Where To?" v-model="destination.title">
-            <button class="btn btn-primary btn-success btn-sm" type="submit">Search</button>
-          </form>
-        </div>
-      </div>
+
+
+
 
       <!-- EVERYTHING BELOW IS THE SEARCH RESULT LAYOUT -->
       <div class="row">
@@ -145,10 +151,13 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.textcolor{
+  color: black;
+}
 
 .card {
-  background-color: rgba(122, 122, 122, 0.795);
-  color: white;
+  background-color: rgba(248, 248, 248, 0.795);
+  color: black;
 }
 .bghome {
   background: url(../assets/tresting.jpg);
@@ -186,8 +195,10 @@
     /* float: right; */
 }
 
-.textcolor{
-  text-shadow: 2px 2px rgb(255, 255, 255);
+.bgmenu {
+  background: rgba(248, 248, 248, 0.815);
+  margin-top: 10em;
+  margin-bottom: 45em;
 }
 
 /* h1,h2 {
