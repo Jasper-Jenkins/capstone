@@ -71,5 +71,13 @@
 </script>
 
 <style scoped>
+<<<<<<< HEAD
   
+=======
+  .results {
+    z-index: 1;
+    position: absolute;
+    display: inline;
+  }
+>>>>>>> fd866a51a59a652ab236778d7789a58350cec6f5
 </style>
