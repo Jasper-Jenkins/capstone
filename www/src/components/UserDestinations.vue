@@ -3,7 +3,7 @@
     <h8>UserDestinations component</h8>
     <h2>Destinations</h2>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center">t
 
     <div class="wrapborder mt-2 col-md-3 ml-2 mt-3 card" style="width: 18rem" v-for="destination in destinations" :key="destination._id">
 
@@ -28,8 +28,8 @@
       return {
 
       }
-    },
-    computed: {
+      }
+    c,omputed: {
       destinations() {
         return this.$store.state.destinations
       }

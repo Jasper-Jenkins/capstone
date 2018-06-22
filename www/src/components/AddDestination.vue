@@ -71,13 +71,15 @@
 </script>
 
 <style scoped>
-<<<<<<< HEAD
-  
-=======
   .results {
     z-index: 1;
     position: absolute;
-    display: inline;
+    display: block;
+    width: 30vh;
+    border: 1px black;
   }
->>>>>>> fd866a51a59a652ab236778d7789a58350cec6f5
+  .results-container {
+    width: 100%;
+    margin: auto;
+  }
 </style>

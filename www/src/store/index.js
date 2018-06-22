@@ -296,7 +296,7 @@ export default new vuex.Store({
           console.log(res)
         })
     },
-    
+
     publishDest({commit, dispatch}, dest){
       server.get('api/destination/'+ dest._id)
       .then(res=> {
