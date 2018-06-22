@@ -44,16 +44,6 @@
         <div class="col googleResults text-center" v-for="result in apiResults" :key="result._id">
           <img :src="result.photo" alt="">
           <strong>{{result.name}}</strong>
-          <!-- <strong>{{result.description}}</strong> // default hardcode != provdided by google || user
-          <strong>{{place.id_reviews}}</strong> -->
-          <!-- then a button, modal pop up google map for location -->
-
-
-
-          <!-- <select v-model="trip">
-            <option disabled value=''>Add Destination to Trip: </option>
-            <option v-for="trip in trips" :key="trip._id" :value="trip">{{trip.title}}</option>
-          </select> -->
           <button class="btn btn-primary btn-success btn-sm" @click="addDestination(result)" v-if="trips.length != 0">Add To Trip</button>
           <mytrip v-if="trips.length == 0"></mytrip>
         </div>

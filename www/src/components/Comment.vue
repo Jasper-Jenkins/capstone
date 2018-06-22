@@ -6,6 +6,7 @@
       <input class="input" type="url" name="image" placeholder=" image" id="image" v-model="comment.photo">
       <button class="btn btn-primary btn-success" type="submit">Add</button>
     </form>
+    <button @click="deleteComment">Delete Comment</button>
   </div>
 </template>
 
@@ -35,7 +36,13 @@
       },
       toggleComment() {
         this.newComment = !this.newComment
-      }
+      },
+      deleteComment(todo){
+        console.log(todo.comments)
+        todo.comments.splice(todo.comments._id, 1)
+        console.log(todo.comments)
+        //this.$store.disp
+      },
     }
   }
 
