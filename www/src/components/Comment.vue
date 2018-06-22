@@ -6,7 +6,11 @@
       <input class="input" type="url" name="image" placeholder=" image" id="image" v-model="comment.photo">
       <button class="btn btn-primary btn-success" type="submit">Add</button>
     </form>
-    <button @click="deleteComment">Delete Comment</button>
+      <div v-for="comment in todo.comments" :key="comment._id">
+          <p>{{comment.comment}}</p>
+          <img :src="comment.photo" alt="">
+          <button  @click="deleteComment(todo)">Delete Comment</button>
+      </div>
   </div>
 </template>
 
@@ -21,6 +25,7 @@
     },
     data() {
       return {
+        deleteComment: false,
         newComment: false,
         comment: {
           comment: '',
@@ -28,7 +33,9 @@
         }
       }
     },
-    computed: {},
+    computed: {
+    
+    },
     methods: {
       addComment(todo) {
         todo.comments.unshift(this.comment)
@@ -37,11 +44,12 @@
       toggleComment() {
         this.newComment = !this.newComment
       },
+     
       deleteComment(todo){
         console.log(todo.comments)
         todo.comments.splice(todo.comments._id, 1)
         console.log(todo.comments)
-        //this.$store.disp
+        this.$store.dispatch('deleteComment', todo)
       },
     }
   }
