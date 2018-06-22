@@ -142,6 +142,18 @@ export default new vuex.Store({
     },
     setTodos(state, todos){
       state.todos = todos
+    },
+    setEditDestination(state, destination){
+      var index = state.destinations.findIndex(t => {
+        return t._id == destination._id
+      })
+      state.destinations.splice(index, 1, destination)                  
+    },
+    setEditTrip(state, trip) {
+      var index = state.userTrips.findIndex(t => {
+        return t._id == trip._id
+      })
+      state.userTrips.splice(index, 1, trip)
     }
   },
   actions: {
@@ -220,25 +232,11 @@ export default new vuex.Store({
       server.delete('/api/trips/' + trip._id)
         .then(res => {
           dispatch('getUsersTrips')
-          //      dispatch('deleteDestination', state.destinations)
         })
         .catch(res => {
           console.log(res)
         })
     },
-
-    // createTodo({ dispatch, commit }, todo) {
-    //   server.post('/api/trips', todo)
-    //     .then(res => {
-    //       commit('addTodo', res.data)
-    //     })
-    //     .catch(res => {
-    //       console.log(res)
-    //     })
-    // },
-
-
-
     getUsersTrips({ dispatch, commit, state }) {
       server.get('/api/trips/user/' + state.user._id)
         .then(res => {
@@ -296,16 +294,12 @@ export default new vuex.Store({
           console.log(res)
         })
     },
-
-    publishDest({commit, dispatch}, dest){
-      server.get('api/destination/'+ dest._id)
+    editDest({commit, dispatch}, dest){
+      server.put('/api/destinations/'+ dest._id, dest)
       .then(res=> {
-        commit('getTripDestinations', dest.tripId)
+        commit('setEditDestination', res.data.destination)
       })
     },
-
-
-
     selectActiveDest({ dispatch, commit }, dest) {
       console.log('works', dest)
       commit('setActiveDest', dest)
@@ -404,6 +398,12 @@ export default new vuex.Store({
       .then(res=>{
         console.log(res.data.thingtodo)
       })
+    },
+    editTrip({commit, dispatch}, trip) {
+      server.put("/api/trips/" + trip._id, trip)
+       .then(res => {
+         commit("setEditTrip", res.data.trip)
+       })
     }
   
   }

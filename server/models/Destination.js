@@ -24,4 +24,9 @@ let destinationSchema = new Schema({
   }
 })
 
+destinationSchema.pre('save', function(next) {
+  this.markModified('published')
+  next()
+})
+
 module.exports = mongoose.model(schemaName, destinationSchema)

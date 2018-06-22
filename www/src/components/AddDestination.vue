@@ -1,14 +1,8 @@
 <template>
   <div class="add-destination tracker">
     <div class="row">
-<<<<<<< HEAD
       <div class="col-12">
         <h1> {{currentTrip.title}}</h1>
-=======
-      <div class="col">
-        <h1>Current Trip</h1>
-        <h1>"{{currentTrip.title}}"</h1>
->>>>>>> 43aa43acdd035b197db6c790eb6d84dd17f3b5dd
       </div>
     </div>
     <div class="row">
