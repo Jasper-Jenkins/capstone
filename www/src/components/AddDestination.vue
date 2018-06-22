@@ -21,12 +21,10 @@
         </div>
       </div>
     </div>
-    <div class="result-col">
+    <div class="results-container">
       <div class="row results">
-        <div class="col result text-center" v-for="result in apiResults" :key="result._id">
-          <strong>{{result.name}}</strong>
-          <span>- {{result.formatted_address}} </span>
-          <button @click="addDestination(result)">+</button>
+        <div class="col-12">
+          <search-results></search-results>
         </div>
       </div>
     </div>
@@ -35,6 +33,7 @@
 </template>
 
 <script>
+  import searchResults from "./SearchResults"
   import usersDestinations from "./UserDestinations"
   export default {
     name: "addDestination",
@@ -42,7 +41,8 @@
       this.$store.dispatch('getTripDestinations', this.$route.params.id)
     },
     components: {
-      usersDestinations
+      usersDestinations,
+      searchResults
     },
     data() {
       return {
@@ -51,9 +51,6 @@
       };
     },
     computed: {
-      apiResults() {
-        return this.$store.state.apiResults
-      },
       currentTrip() {
         return this.$store.state.activeTrip
       }
@@ -64,9 +61,6 @@
       },
       getDestination() {
         this.$store.dispatch('findDestination', this.query)
-      },
-      addDestination(result) {
-        this.$store.dispatch('addDestination', result)
       }
     }
   };
@@ -76,9 +70,10 @@
   .results {
     z-index: 1;
     position: absolute;
+    display: inline;
   }
-
-  .result-col {
-    
+  .results-container {
+    width: 100%;
+    margin: auto;
   }
 </style>

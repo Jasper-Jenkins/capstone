@@ -52,6 +52,5 @@
 
 .add-destination {
     background-color: lightcoral;
-    
   }
 </style>

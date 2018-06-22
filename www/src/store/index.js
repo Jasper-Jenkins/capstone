@@ -392,7 +392,7 @@ export default new vuex.Store({
    deleteComment({dispatch, commit, state}, todo){
       server.put('/api/thingstodo/' + todo._id, todo)
       .then(res=>{
-        console.log(res.data.thingstodo)
+        console.log(res.data.thingtodo)
       })
     }
 
