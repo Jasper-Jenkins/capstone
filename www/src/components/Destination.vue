@@ -5,6 +5,9 @@
       <h2>{{activeDest.title}}</h2>
       
       <img :src="activeDest.photo" alt="">
+      <div v-for="todo in todos" :key="todo._id">
+        <p>{{todo.title}}</p>
+      </div>
     </div>
     <select v-model="trip">
       <option disabled value=''>Add Destination to Trip: </option>
@@ -31,6 +34,9 @@
       trips() {
         return this.$store.state.userTrips
       },
+      todos(){
+        return this.$store.state.userTodos
+      }
 
     },
     methods: {

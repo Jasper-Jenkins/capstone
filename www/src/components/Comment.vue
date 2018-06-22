@@ -9,7 +9,7 @@
       <div v-for="comment in todo.comments" :key="comment._id">
           <p>{{comment.comment}}</p>
           <img :src="comment.photo" alt="">
-          <button  @click="deleteComment(todo)">Delete Comment</button>
+          <button @click="deleteComment(todo)">Delete Comment</button>
       </div>
   </div>
 </template>
@@ -25,7 +25,6 @@
     },
     data() {
       return {
-        deleteComment: false,
         newComment: false,
         comment: {
           comment: '',
