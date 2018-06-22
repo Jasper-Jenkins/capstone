@@ -1,5 +1,5 @@
 <template>
-  <div class="trip jumbotron">
+  <div class="trip">
     <div class="container-fluid">
 
       <div class="row justify-content-center">

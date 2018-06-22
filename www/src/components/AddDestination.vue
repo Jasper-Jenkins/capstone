@@ -79,7 +79,4 @@
     position: absolute;
   }
 
-  .result-col {
-    
-  }
 </style>

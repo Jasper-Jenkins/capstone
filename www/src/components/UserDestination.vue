@@ -62,7 +62,7 @@
   };
 </script>
 
-<style>
+<style scoped>
   .toDo {
     background-color: lightseagreen;
   }
