@@ -1,18 +1,19 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-dark bg-primary top-header format">
-      <div>
+      <a href="#" class="navbar-left">
         <router-link :to="{ name: 'Home'}" class="navbar-brand">
             <a>Home</a>
         </router-link>
         <router-link :to="{ name: 'myTrips'}" class="navbar-brand">
             <a>My Trips</a>
         </router-link>
-      </div>
+        </a>
+     
       <a class="navbar-brand" @click="login" v-if="!(user._id)"><button type="button" class="btn btn-outline-light">Sign In/Login</button></a>
       <div v-if="user._id" class="d-flex flex-column">
         <a class="navbar-brand">User: {{user.displayName}}</a>
-        <a class="navbar-brand btn btn-primary btn-success" @click="signOut">Sign out</a>
+        <a class="navbar-brand btn btn-outline-light" @click="signOut">Sign out</a>
       </div>
     </nav>
     <router-view/>
@@ -49,9 +50,8 @@
 
 }
 .format{
-   box-shadow: 0px 5px 10px black;
-   margin-bottom: 15px;
-   border-bottom-left-radius: 10px;
-   border-bottom-right-radius: 10px;
+   /* box-shadow: 0px 5px 10px black; */
+   /* margin-bottom: 15px; */
+   
 }
 </style>

@@ -1,7 +1,9 @@
 <template>
-  <div class="my-trips">
+  <div class="my-trips jumbotron">
+    
     <create-trip></create-trip>
     <trips></trips>
+
   </div>
 </template>
 
@@ -35,4 +37,9 @@
 </script>
 
 <style scoped>
+
+
+  .my-trips {
+    background-image: url(../assets/travel2.jpg);
+  }
 </style>

@@ -1,14 +1,17 @@
 <template>
-  <div class="create-trip">
-    <button @click="newTrip">Start New Trip</button>
+  <div class="row justify-content-center"> 
+  <div class="create-trip col-md-9 ">
+  <center><button class="btn btn-primary btn-success mt-2 mb-2" @click="newTrip">Start New Trip</button></center>
     <div class="create-trip" v-if="toggleForm">
-      <form v-on:submit.prevent="createTrip" class="form">
+      <form v-on:submit.prevent="createTrip" class="form bgform">
         <input class="input" type="text" name="title" placeholder=" title" id="email" v-model="trip.title">
         <input class="input" type="text" name="description" placeholder=" description" id="name" v-model="trip.description">
-        <button class="btn btn-primary btn-success" type="submit">Create</button>
+        <button class="btn btn-primary btn-success mb-1" type="submit">Create</button>
       </form>
     </div>
+    
   </div>
+</div>
 </template>
 
 <script>
@@ -37,5 +40,11 @@
 
 </script>
 
-<style>
+<style scoped>
+  .card {
+   
+   background-color: rgba(122, 122, 122, 0.795);
+   color: white;
+
+ }
 </style>
