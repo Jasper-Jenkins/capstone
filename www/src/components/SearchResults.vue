@@ -2,10 +2,9 @@
   <div class="search-destinations">
     <div class="result text-center" v-for="result in apiResults" :key="result._id">
       <a @click="addDestination(result)">
-        <strong>{{result.name}}</strong>
-        <span>- {{result.formatted_address}} </span>
+        <p><strong>{{result.name}}</strong> - {{result.formatted_address}}</p>
       </a>
-    </div>
+      </div>
   </div>
 </template>
 
@@ -34,5 +33,17 @@
 <style>
   .result {
     background: white;
+    width: 100%;
+    border: 2px black;
+  }
+
+  .result :hover {
+    color: white;
+    background: rgb(106, 106, 243);
+    cursor: pointer;
+  }
+
+  .search-destinations {
+    border: 1px solid;
   }
 </style>

@@ -6,6 +6,7 @@
       
       <img :src="activeDest.photo" alt="">
       <div v-for="todo in todos" :key="todo._id">
+        <img :src="todo.photo" alt="">
         <p>{{todo.title}}</p>
       </div>
     </div>

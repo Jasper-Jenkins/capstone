@@ -296,6 +296,16 @@ export default new vuex.Store({
           console.log(res)
         })
     },
+    
+    publishDest({commit, dispatch}, dest){
+      server.get('api/destination/'+ dest._id)
+      .then(res=> {
+        commit('getTripDestinations', dest.tripId)
+      })
+    },
+
+
+
     selectActiveDest({ dispatch, commit }, dest) {
       console.log('works', dest)
       commit('setActiveDest', dest)
@@ -395,6 +405,6 @@ export default new vuex.Store({
         console.log(res.data.thingtodo)
       })
     }
-
+  
   }
 })

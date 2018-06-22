@@ -1,7 +1,7 @@
 <template>
   <div class="add-destination tracker">
     <div class="row">
-      <div class="col">
+      <div class="col-12">
         <h1> {{currentTrip.title}}</h1>
       </div>
     </div>
@@ -21,12 +21,10 @@
         </div>
       </div>
     </div>
-    <div class="results-container">
-      <div class="row results">
-        <div class="col-12">
-          <search-results></search-results>
+    <div class="results-container row d-flex justify-content-center">
+        <div class="results col-12">
+            <search-results></search-results>
         </div>
-      </div>
     </div>
 
   </div>
@@ -70,10 +68,12 @@
   .results {
     z-index: 1;
     position: absolute;
-    display: inline;
+    display: block;
+    width: 30vh;
+    border: 1px black;
   }
-  .results-container {
-    width: 100%;
-    margin: auto;
-  }
+
+  
+
+
 </style>
