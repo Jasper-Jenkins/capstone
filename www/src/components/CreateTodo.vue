@@ -6,6 +6,16 @@
       <input class="input" type="text" name="description" placeholder=" description" id="email" v-model="todo.description">
       <button class="btn btn-primary btn-success" type="submit">Add</button>
     </form>
+    <div>
+      <select name="Category" class="form-control" v-model="category">
+        <option selected disabled>Select a Category</option>
+        <option v-for="category in categories" :value="category">{{category}}</option>
+      </select>
+      <button @click="addCatergory">Add</button>
+    </div>
+    <div class="d-flex align-items-row">
+      <p class="ml-3" v-for="(cat, index) in todo.categories" style="color: blue;">{{cat}} <a style="color: red;" @click="removeCategory(index)">x</a></p>
+    </div>
     <button @click=toggleImg>Add image</button>
     <div class="row">
       <div class="col" v-for="img in todo.gallery">
@@ -25,15 +35,21 @@
     data() {
       return {
         newImg: false,
+        category: '',
         todo: {
           title: '',
           description: '',
           img: '',
-          gallery: []
+          gallery: [],
+          categories: []
         }
       }
     },
-    computed: {},
+    computed: {
+      categories() {
+        return this.$store.state.categories
+      },
+    },
     methods: {
       toggleImg() {
         this.newImg = !this.newImg
@@ -46,15 +62,25 @@
         var newTodo = {
           title: this.todo.title,
           description: this.todo.description,
-          gallery: this.todo.gallery
+          gallery: this.todo.gallery,
+          categories: this.todo.categories
         }
         this.$store.dispatch('addTodo', newTodo)
         this.todo = {
           title: '',
           description: '',
           img: '',
-          gallery: []
+          gallery: [],
+          categories: []
         }
+      },
+      addCatergory(){
+        if(this.category && !this.todo.categories.includes(this.category)) {
+          this.todo.categories.push(this.category);
+        }
+      },
+      removeCategory(i){
+        this.todo.categories.splice(i, 1)
       }
     }
   }

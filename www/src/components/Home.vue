@@ -58,9 +58,7 @@
         </div>
         <div class="col googleResults text-center" v-for="result in apiResults" :key="result._id">
           <img :src="result.photo" alt="">
-          <div></div>
           <strong>{{result.name}}</strong>
-          <div></div>
           <!-- <strong>{{result.description}}</strong> // default hardcode != provdided by google || user
           <strong>{{place.id_reviews}}</strong> -->
           <!-- then a button, modal pop up google map for location -->

@@ -7,16 +7,16 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-4">
-          <todos></todos>
-        </div>
-        <div class="col-4">
+        <div class="col-12">
           <button @click="toggleCreate">Create New Todo</button>
           <button @click="toggleAdd">Add Todo</button>
           <create-todo v-if="displayCreate"></create-todo>
-          <add-todo v-if="displayAdd"></add-todo>
+          <div class="todos">
+              <add-todo v-if="displayAdd"></add-todo>
+          </div>
+          <todos></todos>
         </div>
-        <div class="col-4"></div>
+
       </div>
     </div>
   </div>
@@ -65,5 +65,10 @@
 <style>
   .toDo {
     background-color: lightseagreen;
+  }
+
+  .todos {
+    width: 50vh;
+    margin: auto;
   }
 </style>

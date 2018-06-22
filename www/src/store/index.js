@@ -28,66 +28,65 @@ export default new vuex.Store({
     activeDest: {},
     categories: [
       'airport',
-      'amusement_park',
+      'amusement park',
       'aquarium',
-      'art_gallery',
+      'art gallery',
       'bakery',
       'bank',
       'bar',
-      'beauty_salon',
-      'book_store',
-      'bowling_alley',
+      'beauty salon',
+      'book store',
+      'bowling alley',
       'cafe',
       'campground',
-      'car_rental',
+      'car rental',
       'casino',
       'church',
-      'city_hall',
-      'clothing_store',
-      'convenience_store',
-      'department_store',
-      'electronics_store',
+      'city hall',
+      'clothing store',
+      'convenience store',
+      'department store',
+      'electronics store',
       'embassy',
       'florist',
-      'gas_station',
-      'furniture_store',
+      'food',
+      'gas station',
+      'furniture store',
       'gym',
-      'hardware_store',
-      'hindu_temple',
-      'home_goods_store',
-      'jewelry_store',
+      'hardware store',
+      'hindu temple',
+      'home goods store',
+      'jewelry store',
       'library',
-      'liquor_store',
+      'liquor store',
       'locksmith',
       'lodging',
-      'meal_delivery',
-      'meal_takeaway',
+      'meal delivery',
       'mosque',
-      'movie_rental',
-      'movie_theater',
+      'movie rental',
+      'movie theater',
       'museum',
-      'night_club',
+      'night club',
       'park',
-      'pet_store',
+      'pet store',
       'pharmacy',
+      'point of interest',
+      'place of worship',
       'restaurant',
-      'rv_park',
+      'rv park',
       'school',
-      'shoe_store',
-      'shopping_mall',
+      'shoe store',
+      'shopping mall',
       'spa',
       'stadium',
       'store',
-      'subway_station',
+      'subway station',
       'supermarket',
       'synagogue',
-      'train_station',
-      'travel_agency',
-      'transit_station',
-      'zoo',
-      'food',
-      'point_of_interest',
-      'place_of_worship'
+      'train station',
+      'travel agency',
+      'transit station',
+      'zoo'
     ],
     userTodos: [],
     googleTodos: [],
@@ -134,6 +133,15 @@ export default new vuex.Store({
     },
     setActiveTrip(state, trip) {
       state.activeTrip = trip
+    },
+    setRemoveTodo(state, todo) {
+      var index = state.userTodos.findIndex(item => {
+        return item._id == todo._id
+      })
+      state.userTodos.splice(index, 1);
+    },
+    setTodos(state, todos){
+      state.todos = todos
     }
   },
   actions: {
@@ -295,7 +303,7 @@ export default new vuex.Store({
     findTodos({ dispatch, commit, state }, category) {
       server.get('/api/thingstodo/' + state.activeDest.place_id + '/' + category)
         .then(res => {
-          commit('setUserTodos', res.data)
+          commit('setTodos', res.data)
           dispatch('getGoogleTodos', category)
         })
         .catch(res => {
@@ -304,7 +312,7 @@ export default new vuex.Store({
     },
     getGoogleTodos({ dispatch, commit, state }, category) {
       var search = {
-        categories: category,
+        categories: category.replace(" ", "_"),
         coords: state.activeDest.lat + ',' + state.activeDest.long
       }
       server.post('/api/nearby/places', search)
@@ -336,7 +344,6 @@ export default new vuex.Store({
         destinationId: state.activeDest._id,
         tripId: state.activeTrip._id
       }
-      debugger
       server.post('/api/thingstodo', newTodo)
         .then(res => {
           commit('setNewTodo', res.data)
@@ -350,15 +357,18 @@ export default new vuex.Store({
     },
     getDestTodos({ dispatch, commit }, id) {
       server.get('/api/destinations/' + id + '/thingstodo')
-        .then(res => {     
+        .then(res => {
           commit('setUserTodos', res.data)
+        })
+        .catch(res => {
+          console.log(res)
         })
     },
     deleteTodo({ commit, dispatch }, todo) {
       var temp = todo
       server.delete('/api/thingstodo/' + todo._id)
         .then(res => {
-          commit('setTodo', temp)
+          commit('setRemoveTodo', temp)
         })
         .catch(res => {
           console.log(res)
@@ -368,6 +378,7 @@ export default new vuex.Store({
       commit('setApiResults', [])
       commit('setUserResults', [])
       commit('setGoogleTodos', [])
+      commit('setTodos', [])
     },
     addComment({ dispatch, commit }, todo) {
       server.put('/api/thingstodo/' + todo._id, todo)
