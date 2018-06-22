@@ -17,11 +17,7 @@
           <div v-if="toggleForm">
             <form v-on:submit.prevent="getDestination" class="form">
               <input class="input" type="text" name="title" placeholder=" Where to?" id="email" v-model="query">
-<<<<<<< HEAD
               <button class="btn btn-primary btn-success" type="submit">Search</button>
-=======
-              <button class="btn btn-primary btn-success" type="submit">Search Destinations</button>
->>>>>>> fd32bea68f2369b127e8e352f7be282a905fd91e
             </form>
           </div>
         </div>

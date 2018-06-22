@@ -1,5 +1,7 @@
 <template>
-  <div class="user bgImg">
+  <div class="user jumbotron jumbotron-fluid bgImg">
+    <div class="row justify-content-center">
+    <div class="col-6 card">
     <div class="login" v-if="showLogin">
       <h1>Login</h1>
       <form v-on:submit.prevent="login" class="form">
@@ -18,8 +20,8 @@
     <div class="register" v-if="!showLogin">
       <h1>Register</h1>
       <form v-on:submit.prevent="register">
-        <input class="input" type="email" name="email" placeholder=" email" id="email" v-model="user.email">
-        <input class="input" type="text" name="name" placeholder="nam" id="name" v-model="user.displayName">
+        <input class="input" type="email" name="email" placeholder=" e-mail" id="email" v-model="user.email">
+        <input class="input" type="text" name="name" placeholder="name" id="name" v-model="user.displayName">
         <input class="input" type="password" name="password" placeholder="password" id="name" v-model="user.password">
         <button class="btn btn-primary btn-danger" type="submit">Register</button>
       </form>
@@ -31,6 +33,8 @@
         <em @click="toggle"><button class="btn btn-primary btn-success" type="submit">Login</button></em>
       </p>
     </div>
+  </div>
+</div>
   </div>
 </template>
 
@@ -64,5 +68,15 @@
     }
   }
 </script>
-<style>
+<style scoped>
+.jumbotron{
+    height: 100vh;
+}
+  .bgImg{ 
+    background: url(../assets/travel.jpg);
+  }
+  .card {
+    background-color: rgb(238, 238, 238);
+    opacity: .9;
+  }
 </style>
