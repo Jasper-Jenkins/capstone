@@ -2,7 +2,7 @@
   <div class="add-todo todo">
     <div class="find d-flex flex-row">
       <select name="Category" class="form-control" v-model="category" v-on:change="searchTodos">
-        <option selected disabled>Select a Category</option>
+        <option value="Select a Category" hidden>Select a Category</option>
         <option v-for="category in categories" :value="category">{{category}}</option>
       </select>
       <!-- <button @click="searchTodos">Find</button> -->
@@ -27,7 +27,7 @@
     name: 'addTodo',
     data() {
       return {
-        category: ''
+        category: 'Select a Category'
       }
     },
 
@@ -67,21 +67,21 @@
     position: absolute;
     display: block;
     max-height: 50vh;
-    overflow: scroll;
+    overflow: auto;
   }
   .userResults {
-    background: lightgray;
+    background: white;
     margin-bottom: 0; 
     opacity: 0.9;
   }
 
   .googleResults {
-    background: lightgray;
+    background: white;
     opacity: 0.9;
   }
 
   .todo-result {
-    border: 1px solid;
+    
     margin: 0;
     width: 50vh;
   }

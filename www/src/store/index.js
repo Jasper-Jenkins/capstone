@@ -315,7 +315,6 @@ export default new vuex.Store({
         categories: category.replace(" ", "_"),
         coords: state.activeDest.lat + ',' + state.activeDest.long
       }
-      debugger
       server.post('/api/nearby/places', search)
         .then(res => {
           console.log(res.data.results)
