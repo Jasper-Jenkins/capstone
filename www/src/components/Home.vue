@@ -6,7 +6,7 @@
          
         <!-- <div class="col-6 mx-auto mt-2" style="width: 200px;"> -->
             <div class="col-6">
-          <mytrip></mytrip>
+              <create-trip></create-trip>
         </div>
         <div class="col-6 mt-2">
     <h4>Select Existing Trip</h4>
@@ -56,7 +56,8 @@
             <option disabled value=''>Add Destination to Trip: </option>
             <option v-for="trip in trips" :key="trip._id" :value="trip">{{trip.title}}</option>
           </select> -->
-          <button class="btn btn-primary btn-success btn-sm" @click="addDestination(result)">Add To Trip</button>
+          <button class="btn btn-primary btn-success btn-sm" @click="addDestination(result)" v-if="trips.length != 0">Add To Trip</button>
+          <mytrip v-if="trips.length == 0"></mytrip>
         </div>
       </div>
 
@@ -68,6 +69,7 @@
   import router from "../router";
   import destination from "./Destination";
   import mytrip from "./MyTrip";
+  import createTrip from "./CreateTrip"
 
   export default {
     name: "Home",
@@ -81,7 +83,8 @@
     },
     components: {
       destination,
-      mytrip
+      mytrip,
+      createTrip
     },
     computed: {
       userResults() {
@@ -170,6 +173,6 @@
   }
 
   .logobg {
-    background-image: url()
+    background-image: url('')
   }
 </style>

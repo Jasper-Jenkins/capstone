@@ -14,16 +14,12 @@ router.get('/api/thingstodo/:id', (req, res, next) => {
 
 //get by category and place id
 router.get('/api/thingstodo/:placeId/:category', (req, res) => {
-  ToDo.find({
-    place_id: req.params.placeId
-  })
+  ToDo.find({$and: [
+    {place_id: req.params.placeId},
+    {categories: {$in: [''+req.params.category]}}
+  ]})
    .then(thingstodo => {
-     var filterTodos = thingstodo.filter(todo => {
-       if (todo.categories.includes(req.params.category)) {
-         return todo.published
-       }
-     })
-     res.status(200).send(filterTodos)
+     res.status(200).send(thingstodo)
    })
    .catch(err => {
      res.status(400).send(err)

@@ -1,5 +1,5 @@
 <template>
-  <div class="user">
+  <div class="user bgImg">
     <div class="login" v-if="showLogin">
       <h1>Login</h1>
       <form v-on:submit.prevent="login" class="form">
@@ -64,6 +64,5 @@
     }
   }
 </script>
-
-<style scoped>
+<style>
 </style>
