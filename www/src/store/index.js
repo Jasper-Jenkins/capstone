@@ -388,6 +388,13 @@ export default new vuex.Store({
         .catch(res => {
           console.log(res)
         })
+    },
+   deleteComment({dispatch, commit, state}, todo){
+      server.put('/api/thingstodo/' + todo._id, todo)
+      .then(res=>{
+        console.log(res.data.thingstodo)
+      })
     }
+
   }
 })
