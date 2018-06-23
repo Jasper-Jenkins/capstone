@@ -2,7 +2,6 @@
   <div class="user-destinations tracking">
     <!-- <h2>Destinations</h2> -->
     <!-- <h2>Destinations</h2> -->
-    <h8>UserDestinations component</h8>
     <h2>Destinations</h2>
     <div class="row justify-content-center">
       <div v-for="destination in destinations" :key="destination._id">
