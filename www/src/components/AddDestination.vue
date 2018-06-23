@@ -22,7 +22,7 @@
                 <search-results></search-results>
               </div>
             </div>
-          <button class="btn btn-primary btn-success submit-btn" type="submit">Search</button>
+          <button class="btn btn-primary btn-success submit-btn" @click="getDestination">Search</button>
         </div>
       </div>
     </div>
