@@ -1,41 +1,29 @@
 <template>
-<<<<<<< HEAD
   <div class="trip container-fluid">
 
     <div class="row">
       <div class="col">
+        <add-destination></add-destination>
+      </div>
+    </div>
         <!-- <div class="row justify-content-center">
       <div class="col add-destination mb-2"> -->
-        <add-destination></add-destination>
         <!-- </div>
         </div> -->
         <!-- <div class="col"> -->
         <!-- <div class="card-columns"> -->
+        <!-- <div v-for="destination in destinations" :key="destination._id">
+          <edit-destination v-on:setDest="setDest" :destination="destination"></edit-destination>
+        </div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+    <!-- <div class="row"> -->
+      <div class="row"> 
+      <div class="card-columns">
         <div v-for="destination in destinations" :key="destination._id">
           <edit-destination v-on:setDest="setDest" :destination="destination"></edit-destination>
-=======
-  <div class="trip">
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col add-destination mb-2">
-          <add-destination></add-destination>
->>>>>>> 584630e3be527a4482a2c6262a657ebcb6e17711
-        </div>
-        <!-- </div> -->
-        <!-- </div> -->
-      </div>
-<<<<<<< HEAD
-=======
-
-      <div class="row">
-        <div class="card-columns">
-          <div v-for="destination in destinations" :key="destination._id">
-            <edit-destination v-on:setDest="setDest" :destination="destination"></edit-destination>
-          </div>
         </div>
       </div>
-
->>>>>>> 584630e3be527a4482a2c6262a657ebcb6e17711
     </div>
   </div>
 </template>
