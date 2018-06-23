@@ -44,7 +44,8 @@
         tripId: this.destination.tripId,
         userId: this.destination.userId,
         lat: this.destination.lat,
-        long: this.destination.long
+        long: this.destination.long,
+        _id: this.destination._id
       }
     },
     data() {
@@ -58,7 +59,8 @@
           tripId: "",
           userId: "",
           lat: "",
-          long: ""
+          long: "",
+          _id: ""
         }
       }
     },
@@ -90,7 +92,8 @@
           tripId: edit.tripId,
           userId: edit.userId,
           lat: edit.lat,
-          long: edit.long
+          long: edit.long,
+          _id: edit._id
         }
         this.$store.dispatch("editDest", editDest);
         this.editBool = !this.editBool

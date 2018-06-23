@@ -3,29 +3,33 @@
     <!-- This will be the display for a users current todos at each destination -->
     <div>ToDos Component</div>
     <p>Fun activities for your destination!</p>
-    <div v-for="todo in todos" :key="todo._id">
+    <div v-for="(todo, todoIndex) in todos" :key="todo._id">
       {{todo.title}}
       {{todo.description}}
-      <div id="toggleSwitches" class="carousel slide formatCarousel" data-ride="carousel" data-interval="1000">  
+      
+       <button @click="toggleEdit">Edit</button>
+          <form v-on:submit.prevent="editTodo(todo)" class="form" v-if="toggle"><div id="toggleSwitches" class="carousel slide" data-ride="carousel" data-interval="1000">  
         <ol class="carousel-indicators">
           <li v-for="(img, index) in todo.gallery" data-target="#toggleSwitches" v-bind:data-slide-to="index" v-bind:class="{active: index==0}"></li>
         </ol>
         <div class="carousel-inner">
-          <div v-for="(img, index) in todo.gallery" v-bind:class="{active: index==0, 'carousel-item': true} ">
+          <div v-for="(img, index) in todo.gallery" v-bind:class="{active: index==activeImage, 'carousel-item': true} ">
               <img class="d-block w-100 img-fluid" :src="img" alt="">
           </div>
         </div>
-        <a class="carousel-control-prev" href="#toggleSwitches" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#toggleSwitches" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
+        <span @click="prevImage(todoIndex)">
+          <a class="carousel-control-prev" href="#toggleSwitches" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only" @click="prevImage">Previous</span>
+          </a>
+        </span>
+        <span @click="nextImage(todoIndex)">
+          <a class="carousel-control-next" href="#toggleSwitches" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only"  >Next</span>
+          </a>
+        </span>
       </div>
-       <button @click="toggleEdit">Edit</button>
-          <form v-on:submit.prevent="editTodo(todo)" class="form" v-if="toggle">
             <input class="input" type="text" name="comment" placeholder=" comment" id="comment" v-model="todo.title">
             <input class="input" type="text" name="description" placeholder="description" id="descroption" v-model="todo.description">
             <input class="input" type="url" name="image" placeholder=" image" id="image" v-model="img">
@@ -52,6 +56,7 @@
         isActive: true,
         toggle: false,
         img: '',
+        activeImage: 0,
         todo:{
           title:"",
           description:"",
@@ -70,6 +75,22 @@
       }
     },
     methods: {
+      nextImage(i) {
+        debugger
+        if(this.activeImage == this.todos[i].gallery.length-1){
+          this.activeImage = 0
+        }else{
+          this.activeImage++
+        }
+      },
+      prevImage(i){
+        if(this.activeImage == 0){
+          this.activeImage = this.todos[i].gallery.length - 1
+        }else{
+
+          this.activeImage--
+        }
+      },
       deleteTodo(todo) {
         this.$store.dispatch('deleteTodo', todo)
       },
