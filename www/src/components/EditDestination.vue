@@ -1,19 +1,20 @@
 <template>
-  <div class="edit-destination container-fluid">
+  <div class="edit-destination">
     <div class="row">
       <div class="col-12">
-
-        <div class="card-columns">
           <div class="card">
             <img class="card-img-top" :src="destination.photo" alt="Card image cap">
-            <div class="card-body">
-              <router-link @click.native="selectActiveDest(destination)" :to="{ name: 'myDestination', params: { id: destination._id }}"
-                :key="destination._id">
-                <p>
+            <router-link @click.native="selectActiveDest(destination)" :to="{ name: 'myDestination', params: { id: destination._id }}"
+            :key="destination._id">
+                <div class="card-body">
+                
                   <h5 class="card-title">{{destination.title}}</h5>
-                </p>
+                  </div>
+               
               </router-link>
+
               <div class="card-text">
+                
                 <div class="mb-2">
                   <button class="btn btn-danger" @click="toggleEdit">Edit</button>
                   <form @keyup="updateDest" v-on:submit.prevent="editDestination(edit)" class="form bgform" v-if="editBool">
@@ -22,19 +23,20 @@
                     <button class="btn btn-primary btn-success mb-2 mt-2" type="submit">Create</button>
                   </form>
                 </div>
+
                 <div class="mb-2">
                   <button type="button" class="btn btn-danger" @click="deleteDest(destination)">Cancel Destination</button>
                 </div>
                 <div class="mb-2">
                   <button type="button" class="btn btn-danger" @click="publishDest(destination)">Publish Destination</button>
                 </div>
+
               </div>
             </div>
           </div>
-        </div>
+       
       </div>
     </div>
-
   </div>
 </template>
 
