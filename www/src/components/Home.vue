@@ -106,25 +106,30 @@
 
       <!-- EVERYTHING BELOW IS THE SEARCH RESULT LAYOUT -->
       <!-- USER RESULTS -->
-      <div class="row ur mx-auto justify-content-center mt-2">   
+      <div class="rowing ur mt-2">   
 
-        <div class="col-2 userResults" v-for="userResult in userResults" :key="userResult._id">
+        <div class="column userResults" v-for="userResult in userResults" :key="userResult._id">
           <img :src="userResult.photo" alt="">
+          <div class="test">   
           <a @click="selectActiveDest(userResult)">
             <strong>{{userResult.title}}</strong>
           </a>
+        </div>
         </div>
 
         </div>
 
       <!-- GOOGLE RESULTS -->
-      <div class="row gr mx-auto mt-2">
-
-        <div class="col-2 googleResults" v-for="result in apiResults" :key="result._id">
-          <img :src="result.photo" alt="">
-          <strong>{{result.name}}</strong>
-          <button class="btn btn-primary btn-success btn-sm" @click="addDestination(result)" v-if="trips.length != 0">Add To Trip</button>
-          <mytrip v-if="trips.length == 0"></mytrip>
+      <div class="rowing gr mt-2">
+        <div class="column googleResults d-flex flex-row flex-wrap">
+          <div v-for="result in apiResults" :key="result._id">
+            <img :src="result.photo" alt="">
+            <div class="test">     
+            <strong>{{result.name}}</strong>
+            <button class="btn btn-primary btn-success btn-sm" @click="addDestination(result)" v-if="trips.length != 0">Add To Trip</button>
+          </div>
+            <mytrip v-if="trips.length == 0"></mytrip>
+        </div>
         </div>
 
       </div>
@@ -140,10 +145,16 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-  .userResults {
-    flex: 25%;
-  max-width: 25%;
+  /* .userResults {
+    flex: 50%;
+  min-width: 50%;
+  padding: 0 4px; */
+
+  .rowing {
+  display: flex;
+  flex-wrap: wrap;
   padding: 0 4px;
+}
 
     /* background: rgba(247, 247, 247, 0.589);
       color: white;
@@ -151,12 +162,27 @@
       margin: 5px;
       padding: 10px; */
       /* float: left; */
-  }
-  .googleResults {
-    flex: 25%;
+    
+  
+  column {
+  flex: 25%;
   max-width: 25%;
   padding: 0 4px;
+}
 
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
 
 
     /* background: rgba(247, 247, 247, 0.589);
@@ -165,11 +191,11 @@
       margin: 5px;
       padding: 10px; */
       /* float: left; */
-  }
+  
     .userResults img {
       margin-top: 8px;
-      vertical-align: middle;
-
+      vertical-align: top;
+      float: top;
 
         /* height: 100px;
         width: auto; */
@@ -179,14 +205,13 @@
     .googleResults img {
       margin-top: 8px;
       vertical-align: middle;
-
-
+      display: inline-block;
         /* height: 100px;
         width: auto; */
         /* float: right; */
     }
     
-    .ur {
+    /* .ur {
       display: flex;
       flex-wrap: wrap;
       padding: 0 4px;
@@ -196,7 +221,7 @@
       display: flex;
       flex-wrap: wrap;
       padding: 0 4px;
-    }  
+    }   */
 
 .bghome {
   background: url(../assets/tresting.jpg);

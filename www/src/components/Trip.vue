@@ -8,13 +8,13 @@
         </div>       
       </div>
 
-      <div class="row">
+      <!-- <div class="row"> -->
         <!-- <div class="col toDo"> -->
-            <div class="card-columns">
+            <!-- <div class="card-columns"> -->
           <users-destinations></users-destinations>
         <!-- </div> -->
-        </div> 
-      </div>
+        <!-- </div>  -->
+      <!-- </div> -->
       
     </div>
   </div>
