@@ -1,12 +1,12 @@
 <template>
-  <div class="edit-destination">
+  <div class="edit-destination card">
+    <img class="card-img-top" :src="destination.photo" alt="Card image cap">
     <div class="card-body">
       <router-link @click.native="selectActiveDest(destination)" :to="{ name: 'myDestination', params: { id: destination._id }}"
         :key="destination._id">
         <p>
-          <h5>{{destination.title}}</h5>
+          <h5 class="card-title">{{destination.title}}</h5>
         </p>
-        <img :src="destination.photo" style="min-width:25em" alt="">
       </router-link>
     </div>
     <div class="mb-2">
@@ -53,7 +53,7 @@
           tripId: "",
           userId: "",
           lat: "",
-          long: "" 
+          long: ""
         }
       }
     },
