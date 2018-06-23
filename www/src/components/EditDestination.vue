@@ -11,6 +11,11 @@
     </div>
     <div class="mb-2">
       <button class="btn btn-danger" @click="toggleEdit">Edit</button>
+      <form @keyup="updateDest" v-on:submit.prevent="editDestination(edit)" class="form bgform" v-if="editBool">
+        <input class="input" type="text" name="title" placeholder=" Title" id="title" v-model="edit.title">
+        <input class="input mt-2" type="text" name="description" placeholder=" Description" id="name" v-model="edit.photo">
+        <button class="btn btn-primary btn-success mb-2 mt-2" type="submit">Create</button>
+      </form>
     </div>
     <div class="mb-2">
       <button type="button" class="btn btn-danger" @click="deleteDest(destination)">Cancel Destination</button>
@@ -75,6 +80,23 @@
       },
       toggleEdit() {
         this.editBool = !this.editBool
+      },
+      editDestination(edit) {
+        var editDest = {
+          title: edit.title,
+          photo: edit.photo,
+          place_id: edit.place_id,
+          published: edit.published,
+          tripId: edit.tripId,
+          userId: edit.userId,
+          lat: edit.lat,
+          long: edit.long
+        }
+        this.$store.dispatch("editDest", editDest);
+        this.editBool = !this.editBool
+      },
+      updateDest() {
+        this.$emit('setDest', this.edit)
       }
     }
   }

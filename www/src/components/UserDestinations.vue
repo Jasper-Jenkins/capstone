@@ -6,7 +6,7 @@
     <h2>Destinations</h2>
     <div class="row justify-content-center">
       <div v-for="destination in destinations" :key="destination._id">
-        <edit-destination :destination="destination"></edit-destination>
+        <edit-destination v-on:setDest="setDest" :destination="destination"></edit-destination>
       </div>
     </div>
   </div>
@@ -39,6 +39,12 @@
       publishDest(dest) {
         dest.published = !dest.published;
         this.$store.dispatch("editDest", dest)
+      },
+      setDest(dest) {
+        var index = this.destinations.findIndex(d => {
+          return d._id == dest._id
+        })
+        this.destinations.splice(index, 1, dest);
       }
     }
   }

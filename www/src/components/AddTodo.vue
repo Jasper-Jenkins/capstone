@@ -5,7 +5,6 @@
         <option value="Select a Category" hidden>Select a Category</option>
         <option v-for="category in categories" :value="category">{{category}}</option>
       </select>
-      <!-- <button @click="searchTodos">Find</button> -->
     </div>
     <div class="results" v-if="usersTodos.length + googleTodos.length > 0">
       <div class="userResults">

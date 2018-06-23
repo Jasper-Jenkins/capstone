@@ -8,7 +8,7 @@ var api = axios.default.create({
   withCredentials: true
 })
 
-let apiKey = 'AIzaSyCb7mDvm7G1Aa7Pu3LklOArn99tbDJZj00'
+let apiKey = 'AIzaSyAnjgM-XGIhA--DrN6jiplEl1Jk04k8CHI'
 
 router.get('/api/locations/:query', (req, res) => {
   api.get('textsearch/json?query=' + req.params.query + '&key=' +apiKey)
