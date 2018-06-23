@@ -38,7 +38,7 @@
     methods: {
       addComment(todo) {
         todo.comments.unshift(this.comment)
-        this.$store.dispatch('addComment', todo)
+        this.$store.dispatch('editTodo', todo)
       },
       toggleComment() {
         this.newComment = !this.newComment
