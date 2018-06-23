@@ -1,32 +1,21 @@
 <template>
-  <div class="trip">
-    <div class="container-fluid">
+  <div class="trip container-fluid">
 
-      <div class="row justify-content-center">
-        <div class="col add-destination mb-2">
-          <add-destination></add-destination>
+    <div class="row">
+      <div class="col">
+        <!-- <div class="row justify-content-center">
+      <div class="col add-destination mb-2"> -->
+        <add-destination></add-destination>
+        <!-- </div>
+        </div> -->
+        <!-- <div class="col"> -->
+        <!-- <div class="card-columns"> -->
+        <div v-for="destination in destinations" :key="destination._id">
+          <edit-destination v-on:setDest="setDest" :destination="destination"></edit-destination>
         </div>
-      </div>
-
-      <!-- <div class="row"> -->
-        <!-- <div class="col toDo"> -->
-<<<<<<< HEAD
-            <!-- <div class="card-columns"> -->
-          <users-destinations></users-destinations>
         <!-- </div> -->
-        <!-- </div>  -->
-      <!-- </div> -->
-      
-=======
-        <div class="card-columns">
-          <div v-for="destination in destinations" :key="destination._id">
-            <edit-destination v-on:setDest="setDest" :destination="destination"></edit-destination>
-          </div>
-          <!-- </div> -->
-        </div>
+        <!-- </div> -->
       </div>
-
->>>>>>> 2a10597c6f346d6ffbde963f880fd3d3ec345ab3
     </div>
   </div>
 </template>
@@ -41,7 +30,8 @@
       this.$store.dispatch('clearResults')
     },
     components: {
-      addDestination
+      addDestination,
+      editDestination
     },
     data() {
       return {
@@ -84,6 +74,9 @@
 
   .trip {
     background-image: url(../assets/travel2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 
   .add-destination {
