@@ -26,7 +26,6 @@
             <search-results></search-results>
         </div>
     </div>
-
   </div>
 </template>
 

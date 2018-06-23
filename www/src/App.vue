@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-dark bg-primary top-header format">
-      <a href="#" class="navbar-left">
+        <a href="#" class="navbar-left">
         <router-link :to="{ name: 'Home'}" class="navbar-brand">
             <a>Home</a>
         </router-link>
@@ -9,6 +9,8 @@
             <a>My Trips</a>
         </router-link>
         </a>
+
+        <img src="./assets/whitelogo.png" width="280px">
      
       <a class="navbar-brand" @click="login" v-if="!(user._id)"><button type="button" class="btn btn-outline-light">Sign In/Login</button></a>
       <div v-if="user._id" class="d-flex flex-column">
@@ -49,6 +51,11 @@
   margin-top: 0px;
 
 }
+/* .navbar-left{
+   position: absolute;
+   
+} */
+
 .format{
    /* box-shadow: 0px 5px 10px black; */
    /* margin-bottom: 15px; */
