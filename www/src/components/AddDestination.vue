@@ -13,16 +13,16 @@
         <div>
           <button @click="toggleCreate">Add More Destinations</button>
         </div>
-        <div v-if="toggleForm">
-          <form v-on:submit.prevent="getDestination" class="form">
-            <input class="input" type="text" name="title" placeholder=" Where to?" id="email" v-model="query">
-            <button class="btn btn-primary btn-success submit-btn" type="submit">Search</button>
-          </form>
-          <div class="row justify-content-center">
-            <div class="results col-12">
-              <search-results></search-results>
+        <div class="d-flex flex-row justify-content-center" v-if="toggleForm">
+          <div>
+            <form v-on:submit.prevent="getDestination" class="form">
+              <input class="input" type="text" name="title" placeholder=" Where to?" id="email" v-model="query">
+            </form>
+              <div class="results">
+                <search-results></search-results>
+              </div>
             </div>
-          </div>
+          <button class="btn btn-primary btn-success submit-btn" type="submit">Search</button>
         </div>
       </div>
     </div>
@@ -67,12 +67,17 @@
     z-index: 1;
     position: absolute;
     display: block;
-    width: 100%;
+    width: 30vh;
     border: 1px black;
+    height: 50vh;
+    overflow: auto;
   }
+
   .search-box {
-    width: 40vh;
+    width: 100%;
   }
 
-
+  input {
+    width: 30vh;
+  }
 </style>
