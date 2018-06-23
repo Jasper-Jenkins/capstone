@@ -46,9 +46,9 @@
 </script>
 
 <style scoped>
-  .toDo {
+  /* .toDo {
   /* background-color:khaki; */
-}
+/* } */ 
 
  .trip {
     background-image: url(../assets/travel2.jpg);
@@ -59,10 +59,10 @@
   }
 
 .card-columns {
-  break-inside: avoid;
+  /* break-inside: avoid; */
     display: inline-block;
     column-count: 4;
-    column-gap: 0;
+    /* column-gap: 0; */
   }
   .user-destinations{
     background-color: rgba(247, 247, 247, 0.589);
