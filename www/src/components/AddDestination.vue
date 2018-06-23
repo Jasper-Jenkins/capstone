@@ -9,36 +9,35 @@
       <div class="col-12">
         <div>Add Destination Component</div>
       </div>
-      <div class="col mb-2">
+      <div class="col mb-2 search-box">
         <div>
           <button @click="toggleCreate">Add More Destinations</button>
         </div>
         <div v-if="toggleForm">
           <form v-on:submit.prevent="getDestination" class="form">
             <input class="input" type="text" name="title" placeholder=" Where to?" id="email" v-model="query">
-            <button class="btn btn-primary btn-success" type="submit">Search</button>
+            <button class="btn btn-primary btn-success submit-btn" type="submit">Search</button>
           </form>
+          <div class="row justify-content-center">
+            <div class="results col-12">
+              <search-results></search-results>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="results-container row d-flex justify-content-center">
-        <div class="results col-12">
-            <search-results></search-results>
-        </div>
     </div>
   </div>
 </template>
 
 <script>
   import searchResults from "./SearchResults"
-  import usersDestinations from "./UserDestinations"
+
   export default {
     name: "addDestination",
     mounted() {
       this.$store.dispatch('getTripDestinations', this.$route.params.id)
     },
     components: {
-      usersDestinations,
       searchResults
     },
     data() {
@@ -68,11 +67,12 @@
     z-index: 1;
     position: absolute;
     display: block;
-    width: 30vh;
+    width: 100%;
     border: 1px black;
   }
-  .results-container {
-    width: 100%;
-    margin: auto;
+  .search-box {
+    width: 40vh;
   }
+
+
 </style>

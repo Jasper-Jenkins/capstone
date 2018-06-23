@@ -2,7 +2,7 @@
   <div class="search-destinations">
     <div class="result text-center" v-for="result in apiResults" :key="result._id">
       <a @click="addDestination(result)">
-        <p><strong>{{result.name}}</strong> - {{result.formatted_address}}</p>
+        <p class="result-name"><strong>{{result.name}}</strong> - {{result.formatted_address}}</p>
       </a>
       </div>
   </div>
@@ -45,5 +45,9 @@
 
   .search-destinations {
     border: 1px solid;
+  }
+
+  .result-name {
+    margin: 0;
   }
 </style>
