@@ -23,7 +23,7 @@
       }
     },
     computed: {
-      destinations() { 
+      destinations() {
         return this.$store.state.destinations
       }
     },
@@ -34,7 +34,7 @@
       deleteDest(dest) {
         this.$store.dispatch('deleteDest', dest)
       },
-      publishDest(dest){
+      publishDest(dest) {
         dest.published = !dest.published;
         this.$store.dispatch("editDest", dest)
       }

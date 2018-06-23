@@ -6,12 +6,23 @@
     <div v-for="todo in todos" :key="todo._id">
       {{todo.title}}
       {{todo.description}}
-      <div class="carousel slide formatCarousel" data-ride="carousel" :data-interval="1000">  
-        <div class="carousel-innner">
+      <div id="toggleSwitches" class="carousel slide formatCarousel" data-ride="carousel" data-interval="1000">  
+        <ol class="carousel-indicators">
+          <li v-for="(img, index) in todo.gallery" data-target="#toggleSwitches" v-bind:data-slide-to="index" v-bind:class="{active: index==0}"></li>
+        </ol>
+        <div class="carousel-inner">
           <div v-for="(img, index) in todo.gallery" v-bind:class="{active: index==0, 'carousel-item': true} ">
               <img class="d-block w-100 img-fluid" :src="img" alt="">
           </div>
         </div>
+        <a class="carousel-control-prev" href="#toggleSwitches" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#toggleSwitches" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
        <button @click="toggleEdit">Edit</button>
           <form v-on:submit.prevent="editTodo(todo)" class="form" v-if="toggle">

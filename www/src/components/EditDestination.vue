@@ -10,7 +10,7 @@
       </router-link>
     </div>
     <div class="mb-2">
-      <button class="btn btn-danger" @click="editDest(destination)">Edit</button>
+      <button class="btn btn-danger" @click="toggleEdit">Edit</button>
     </div>
     <div class="mb-2">
       <button type="button" class="btn btn-danger" @click="deleteDest(destination)">Cancel Destination</button>
@@ -30,13 +30,35 @@
         required: true
       }
     },
+    mounted() {
+      this.edit = {
+        title: this.destination.title,
+        photo: this.destination.photo,
+        place_id: this.destination.place_id,
+        published: this.destination.published,
+        tripId: this.destination.tripId,
+        userId: this.destination.userId,
+        lat: this.destination.lat,
+        long: this.destination.long
+      }
+    },
     data() {
       return {
-
+        editBool: false,
+        edit: {
+          title: "",
+          photo: "",
+          place_id: "",
+          published: "",
+          tripId: "",
+          userId: "",
+          lat: "",
+          long: "" 
+        }
       }
     },
     computed: {
-      destinations() { 
+      destinations() {
         return this.$store.state.destinations
       }
     },
@@ -47,9 +69,12 @@
       deleteDest(dest) {
         this.$store.dispatch('deleteDest', dest)
       },
-      publishDest(dest){
+      publishDest(dest) {
         dest.published = !dest.published;
         this.$store.dispatch("editDest", dest)
+      },
+      toggleEdit() {
+        this.editBool = !this.editBool
       }
     }
   }
