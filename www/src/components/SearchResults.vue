@@ -16,6 +16,9 @@
 
       }
     },
+    mounted() {
+     // this.$store.dispatch('authenticate')
+    },
     computed: {
       apiResults() {
         return this.$store.state.apiResults

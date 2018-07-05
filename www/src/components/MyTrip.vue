@@ -29,6 +29,9 @@ export default {
         toggleForm: false
       }
     },
+    mounted() {
+  //    this.$store.dispatch('authenticate')
+    },
     computed: {
   
     },

@@ -29,6 +29,7 @@
 
   export default {
     mounted() {
+    //  this.$store.dispatch('authenticate')
       this.$store.dispatch("getDestTodos", this.$route.params.id);
       this.$store.dispatch('clearResults')
     },

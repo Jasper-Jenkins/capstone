@@ -28,6 +28,12 @@
         trip: {}
       }
     },
+    mounted() {
+     if (!this.$store.state.user._id) {
+        // if no user id kick to the Login page
+        this.$router.push({ name: "User" }); //
+      }
+    },
     computed: {
       activeDest() {
         return this.$store.state.activeDest

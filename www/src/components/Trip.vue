@@ -28,6 +28,7 @@
   export default {
     name: 'Trip',
     mounted() {
+ //    this.$store.dispatch('authenticate')
       this.$store.dispatch('clearResults')
     },
     components: {

@@ -34,7 +34,9 @@
 
   export default {
     name: "addDestination",
+  
     mounted() {
+ 
       this.$store.dispatch('getTripDestinations', this.$route.params.id)
     },
     components: {

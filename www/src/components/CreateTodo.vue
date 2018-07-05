@@ -45,6 +45,9 @@
         }
       }
     },
+    mounted() {
+    //  this.$store.dispatch('authenticate')
+    },
     computed: {
       categories() {
         return this.$store.state.categories

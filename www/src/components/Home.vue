@@ -33,9 +33,11 @@
       }
     },
     mounted() {
+ 
+
       if (!this.$store.state.user._id) {
         // if no user id kick to the Login page
-        router.push({ name: "User" });
+        router.push({ name: "User" }); //
       }
       this.$store.dispatch("getUsersTrips");
       this.$store.dispatch('clearResults')

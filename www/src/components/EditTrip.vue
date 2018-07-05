@@ -28,6 +28,7 @@
       }
     },
     mounted() {
+   
       this.edit = {
         title: this.trip.title,
         description: this.trip.description,

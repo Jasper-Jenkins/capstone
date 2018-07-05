@@ -29,7 +29,9 @@
         category: 'Select a Category'
       }
     },
-
+    mounted(){
+  
+    },
     computed: {
       categories() {
         return this.$store.state.categories

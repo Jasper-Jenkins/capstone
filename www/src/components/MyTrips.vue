@@ -18,6 +18,15 @@
       createTrip
     },
     mounted(){
+      
+      if (!this.$store.state.user._id) {
+        // if no user id kick to the Login page
+        this.$router.push({ name: "User" }); //
+      }
+    //  if(this.$store.state.user == null){
+      //   this.$store.dispatch('authenticate')
+     // }
+     
       this.$store.dispatch('getUsersTrips')
     },
     data() {

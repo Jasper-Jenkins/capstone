@@ -50,6 +50,7 @@
       }
     },
     mounted() {
+    //  this.$store.dispatch('authenticate')
       this.edit = {
         title: this.destination.title,
         photo: this.destination.photo,

@@ -19,6 +19,9 @@
 
       }
     },
+    mounted() {
+   
+    },
     computed: {
       trips() {
         return this.$store.state.userTrips

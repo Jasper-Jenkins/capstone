@@ -32,6 +32,9 @@
         }
       }
     },
+    mounted() {
+  //   this.$store.dispatch('authenticate')
+    },
     computed: {
     
     },

@@ -178,12 +178,21 @@ export default new vuex.Store({
         })
     },
     authenticate({ commit, dispatch }) {
+    //  debugger
+    //var check = true
       server.get('/authenticate')
         .then(res => {
+     //     debugger
           commit('setUser', res.data.data)
           router.push('/')
+        
         })
         .catch(res => {
+      //    if(check){
+
+          console.log(res)
+          //router.push("/")
+        //  check = false;}
         })
     },
     signOut({ commit, dispatch, state }) {

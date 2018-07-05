@@ -1,5 +1,7 @@
 <template>
+  
   <div class="row justify-content-center"> 
+
   <div class="create-trip col-md-9 ">
   <center><button class="btn btn-primary btn-success mt-3 mb-2" @click="newTrip">Start New Trip</button></center>
     <div class="create-trip" v-if="toggleForm">
@@ -26,6 +28,12 @@
         toggleForm: false
       }
     },
+    mounted() {
+    if (!this.$store.state.user._id) {
+        // if no user id kick to the Login page
+        this.$router.push({ name: "User" }); //
+      }
+    },
     computed: {},
     methods: {
       createTrip() {
@@ -34,7 +42,8 @@
       },
       newTrip() {
         this.toggleForm = !this.toggleForm
-      }
+      },
+      
     }
   }
 
