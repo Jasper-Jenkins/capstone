@@ -11,7 +11,7 @@
       </form>
       <br>
       <div>
-         <h1>Demo Login</h1>
+         <h1>Demo</h1>
       <form v-on:submit.prevent="demoLogin" class="form">
         <input class="input" type="email" name="email" placeholder=" e-mail" id="email" v-model="demo.email">
         <input class="input" type="password" name="password" placeholder=" password" id="name" v-model="demo.password">
@@ -57,8 +57,7 @@
           displayName: '',
           password: ''
         }, 
-        demo:
-        {
+        demo: { //If you use the demologin code for your own server, be sure to register a user that matches these credentials.
           email: "demo@demo.com",
           displayName: "Demo",
           password: "12345"
