@@ -11,6 +11,12 @@
       </form>
       <br>
       <div>
+         <h1>Demo Login</h1>
+      <form v-on:submit.prevent="demoLogin" class="form">
+        <input class="input" type="email" name="email" placeholder=" e-mail" id="email" v-model="demo.email">
+        <input class="input" type="password" name="password" placeholder=" password" id="name" v-model="demo.password">
+        <button class="btn btn-primary btn-success" type="submit">Demo Login</button>
+      </form>
       </div>
       <br>
       <p class="user">Not a user?
@@ -51,11 +57,20 @@
           displayName: '',
           password: ''
         }, 
+        demo:
+        {
+          email: "demo@demo.com",
+          displayName: "Demo",
+          password: "12345"
+        },
         showLogin: true
       }
     },
     computed: {},
     methods: {
+      demoLogin(){
+        this.$store.dispatch('login', this.demo)
+      },
       login() {
         this.$store.dispatch('login', this.user)
       },
