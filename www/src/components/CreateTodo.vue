@@ -14,7 +14,9 @@
       <button @click="addCatergory">Add</button>
     </div>
     <div class="d-flex align-items-row">
-      <p class="ml-3" v-for="(cat, index) in todo.categories" style="color: blue;">{{cat}} <a style="color: red;" @click="removeCategory(index)">x</a></p>
+      <p class="ml-3" v-for="(cat, index) in todo.categories" style="color: blue;">{{cat}}
+        <a style="color: red;" @click="removeCategory(index)">x</a>
+      </p>
     </div>
     <button @click=toggleImg>Add image</button>
     <div class="row">
@@ -42,11 +44,16 @@
           img: '',
           gallery: [],
           categories: []
-        }
+        },
+        lat: 0,
+        long: 0
       }
     },
     mounted() {
-    //  this.$store.dispatch('authenticate')
+      //  this.$store.dispatch('authenticate')
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(this.getPos);
+        }
     },
     computed: {
       categories() {
@@ -66,7 +73,9 @@
           title: this.todo.title,
           description: this.todo.description,
           gallery: this.todo.gallery,
-          categories: this.todo.categories
+          categories: this.todo.categories,
+          lat: this.lat,
+          long: this.long
         }
         this.$store.dispatch('addTodo', newTodo)
         this.todo = {
@@ -77,12 +86,16 @@
           categories: []
         }
       },
-      addCatergory(){
-        if(this.category && !this.todo.categories.includes(this.category)) {
+      getPos(position) {
+        this.lat = position.coords.latitude
+        this.long = position.coords.longitude
+      },
+      addCatergory() {
+        if (this.category && !this.todo.categories.includes(this.category)) {
           this.todo.categories.push(this.category);
         }
       },
-      removeCategory(i){
+      removeCategory(i) {
         this.todo.categories.splice(i, 1)
       }
     }
@@ -91,5 +104,4 @@
 </script>
 
 <style scoped>
-
 </style>

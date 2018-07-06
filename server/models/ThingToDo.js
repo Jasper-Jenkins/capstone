@@ -23,6 +23,8 @@ let todoSchema = new Schema({
   place_id: { type: String, required: true },
   rating: { type: Number },
   published: { type: Boolean, default: true },
+  long: { type: String},
+  lat: { type: String},
   userId: {
     type: ObjectId,
     ref: 'User',

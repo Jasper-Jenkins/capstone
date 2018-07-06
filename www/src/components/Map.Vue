@@ -17,25 +17,25 @@
     },
     mounted() {
       const bounds = new google.maps.LatLngBounds();
+      
       var centerLat = 0
       var centerLong = 0
-      debugger
       if (this.name == "destination") {
         this.markers = this.destinations
       } else if (this.name == "todos") {
-        markers = this.todos
+        this.markers = this.todos
       }
-      this.markers.forEach(mark => {
-        centerLat += mark.latitude
-        centerLong += mark.longitude
-      })
+      // this.markers.forEach(mark => {
+      //   centerLat += mark.latitude
+      //   centerLong += mark.longitude
+      // })
 
       const element = document.getElementById(this.mapName)
-      const options = {
-        zoom: 14,
-        center: new google.maps.LatLng(centerLat / this.destinations.length, centerLong / this.destinations.length)
-      }
-      const map = new google.maps.Map(element, options);
+      // const options = {
+      //   zoom: 3,
+      //   center: new google.maps.LatLng(centerLat / this.destinations.length, centerLong / this.destinations.length)
+      // }
+      const map = new google.maps.Map(element);
 
       this.markers.forEach((coord) => {
         const position = new google.maps.LatLng(coord.latitude, coord.longitude);
@@ -43,8 +43,11 @@
           position,
           map
         });
-
+        
+        map.setCenter(bounds.getCenter())
         map.fitBounds(bounds.extend(position))
+        map.setZoom(10)
+        console.log(zoom)
       });
     },
     data() {
@@ -62,7 +65,16 @@
             longitude: dest.long
           })
         });
-        console.log(coords)
+        return coords
+      },
+      todos() {
+        var coords = []
+        var todos = this.$store.state.userTodos.forEach(todo => {
+          coords.push({
+            latitude: todo.lat,
+            longitude: todo.long
+          })
+        });
         return coords
       }
     },
@@ -73,9 +85,9 @@
 
 <style>
   .google-map {
-  width: 800px;
-  height: 600px;
-  margin: 0 auto;
-  background: gray;
-}
+    width: 80%;
+    height: 50vh;
+    margin: 0 auto;
+    background: gray;
+  }
 </style>

@@ -44,7 +44,6 @@
     methods: {
       addComment(todo) {
         this.comment["author"] = this.user.displayName
-        debugger
         todo.comments.unshift(this.comment)
         this.$store.dispatch('editTodo', todo)
       },

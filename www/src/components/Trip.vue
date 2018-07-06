@@ -9,7 +9,9 @@
         <!-- </div> -->
       </div>
       <div class="row">
-        <google-map name="destination"></google-map>
+        <div class="col-12 text-center mb-5">
+          <google-map name="destination"></google-map>
+        </div>
       </div>
       <div class="row">
         <div class="card-columns">
