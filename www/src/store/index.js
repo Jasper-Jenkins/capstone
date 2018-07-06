@@ -221,7 +221,8 @@ export default new vuex.Store({
           console.log(res)
         })
     },
-    createTrip({ dispatch, commit }, trip) {
+    createTrip({ dispatch, commit, state }, trip) {
+      trip["author"] = state.user.displayName
       server.post('/api/trips', trip)
         .then(res => {
           commit('addTrip', res.data)
@@ -256,7 +257,8 @@ export default new vuex.Store({
           tripId: state.activeTrip._id,
           long: destination.geometry.location.lng,
           lat: destination.geometry.location.lat,
-          photo: destination.photo
+          photo: destination.photo,
+          author: state.user.displayName
         }
       }
       else {
@@ -266,7 +268,8 @@ export default new vuex.Store({
           tripId: state.activeTrip._id,
           long: destination.long,
           lat: destination.lat,
-          photo: destination.photo
+          photo: destination.photo,
+          author: state.user.displayName
         }
       }
       server.post('/api/destinations', newDestination)
@@ -333,6 +336,7 @@ export default new vuex.Store({
     addTodo({ dispatch, commit, state }, todo) {
       todo.destinationId = state.activeDest._id
       todo.tripId = state.activeTrip._id
+      todo["author"] = state.user.displayName
       todo.place_id = state.activeDest.place_id
       server.post('/api/thingstodo', todo)
         .then(res => {
@@ -350,6 +354,7 @@ export default new vuex.Store({
         destinationId: state.activeDest._id,
         tripId: state.activeTrip._id
       }
+      newTodo["author"] = state.user.displayName
       server.post('/api/thingstodo', newTodo)
         .then(res => {
           commit('setNewTodo', res.data)

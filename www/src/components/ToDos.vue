@@ -4,8 +4,9 @@
     <div>ToDos Component</div>
     <p>Fun activities for your destination!</p>
     <div v-for="(todo, todoIndex) in todos" :key="todo._id">
-      {{todo.title}}
-      {{todo.description}}
+      <h4>{{todo.title}}</h4>
+      <h5>{{todo.description}}</h5>
+      <p>Author: {{todo.author}}</p>
       
        <button @click="toggleEdit">Edit</button>
           <form v-on:submit.prevent="editTodo(todo)" class="form" v-if="toggle"><div id="toggleSwitches" class="carousel slide" data-ride="carousel" data-interval="1000">  

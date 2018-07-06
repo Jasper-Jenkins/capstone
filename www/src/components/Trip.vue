@@ -8,7 +8,9 @@
         <!-- </div> -->
         <!-- </div> -->
       </div>
-
+      <div class="row">
+        <google-map name="destination"></google-map>
+      </div>
       <div class="row">
         <div class="card-columns">
           <div v-for="destination in destinations" :key="destination._id">
@@ -24,16 +26,18 @@
 <script>
   import addDestination from './AddDestination'
   import editDestination from "./EditDestination"
+  import googleMap from "./Map"
 
   export default {
     name: 'Trip',
     mounted() {
- //    this.$store.dispatch('authenticate')
+      //this.$store.dispatch('authenticate')
       this.$store.dispatch('clearResults')
     },
     components: {
       addDestination,
-      editDestination
+      editDestination,
+      googleMap
     },
     data() {
       return {

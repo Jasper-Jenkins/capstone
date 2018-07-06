@@ -3,7 +3,8 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col">
-          {{currentDest.title}}
+          <h3>{{currentDest.title}}</h3>
+          <p>Author: {{currentDest.author}}</p>
         </div>
       </div>
       <div class="row">

@@ -9,6 +9,7 @@
       <div v-for="comment in todo.comments" :key="comment._id">
           <p>{{comment.comment}}</p>
           <img :src="comment.photo" alt="">
+          <p>Author: {{comment.author}}</p>
           <button @click="deleteComment(todo)">Delete Comment</button>
       </div>
   </div>
@@ -36,10 +37,14 @@
   //   this.$store.dispatch('authenticate')
     },
     computed: {
-    
+      user() {
+        return this.$store.state.user
+      }
     },
     methods: {
       addComment(todo) {
+        this.comment["author"] = this.user.displayName
+        debugger
         todo.comments.unshift(this.comment)
         this.$store.dispatch('editTodo', todo)
       },
