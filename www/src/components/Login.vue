@@ -11,12 +11,7 @@
       </form>
       <br>
       <div>
-         <h1>Demo</h1>
-      <form v-on:submit.prevent="demoLogin" class="form">
-        <input class="input" type="email" name="email" placeholder=" e-mail" id="email" v-model="demo.email">
-        <input class="input" type="password" name="password" placeholder=" password" id="name" v-model="demo.password">
-        <button class="btn btn-primary btn-success" type="submit">Demo Login</button>
-      </form>
+         <p>Click to start <button class="btn btn-success" @click="demoLogin">Demo</button></p>
       </div>
       <br>
       <p class="user">Not a user?
@@ -47,6 +42,9 @@
 <script>
   export default {
     name: '',
+    // created() {
+    //   this.$store.dispatch('authenticate', true)
+    // },
     mounted(){
       this.$store.dispatch('authenticate')
     },
@@ -65,7 +63,11 @@
         showLogin: true
       }
     },
-    computed: {},
+    computed: {
+      currentUser() {
+        return this.$store.state.user
+      }
+    },
     methods: {
       demoLogin(){
         this.$store.dispatch('login', this.demo)

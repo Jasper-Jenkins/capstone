@@ -177,22 +177,15 @@ export default new vuex.Store({
           console.log(res.data)
         })
     },
-    authenticate({ commit, dispatch }) {
-    //  debugger
-    //var check = true
+    authenticate({ commit, dispatch }, bool) {
       server.get('/authenticate')
         .then(res => {
-     //     debugger
           commit('setUser', res.data.data)
+          
           router.push('/')
-        
         })
         .catch(res => {
-      //    if(check){
-
           console.log(res)
-          //router.push("/")
-        //  check = false;}
         })
     },
     signOut({ commit, dispatch, state }) {
@@ -413,7 +406,17 @@ export default new vuex.Store({
        .then(res => {
          commit("setEditTrip", res.data.trip)
        })
-    }
-  
+    },
+    endDemo({ dispatch, commit, state }) {
+      if(state.user._id) {
+        server.delete('/end-demo/' + state.user._id)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
+    },
   }
 })

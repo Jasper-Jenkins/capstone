@@ -1,6 +1,9 @@
 let router = require('express').Router();
 let Users = require('../models/user');
 let session = require('./session')
+let Trip = require('../models/Trip')
+let Destination = require('../models/Destination')
+let Todo = require('../models/ThingToDo')
 
 let loginError = new Error('Bad Email or Password')
 
@@ -36,7 +39,7 @@ router.post('/login', (req, res) => {
           })
         })
         .catch(err => {
-          res.status(401).send({mesage: 'Invalid Email or Password' })
+          res.status(401).send({ mesage: 'Invalid Email or Password' })
         })
     })
     .catch(err => {
@@ -72,6 +75,24 @@ router.get('/authenticate', (req, res) => {
       error: 'Please sign in!'
     })
   })
+})
+
+router.delete('/end-demo/:id', (req, res) => {
+  Trip.deleteMany({ "userId": req.params.id })
+    .then(data => {
+      Destination.deleteMany({ "userId": req.params.id })
+        .then(d => {
+          Todo.deleteMany({ "userId": req.params.id })
+            .then(t => {
+                res.send({
+                  message: 'You have successfully been logged out. Please come back soon!'
+                })
+            })
+        })
+    })
+    .catch(err => {
+      res.status(400).send(err)
+    })
 })
 
 module.exports = {

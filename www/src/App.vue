@@ -30,6 +30,15 @@
         return this.$store.state.user
       }
     },
+    created() {
+      this.$store.dispatch('endDemo')
+      window.addEventListener('beforeunload', () => {
+        if (this.$store.state.user.email == 'demo@demo.com') {
+          this.$store.dispatch('endDemo')
+          this.$store.dispatch('signOut')
+        }
+      })
+    },
     methods: {
       login() {
         this.$router.push({ name: 'User' })
