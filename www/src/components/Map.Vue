@@ -1,6 +1,6 @@
 <template>
-  <div class="map">
-    <template v-if="destinations.length > 0">
+  <div class="">
+    <template v-if="coords.length > 0">
       <div class="google-map" :id="mapName"></div>
     </template>
   </div>
@@ -8,77 +8,61 @@
 
 <script>
   export default {
-    name: 'map',
+    name: 'googleMap',
     props: {
+      coords: {
+        type: Array,
+        required: true
+      },
       name: {
         type: String,
         required: true
       }
     },
     mounted() {
-      const bounds = new google.maps.LatLngBounds();
-      
-      var centerLat = 0
-      var centerLong = 0
-      if (this.name == "destination") {
-        this.markers = this.destinations
-      } else if (this.name == "todos") {
-        this.markers = this.todos
-      }
-      // this.markers.forEach(mark => {
-      //   centerLat += mark.latitude
-      //   centerLong += mark.longitude
-      // })
-
-      const element = document.getElementById(this.mapName)
-      // const options = {
-      //   zoom: 3,
-      //   center: new google.maps.LatLng(centerLat / this.destinations.length, centerLong / this.destinations.length)
-      // }
-      const map = new google.maps.Map(element);
-
-      this.markers.forEach((coord) => {
-        const position = new google.maps.LatLng(coord.latitude, coord.longitude);
-        const marker = new google.maps.Marker({
-          position,
-          map
-        });
-        
-        map.setCenter(bounds.getCenter())
-        map.fitBounds(bounds.extend(position))
-        map.setZoom(10)
-        console.log(zoom)
-      });
+      debugger
+      this.buildMap()
     },
     data() {
       return {
         mapName: this.name + "-map",
-        markers: []
+        coordinates: this.coords,
+        markers: [],
+        bounds: null,
+        map: null
       }
     },
     computed: {
-      destinations() {
-        var coords = []
-        var dests = this.$store.state.destinations.forEach(dest => {
-          coords.push({
-            latitude: dest.lat,
-            longitude: dest.long
-          })
+
+    },
+    methods: {
+      buildMap() {
+        this.bounds = new google.maps.LatLngBounds();
+        const element = document.getElementById(this.mapName)
+        debugger
+        this.map = new google.maps.Map(element);
+        this.coords.forEach((coord) => {
+          const position = new google.maps.LatLng(coord.lat, coord.long);
+          const marker = new google.maps.Marker({
+            position,
+            map: this.map
+          });
+          this.markers.push(marker)
+          this.map.fitBounds(this.bounds.extend(position))
+          
         });
-        return coords
-      },
-      todos() {
-        var coords = []
-        var todos = this.$store.state.userTodos.forEach(todo => {
-          coords.push({
-            latitude: todo.lat,
-            longitude: todo.long
-          })
-        });
-        return coords
+        this.map.setCenter(this.bounds.getCenter())
+        if (this.coords.length == 1) {
+          debugger
+          this.map.setZoom(10)
+        }
       }
     },
-    methods: {}
+    watch: {
+      coords() {    
+        this.buildMap()
+      }
+    }
   }
 
 </script>

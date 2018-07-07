@@ -10,7 +10,7 @@
       </div>
       <div class="row">
         <div class="col-12 text-center mb-5">
-          <google-map name="destination"></google-map>
+          <google-map name="destination" :coords="destinations"></google-map>
         </div>
       </div>
       <div class="row">
