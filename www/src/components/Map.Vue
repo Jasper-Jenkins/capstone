@@ -1,8 +1,6 @@
 <template>
-  <div class="">
-    <template v-if="coords.length > 0">
+  <div class="map" v-if="coords.length > 0">
       <div class="google-map" :id="mapName"></div>
-    </template>
   </div>
 </template>
 
@@ -19,8 +17,7 @@
         required: true
       }
     },
-    mounted() {
-      debugger
+    updated() {
       this.buildMap()
     },
     data() {
@@ -39,7 +36,7 @@
       buildMap() {
         this.bounds = new google.maps.LatLngBounds();
         const element = document.getElementById(this.mapName)
-        debugger
+
         this.map = new google.maps.Map(element);
         this.coords.forEach((coord) => {
           const position = new google.maps.LatLng(coord.lat, coord.long);
@@ -53,14 +50,9 @@
         });
         this.map.setCenter(this.bounds.getCenter())
         if (this.coords.length == 1) {
-          debugger
+  
           this.map.setZoom(10)
         }
-      }
-    },
-    watch: {
-      coords() {    
-        this.buildMap()
       }
     }
   }
