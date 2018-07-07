@@ -8,26 +8,21 @@
             :key="destination._id">
             <div class="card-body">
               <h5 class="card-title">{{destination.title}}</h5>
+              <p>Author: {{destination.author}}</p>
             </div>
           </router-link>
 
           <div class="card-text">
-
-            <div class="mb-2">
-              <button class="btn btn-danger" @click="toggleEdit">Edit</button>
-              <form @keyup="updateDest" v-on:submit.prevent="editDestination(edit)" class="form bgform" v-if="editBool">
+              <button class="btn btn-success" @click="toggleEdit">Edit</button>
+              <form @keyup="updateDest" v-on:submit.prevent="editDestination(edit)" class="form bgform d-flex flex-column" style="width: 80%; margin: auto;" v-if="editBool">
                 <input class="input" type="text" name="title" placeholder=" Title" id="title" v-model="edit.title">
                 <input class="input mt-2" type="text" name="description" placeholder=" Description" id="name" v-model="edit.photo">
-                <button class="btn btn-primary btn-success mb-2 mt-2" type="submit">Create</button>
+                <button class="btn btn-primary btn-success mb-2 mt-2" type="submit">Submit</button>
               </form>
-            </div>
-
-            <div class="mb-2">
-              <button type="button" class="btn btn-danger" @click="deleteDest(destination)">Cancel Destination</button>
-            </div>
-            <div class="mb-2">
-              <button type="button" class="btn btn-danger" @click="publishDest(destination)">Publish Destination</button>
-            </div>
+      
+              <button type="button" class="btn btn-primary" @click="publishDest(destination)">Publish</button>
+        
+              <button type="button" class="btn btn-danger" @click="deleteDest(destination)">Cancel</button>
           </div>
         </div>
       </div>

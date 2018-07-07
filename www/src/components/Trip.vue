@@ -48,6 +48,7 @@
     },
     computed: {
       destinations() {
+        console.log(this.$store.state.destinations, "destinations")
         return this.$store.state.destinations
       }
     },
