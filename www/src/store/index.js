@@ -352,7 +352,9 @@ export default new vuex.Store({
         title: todo.name,
         categories: todo.types,
         destinationId: state.activeDest._id,
-        tripId: state.activeTrip._id
+        tripId: state.activeTrip._id,
+        lat: todo.geometry.location.lat,
+        long: todo.geometry.location.lng
       }
       newTodo["author"] = state.user.displayName
       server.post('/api/thingstodo', newTodo)

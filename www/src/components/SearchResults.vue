@@ -1,5 +1,5 @@
 <template>
-  <div class="search-destinations">
+  <div class="search-destinations" v-if="apiResults">
     <div class="result text-center" v-for="result in apiResults" :key="result._id">
       <a @click="addDestination(result)">
         <p class="result-name"><strong>{{result.name}}</strong> - {{result.formatted_address}}</p>
@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    name: '',
+    name: 'searchResults',
     data() {
       return {
 
@@ -27,6 +27,7 @@
     methods: {
       addDestination(result) {
         this.$store.dispatch('addDestination', result)
+        this.$store.dispatch('clearResults')
       }
     }
   }

@@ -9,11 +9,11 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <button @click="toggleCreate">Create New Todo</button>
-          <button @click="toggleAdd">Add Todo</button>
+          <button @click="toggleCreate" class="btn btn-primary">Create New Todo</button>
+          <button @click="toggleAdd" class="btn btn-success">Add Todo</button>
           <create-todo v-if="displayCreate"></create-todo>
           <div class="todos">
-              <add-todo v-if="displayAdd"></add-todo>
+            <add-todo v-if="displayAdd"></add-todo>
           </div>
           <todos></todos>
         </div>

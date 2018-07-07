@@ -28,11 +28,9 @@
             <div class="mb-2">
               <button type="button" class="btn btn-danger" @click="publishDest(destination)">Publish Destination</button>
             </div>
-
           </div>
         </div>
       </div>
-
     </div>
   </div>
   </div>

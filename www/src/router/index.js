@@ -38,7 +38,7 @@ export default new Router({
       component: MyTrips
     },
     {
-      path: '/mydestination',
+      path: '/mydestination/:id',
       name: 'myDestination',
       component: MyDestination
     },

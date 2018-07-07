@@ -1,6 +1,6 @@
 <template>
   <div class="map" v-if="coords.length > 0">
-      <div class="google-map" :id="mapName"></div>
+    <div class="google-map" :id="mapName"></div>
   </div>
 </template>
 
@@ -16,6 +16,9 @@
         type: String,
         required: true
       }
+    },
+    mounted() {
+
     },
     updated() {
       this.buildMap()
@@ -42,18 +45,28 @@
           const position = new google.maps.LatLng(coord.lat, coord.long);
           const marker = new google.maps.Marker({
             position,
-            map: this.map
+            map: this.map,
+            animation: google.maps.Animation.DROP,
+            destination: coord
           });
+          if (this.name == "destination") {
+            google.maps.event.addListener(marker, "click", (e) => {
+              this.selectActiveDest(marker.destination)
+            });
+          }
           this.markers.push(marker)
           this.map.fitBounds(this.bounds.extend(position))
-          
         });
         this.map.setCenter(this.bounds.getCenter())
-        if (this.coords.length == 1) {
-  
+
+        if (this.coords.length == 1 && this.name == "destination") {
           this.map.setZoom(10)
         }
-      }
+      },
+      selectActiveDest(dest) {
+        this.$store.dispatch('selectActiveDest', dest)
+        this.$router.push({ name: 'myDestination', params: { id: dest._id } })
+      },
     }
   }
 
