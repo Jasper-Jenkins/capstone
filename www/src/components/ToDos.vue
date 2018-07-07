@@ -62,7 +62,6 @@
         this.$router.push({ name: "User" }); //
       }
       this.$store.dispatch('getDestTodos', this.$store.state.activeDest._id)
-      setInterval(this.nextImage())
     },
     computed: {
       todos() {
@@ -77,7 +76,6 @@
       },
       editTodo(todo) {
         todo.gallery.unshift(this.img)
-        debugger
         this.$store.dispatch('editTodo', todo)
         // this.todo.img = ''
       },

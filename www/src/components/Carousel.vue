@@ -1,5 +1,5 @@
 <template>
-  <div id="toggleSwitches" class="carousel slide formatCarousel" data-ride="carousel" data-interval="1000">
+  <div id="toggleSwitches" class="carousel slide formatCarousel" data-ride="carousel" data-interval="1000" v-on:change="autoSlide()">
     <div class="carousel-inner">
       <div v-for="(img, index) in todo.gallery" v-bind:class="{active: index==activeImage, 'carousel-item': true} ">
         <img class="d-block w-100 img-fluid" style="height: 40vh;" :src="img" alt="">
@@ -11,7 +11,7 @@
         <span class="sr-only" @click="prevImage">Previous</span>
       </a>
     </span>
-    <span @click="nextImage()">
+    <span @click="nextImage(); autoSlide()">
       <a class="carousel-control-next" href="#toggleSwitches" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
@@ -31,13 +31,17 @@
     },
     data() {
       return {
-        activeImage: 0
+        activeImage: 0,
+        timer: null
       }
+    },
+    mounted() {
+      this.autoSlide(false)
     },
     computed: {},
     methods: {
       nextImage() {
-        debugger
+        this.autoSlide()
         if (this.activeImage == this.todo.gallery.length - 1) {
           this.activeImage = 0
         } else {
@@ -51,10 +55,15 @@
 
           this.activeImage--
         }
+      },
+      autoSlide() {
+        if(this.timer) {
+          clearInterval(this.timer)
+        }
+        this.timer = setInterval(() => {
+            this.nextImage()
+          }, 5000)
       }
-    },
-    updated() {
-      setTimeout(this.nextImage(), 3000)
     }
   }
 
