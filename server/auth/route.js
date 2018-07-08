@@ -34,7 +34,6 @@ router.post('/login', (req, res) => {
           delete user.password
           res.send({
             message: 'successfully logged in',
-            session: req.session.uid,
             data: user
           })
         })

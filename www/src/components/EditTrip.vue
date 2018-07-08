@@ -10,9 +10,11 @@
         <form @keyup="updateTrip" v-on:submit.prevent="editTrip(edit)" class="form bgform" v-if="editBool">
           <input class="input" type="text" name="title" placeholder=" Title" id="title" v-model="edit.title">
           <input class="input mt-2" type="text" name="description" placeholder=" Description" id="name" v-model="edit.description">
-          <button class="btn btn-primary btn-success mb-2 mt-2" type="submit">Create</button>
+          <button class="btn btn-primary btn-success mb-2 mt-2" type="submit">Submit</button>
         </form>
-        <button type="button" class="btn btn-danger" @click="deleteTrip(trip)">Cancel Trip</button>
+        <button type="button" class="btn btn-primary" @click="publishTrip(trip)" v-if="!trip.published">Publish</button>
+<button type="button" class="btn btn-primary" @click="publishTrip(trip)" v-if="trip.published">Unpublish</button>
+        <button type="button" class="btn btn-danger" @click="deleteTrip(trip)">Cancel</button>
       </div>
     </div>
   </div>
@@ -72,6 +74,9 @@
       },
       updateTrip() {
         this.$emit('setTrip', this.edit)
+      },
+      publishTrip(trip) {
+        this.$store.dispatch("publishTrip", trip)
       }
     }
   }

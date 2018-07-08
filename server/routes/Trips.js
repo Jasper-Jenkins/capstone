@@ -68,6 +68,28 @@ router.delete('/api/trips/:id', (req, res, next) => {
     })
 })
 
+router.put('/api/trip/publish/:id', (req, res) => {
+  var options = {
+    multi: true,
+  }
+  Trip.update({ _id: req.params.id, userId: req.session.uid }, { published: req.body.published }, options)
+    .then(trip => {
+      Destination.update({ tripId: req.params.id }, { published: req.body.published }, { multi: true })
+        .then(destination => {
+          Todo.update({tripId: req.params.id }, { published: req.body.published }, {multi: true})
+            .then(todo => {
+              res.status(200).send({ trip, destination, todo })
+            })
+        })
+        .catch(err => {
+          res.status(400).send({ message: 'An Error occured!', err })
+        })
+    })
+    .catch(err => {
+      res.status(400).send(err)
+    })
+})
+
 module.exports = {
   router
 }

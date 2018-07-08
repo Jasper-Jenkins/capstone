@@ -425,5 +425,18 @@ export default new vuex.Store({
         })
       }
     },
+    publishTrip({dispatch, commit}, trip) {
+      trip.published = !trip.published
+      var pub = {
+        published: !trip.published
+      }
+      server.put('/api/trip/publish/' + trip._id, pub)
+        .then(res => {
+          commit('setEditTrip', trip)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }
 })

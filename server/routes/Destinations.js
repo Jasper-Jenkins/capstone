@@ -4,7 +4,7 @@ var ThingToDo = require('../models/ThingToDo')
 
 router.get('/api/destinations/:userId/user', (req, res) => {
   Destination.find({
-    userId: req.params.userId
+    userId: req.session.uid
   })
     .then(destination => {
       res.status(200).send(destination)
@@ -16,13 +16,11 @@ router.get('/api/destinations/:userId/user', (req, res) => {
 //get all published
 router.get('/api/destinations/:placeId/place', (req, res) => {
   Destination.find({
-    place_id: req.params.placeId
+    place_id: req.params.placeId,
+    published: true
   })
     .then(destinations => {
-      var pubDest = destinations.filter(destination => {
-        return destination.published == true
-      })
-      res.status(200).send(pubDest)
+      res.status(200).send(destinations)
     })
     .catch(err => {
       res.status(400).send(err)
@@ -93,15 +91,15 @@ router.delete('/api/destinations/:id', (req, res, next) => {
 
 
 //make a destination public
-router.put('/api/destination/public/:id', (req, res) => {
-  Destination.findByIdAndUpdate(req.params.id, req.body, { new: true })
+router.put('/api/destination/publish/:id', (req, res) => {
+  Destination.update({ destinationId: req.params.id, userId: req.session.uid }, { published: req.body.published }, { multi: true })
     .then(destination => {
-      ThingToDo.update({ destinationId: destination._id }, { published: req.body.published }, { multi: true })
+      ThingToDo.update({ destinationId: req.params.id }, { published: req.body.published }, { multi: true })
         .then(todos => {
           res.status(200).send({ todos, destination })
         })
         .catch(err => {
-          res.status(400).send({ message: 'doesnt work', err })
+          res.status(400).send({ message: 'An Error occured!', err })
         })
     })
     .catch(err => {

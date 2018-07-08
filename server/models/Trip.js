@@ -9,6 +9,7 @@ let tripSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String },
   author: { type: String },
+  published: { type: Boolean, default: false },
   userId: {
     type: ObjectId,
     ref: 'User',

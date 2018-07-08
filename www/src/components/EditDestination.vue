@@ -20,8 +20,8 @@
                 <button class="btn btn-primary btn-success mb-2 mt-2" type="submit">Submit</button>
               </form>
       
-              <button type="button" class="btn btn-primary" @click="publishDest(destination)">Publish</button>
-        
+              <button type="button" class="btn btn-primary" @click="publishDest(destination)" v-if="!destination.published">Publish</button>
+              <button type="button" class="btn btn-primary" @click="publishDest(destination)" v-if="!destination.published">Unpublish</button>
               <button type="button" class="btn btn-danger" @click="deleteDest(destination)">Cancel</button>
           </div>
         </div>
