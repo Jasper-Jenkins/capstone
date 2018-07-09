@@ -1,5 +1,5 @@
 let router = require('express').Router();
-let Users = require('../models/user');
+let Users = require('../models/User');
 let session = require('./session')
 let Trip = require('../models/Trip')
 let Destination = require('../models/Destination')
