@@ -21,21 +21,22 @@
     },
     computed: {
       userResults() {
-        return this.$store.state.userResults;
+        return this.$store.state.userModule.userResults;
       },
       apiResults() {
-        return this.$store.state.apiResults;
+        return this.$store.state.destModule.apiResults;
       },
       trips() {
-        var trips = this.$store.state.userTrips;
+        var trips = this.$store.state.userModule.userTrips;
         return trips;
       },
       currentDest() {
-        return this.$store.state.activeDest
+        return this.$store.state.destModule.activeDest
       }
     },
     mounted() {
-      if (!this.$store.state.user._id) {
+      debugger
+      if (!this.$store.state.userModule.user._id) {
         router.push({ name: "User" });
       }
       this.$store.dispatch("getUsersTrips");

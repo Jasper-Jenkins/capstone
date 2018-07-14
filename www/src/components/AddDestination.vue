@@ -45,7 +45,7 @@
     },
     computed: {
       currentTrip() {
-        return this.$store.state.activeTrip
+        return this.$store.state.tripModule.activeTrip
       }
     },
     methods: {

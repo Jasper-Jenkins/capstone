@@ -21,7 +21,7 @@
     },
     computed: {
       apiResults() {
-        return this.$store.state.apiResults
+        return this.$store.state.destModule.apiResults
       },
     },
     methods: {

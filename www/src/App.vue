@@ -27,13 +27,13 @@
     name: 'App',
     computed: {
       user() {
-        return this.$store.state.user
+        return this.$store.state.userModule.user
       }
     },
     created() {
       this.$store.dispatch('endDemo')
       window.addEventListener('beforeunload', () => {
-        if (this.$store.state.user.email == 'demo@demo.com') {
+        if (this.$store.state.userModule.user.email == 'demo@demo.com') {
           this.$store.dispatch('endDemo')
           this.$store.dispatch('signOut')
         }

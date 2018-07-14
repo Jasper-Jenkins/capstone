@@ -19,7 +19,7 @@
     },
     mounted(){
       
-      if (!this.$store.state.user._id) {
+      if (!this.$store.state.userModule.user._id) {
         // if no user id kick to the Login page
         this.$router.push({ name: "User" }); //
       }
@@ -35,7 +35,7 @@
     },
     computed: {
       trips() {
-        this.$store.state.trips
+        this.$store.state.tripModule.trips
       }
     },
     methods: {

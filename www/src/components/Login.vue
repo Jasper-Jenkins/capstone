@@ -41,7 +41,7 @@
 
 <script>
   export default {
-    name: '',
+    name: 'Login',
     // created() {
     //   this.$store.dispatch('authenticate', true)
     // },
@@ -65,7 +65,7 @@
     },
     computed: {
       currentUser() {
-        return this.$store.state.user
+        return this.$store.state.userModule.user
       }
     },
     methods: {

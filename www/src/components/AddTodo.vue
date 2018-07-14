@@ -37,10 +37,10 @@
         return this.$store.state.categories
       },
       usersTodos() {
-        return this.$store.state.todos
+        return this.$store.state.todoModule.todos
       },
       googleTodos() {
-        return this.$store.state.googleTodos
+        return this.$store.state.todoModule.googleTodos
       }
     },
     methods: {

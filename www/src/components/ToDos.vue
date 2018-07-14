@@ -57,16 +57,16 @@
       }
     },
     mounted() {
-      if (!this.$store.state.user._id) {
+      if (!this.$store.state.userModule.user._id) {
         // if no user id kick to the Login page
         this.$router.push({ name: "User" }); //
       }
-      this.$store.dispatch('getDestTodos', this.$store.state.activeDest._id)
+      this.$store.dispatch('getDestTodos', this.$store.state.destModule.activeDest._id)
     },
     computed: {
       todos() {
-        var todos = this.$store.state.userTodos
-        console.log(this.$store.state.userTodos, "todos are computing and should be empty for now")
+        var todos = this.$store.state.todoModule.userTodos
+        console.log(this.$store.state.todoModule.userTodos, "todos are computing and should be empty for now")
         return todos
       }
     },

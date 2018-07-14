@@ -29,20 +29,20 @@
       }
     },
     mounted() {
-     if (!this.$store.state.user._id) {
+     if (!this.$store.state.userModule.user._id) {
         // if no user id kick to the Login page
         this.$router.push({ name: "User" }); //
       }
     },
     computed: {
       activeDest() {
-        return this.$store.state.activeDest
+        return this.$store.state.destModule.activeDest
       },
       trips() {
-        return this.$store.state.userTrips
+        return this.$store.state.userModule.userTrips
       },
       todos(){
-        return this.$store.state.userTodos
+        return this.$store.state.userModule.userTodos
       }
 
     },

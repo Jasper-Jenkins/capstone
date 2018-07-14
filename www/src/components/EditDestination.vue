@@ -72,7 +72,7 @@
     },
     computed: {
       destinations() {
-        return this.$store.state.destinations
+        return this.$store.state.destModule.destinations
       }
     },
     methods: {

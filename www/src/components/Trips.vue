@@ -24,7 +24,7 @@
     },
     computed: {
       trips() {
-        return this.$store.state.userTrips
+        return this.$store.state.userModule.userTrips
       }
     },
     methods: {

@@ -48,7 +48,7 @@
     },
     computed: {
       currentDest() {
-        return this.$store.state.activeDest
+        return this.$store.state.destModule.activeDest
       }
     },
     methods: {

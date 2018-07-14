@@ -48,7 +48,7 @@
     },
     computed: {
       destinations() {
-        console.log(this.$store.state.destinations, "destinations")
+        console.log(this.$store.state.destModule.destinations, "destinations")
         return this.$store.state.destinations
       }
     },
