@@ -437,6 +437,9 @@ export default new vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    selectTrip({dispatch, commit}, trip) {
+      commit("setActiveTrip", trip)
     }
   }
 })

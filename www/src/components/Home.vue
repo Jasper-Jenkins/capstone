@@ -28,16 +28,15 @@
       },
       trips() {
         var trips = this.$store.state.userTrips;
-        console.log(trips, "this trips");
         return trips;
+      },
+      currentDest() {
+        return this.$store.state.activeDest
       }
     },
     mounted() {
-
-
       if (!this.$store.state.user._id) {
-        // if no user id kick to the Login page
-        router.push({ name: "User" }); //
+        router.push({ name: "User" });
       }
       this.$store.dispatch("getUsersTrips");
       this.$store.dispatch('clearResults')
@@ -55,6 +54,9 @@
       selectActiveDest(userResult) {
         this.$store.dispatch("selectActiveDest", userResult);
         this.$router.push("Destination");
+      },
+      selectDest(dest) {
+        this.$store.dispatch("selectActiveDest", dest)
       }
     }
   };
@@ -67,24 +69,17 @@
     <!-- <h1>/test</h1> -->
 
     <section class="search vertical-center jumbotron bghome">
-
       <div class="container-fluid">
-
         <div class="textcolor mgmenu">
-
-
           <div class="row justify-content-center mx-auto bgmenu">
-            <!-- create trip shit -->
+            <!-- create trip-->
             <div class="col-sm-2 justify-content-center">
               <create-trip></create-trip>
             </div>
 
             <div class="col-sm-2 mt-2 mb-2">
               <h5>Select Existing Trip</h5>
-              <select v-model="trip">
-                <option disabled value=''>Add Destination to Trip: </option>
-                <option v-for="trip in trips" :key="trip._id" :value="trip">{{trip.title}}</option>
-              </select>
+            
             </div>
 
             <div class="col-sm-2 mt-2 ml-4">
@@ -93,19 +88,8 @@
                 <button class="btn btn-primary btn-success btn-sm mt-2 mb-2" type="submit">Search</button>
               </form>
             </div>
-            <!-- <div class="row">
-                    <div class="col-12 mt-2">
-                      <h4>Looking for destination ideas? Here are some ideas from other travelers.</h4>
-                      <h4>Add new destinations below! </h4>
-                    </div>
-                  </div> -->
-
           </div>
         </div>
-
-        <!-- </section>
-      <section class="results jumbotron"> -->
-
         <!-- EVERYTHING BELOW IS THE SEARCH RESULT LAYOUT -->
         <!-- USER RESULTS -->
         <div class="rowing ur mt-2">
@@ -119,7 +103,6 @@
             </div>
             <p>Author: {{userResult.author}}</p>
           </div>
-
         </div>
 
         <!-- GOOGLE RESULTS -->
@@ -129,12 +112,34 @@
               <img :src="result.photo" alt="">
               <div class="test">
                 <strong>{{result.name}}</strong>
-                <button class="btn btn-primary btn-success btn-sm" @click="addDestination(result)" v-if="trips.length != 0">Add To Trip</button>
+                <button class="btn btn-primary btn-success btn-sm"  type="button" data-toggle="modal" data-target="#destModal" @click="selectDest(result)">Add To Trip</button>
+                <div class="modal fade" id="destModal" tabindex="-1" role="dialog" aria-labelledby="destModalTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="destModalTitle">{{currentDest.name}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <h4>Select a Trip!</h4>
+                        <select v-model="trip">
+                          <option disabled value=''>Add Destination to Trip: </option>
+                          <option v-for="t in trips" :key="t._id" :value="t">{{t.title}}</option>
+                        </select>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button v-if="trip._id" class="btn btn-primary btn-primary" data-dismiss="modal" @click="addDestination(currentDest)">Submit</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <mytrip v-if="trips.length == 0"></mytrip>
             </div>
           </div>
-
         </div>
 
 
@@ -147,24 +152,12 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  /* .userResults {
-    flex: 50%;
-  min-width: 50%;
-  padding: 0 4px; */
 
   .rowing {
     display: flex;
     flex-wrap: wrap;
     padding: 0 4px;
   }
-
-  /* background: rgba(247, 247, 247, 0.589);
-      color: white;
-      border: 1px solid black;
-      margin: 5px;
-      padding: 10px; */
-
-  /* float: left; */
 
   column {
     flex: 25%;
@@ -186,49 +179,20 @@
     }
   }
 
-
-  /* background: rgba(247, 247, 247, 0.589);
-      color: white;
-      border: 1px solid black;
-      margin: 5px;
-      padding: 10px; */
-
-  /* float: left; */
-
   .userResults img {
     margin-top: 8px;
     vertical-align: top;
     float: top;
-
-    /* height: 100px;
-        width: auto; */
-    /* float: right; */
   }
 
   .googleResults img {
     margin-top: 8px;
     vertical-align: middle;
     display: inline-block;
-    /* height: 100px;
-        width: auto; */
-    /* float: right; */
   }
-
-  /* .ur {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 0 4px;
-    }
-    
-    .gr {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 0 4px;
-    }   */
 
   .bghome {
     background: url(../assets/tresting.jpg);
-    /* background-repeat: no-repeat; */
     margin-top: 2em;
   }
 
@@ -238,7 +202,6 @@
 
   .jumbotron {
     min-height: 600px;
-    /* justify-content: center; */
   }
 
 
@@ -247,31 +210,9 @@
     border-color: rgba(0, 0, 0, 0.479);
     border-width: 0.2mm;
     border-style: solid;
-    /* justify-content: center; */
   }
 
   .results {
     background: url(../assets/tresting.jpg);
   }
-
-  /* h1,h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-} */
-
-  /* select active destination */
 </style>
-
-<!-- Image Gallery Link https://www.w3schools.com/css/css_image_gallery.asp -->
