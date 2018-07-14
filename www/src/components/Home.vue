@@ -21,13 +21,13 @@
     },
     computed: {
       userResults() {
-        return this.$store.state.userModule.userResults;
+        return this.$store.state.destModule.userResults;
       },
       apiResults() {
         return this.$store.state.destModule.apiResults;
       },
       trips() {
-        var trips = this.$store.state.userModule.userTrips;
+        var trips = this.$store.state.tripModule.userTrips;
         return trips;
       },
       currentDest() {
@@ -40,7 +40,7 @@
         router.push({ name: "User" });
       }
       this.$store.dispatch("getUsersTrips");
-      this.$store.dispatch('clearResults')
+      //this.$store.dispatch('clearResults')
     },
     methods: {
       getResults() {

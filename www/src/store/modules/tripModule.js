@@ -52,7 +52,7 @@ export default {
         })
     },
     getUsersTrips({ dispatch, commit, rootState }) {
-      server.get('/api/trips/user/' + rootState.user._id)
+      server.get('/api/trips/user/' + rootState.userModule.user._id)
         .then(res => {
           commit('setUserTrips', res.data)
         })
