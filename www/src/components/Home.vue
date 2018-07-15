@@ -11,13 +11,23 @@
         destination: {
           title: ""
         },
-        trip: {}
+        trip: {},
+        msnry: null
       };
     },
     components: {
       destination,
       mytrip,
       createTrip
+    },
+    watch: {
+      apiResults: function () {
+        this.$nextTick(() => {
+          setTimeout(() => {
+            this.masonry(true);
+          }, 500);
+        });
+      }
     },
     computed: {
       userResults() {
@@ -39,12 +49,10 @@
         router.push({ name: "User" });
       }
       this.$store.dispatch("getUsersTrips");
-      this.masonry
+      this.masonry(false)
     },
     methods: {
       getResults() {
-        console.log(this.destination);
-        this.masonry()
         this.$store.dispatch("findDestination", this.destination.title)
         this.title = "";
       },
@@ -59,14 +67,23 @@
       selectDest(dest) {
         this.$store.dispatch("selectActiveDest", dest)
       },
-      masonry() {
-        var elem = document.querySelector('.grid');
-        var msnry = new Masonry(elem, {
-          itemSelector: '.grid-item',
-          columnWidth: document.body.scrollWidth
-        });
-        var msnry = new Masonry('.grid', {
-        });
+      masonry(rebuild) {
+        if (!rebuild) {
+          debugger
+          var elem = document.querySelector('.grid');
+          this.msnry = new Masonry(elem, {
+            itemSelector: '.grid-item',
+            columnWidth: '.home',
+            percentPosition: true,
+            horizontalOrder: true
+          });
+          this.msnry = new Masonry('.grid', {
+          });
+        } else {
+          debugger
+            this.msnry.reloadItems()
+            this.msnry.layout()
+        }
       }
     }
   };
@@ -100,7 +117,7 @@
     <div class="grid">
       <div class="grid-item" v-for="userResult in userResults" :key="userResult._id">
         <div class="card result">
-          <img :src="userResult.photo" alt="">
+          <img :src="userResult.photo">
           <div class="test">
             <a @click="selectActiveDest(userResult)">
               <strong>{{userResult.title}}</strong>
@@ -114,7 +131,7 @@
       <!-- GOOGLE RESULTS -->
       <div class="grid-item" v-for="result in apiResults" :key="result._id">
         <div class="card result">
-          <img :src="result.photo" alt="">
+          <img id="img" :src="result.photo">
           <strong>{{result.name}}</strong>
           <button class="btn btn-primary btn-success btn-sm" type="button" data-toggle="modal" data-target="#destModal" @click="selectDest(result)">Add To Trip</button>
           <div class="modal fade" id="destModal" tabindex="-1" role="dialog" aria-labelledby="destModalTitle" aria-hidden="true">
@@ -156,13 +173,12 @@
   }
 
   .result {
-    margin: 10px;
     padding: 5px;
     border: 2px solid black;
+    margin: 10px;
   }
 
   .home {
     background: url(../assets/tresting.jpg);
   }
-
 </style>

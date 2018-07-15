@@ -8,7 +8,8 @@ var api = axios.default.create({
   withCredentials: true
 })
 
-let apiKey = 'AIzaSyAnjgM-XGIhA--DrN6jiplEl1Jk04k8CHI'
+let apiKey = 'AIzaSyCb7mDvm7G1Aa7Pu3LklOArn99tbDJZj00'
+let imgKey = 'AIzaSyDwdoKeSFC0xUN1VI8Ud78ZfpadFV7jUwU'
 
 router.get('/api/locations/:query', (req, res) => {
   api.get('textsearch/json?query=' + req.params.query + '&key=' +apiKey)
@@ -19,7 +20,7 @@ router.get('/api/locations/:query', (req, res) => {
           geometry: local.geometry,
           name: local.name,
           place_id: local.place_id,
-          photo: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" +local.photos[0].photo_reference+ "&key=" + apiKey
+          photo: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" +local.photos[0].photo_reference+ "&key=" + imgKey
         }
       })
       res.status(200).send(newPlace)
