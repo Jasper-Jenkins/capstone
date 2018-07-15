@@ -69,7 +69,6 @@
       },
       masonry(rebuild) {
         if (!rebuild) {
-          debugger
           var elem = document.querySelector('.grid');
           this.msnry = new Masonry(elem, {
             itemSelector: '.grid-item',
@@ -80,9 +79,8 @@
           this.msnry = new Masonry('.grid', {
           });
         } else {
-          debugger
-            this.msnry.reloadItems()
-            this.msnry.layout()
+          this.msnry.reloadItems()
+          this.msnry.layout()
         }
       }
     }
@@ -94,22 +92,19 @@
 <template>
   <div class="home">
     <!-- <h1>/test</h1> -->
-    <div class="row justify-content-center mx-auto">
+    <div class="row d-flex justify-content-center">
       <!-- create trip-->
-      <div class="col-sm-2 justify-content-center">
-        <create-trip></create-trip>
-      </div>
+      <div class="topbar col-6 d-flex flex-row justify-content-around">
+        <div class="topbar-items">
+          <create-trip></create-trip>
+        </div>
 
-      <div class="col-sm-2 mt-2 mb-2">
-        <h5>Select Existing Trip</h5>
-
-      </div>
-
-      <div class="col-sm-2 mt-2 ml-4">
-        <form @submit.prevent="getResults">
-          <input type="text" name="destination" id="destination" placeholder=" Where To?" v-model="destination.title">
-          <button class="btn btn-primary btn-success btn-sm mt-2 mb-2" type="submit">Search</button>
-        </form>
+        <div class="topbar-items">
+          <form @submit.prevent="getResults">
+            <input type="text" name="destination" id="destination" placeholder=" Where To?" v-model="destination.title">
+            <button class="btn btn-primary btn-success btn-sm mt-2 mb-2" type="submit">Search</button>
+          </form>
+        </div>
       </div>
     </div>
     <!-- EVERYTHING BELOW IS THE SEARCH RESULT LAYOUT -->
@@ -175,10 +170,27 @@
   .result {
     padding: 5px;
     border: 2px solid black;
-    margin: 10px;
+    margin: 5px;
   }
 
   .home {
-    background: url(../assets/tresting.jpg);
+    background-image: url(../assets/tresting.jpg);
+    min-height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .topbar {
+    width: 70%;
+    background-color: white;
+    border: 2px double gray;
+    box-shadow: 5px 5px rgb(43, 42, 42);
+    margin-top: 2vh; 
+  }
+
+  .topbar-items {
+    margin: auto;
   }
 </style>

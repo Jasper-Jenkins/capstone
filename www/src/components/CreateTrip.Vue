@@ -1,19 +1,30 @@
 <template>
-  
-  <div class="row justify-content-center"> 
-
-  <div class="create-trip col-md-9 ">
-  <center><button class="btn btn-primary btn-success mt-3 mb-2" @click="newTrip">Start New Trip</button></center>
-    <div class="create-trip" v-if="toggleForm">
-      <form v-on:submit.prevent="createTrip" class="form bgform">
-        <input class="input" type="text" name="title" placeholder=" Title" id="email" v-model="trip.title">
-        <input class="input mt-2" type="text" name="description" placeholder=" Description" id="name" v-model="trip.description">
-        <button class="btn btn-primary btn-success mb-2 mt-2" type="submit">Create</button>
-      </form>
+  <div class="create-trip">
+    <button class="btn btn-primary btn-success" data-toggle="modal" data-target="#createTripModal" @click="checkLogin">Start New Trip</button>
+    <div class="modal fade" id="createTripModal" tabindex="-1" role="dialog" aria-labelledby="createTripModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createTripModalTitle">Create a Trip!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form v-on:submit.prevent="createTrip" class="form bgform">
+              <input class="input" type="text" name="title" placeholder=" Title" id="email" v-model="trip.title">
+              <input class="input mt-2" type="text" name="description" placeholder=" Description" id="name" v-model="trip.description">
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button v-if="trip.title.length > 0" class="btn btn-primary btn-primary" data-dismiss="modal" @click="addDestination(currentDest)">Submit</button>
+          </div>
+        </div>
+      </div>
     </div>
-    
   </div>
-</div>
+
 </template>
 
 <script>
@@ -29,10 +40,6 @@
       }
     },
     mounted() {
-    if (!this.$store.state.userModule.user._id) {
-        // if no user id kick to the Login page
-        this.$router.push({ name: "User" }); //
-      }
     },
     computed: {},
     methods: {
@@ -40,20 +47,15 @@
         this.$store.dispatch("createTrip", this.trip);
         this.toggleForm = !this.toggleForm
       },
-      newTrip() {
-        this.toggleForm = !this.toggleForm
+      checkLogin() {
+        if (!this.$store.state.userModule.user._id) {
+          this.$router.push({ name: "User" }); //
+        }
       },
-      
     }
   }
 
 </script>
 
 <style scoped>
-  .card {
-   
-   background-color: rgba(122, 122, 122, 0.795);
-   color: white;
-
- }
 </style>
