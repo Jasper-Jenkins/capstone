@@ -18,7 +18,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            <button v-if="trip.title.length > 0" class="btn btn-primary btn-primary" data-dismiss="modal" @click="addDestination(currentDest)">Submit</button>
+            <button v-if="trip.title.length > 0" class="btn btn-primary btn-primary" data-dismiss="modal" @click="createTrip()">Submit</button>
           </div>
         </div>
       </div>

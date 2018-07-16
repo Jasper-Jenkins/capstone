@@ -109,7 +109,7 @@
     </div>
     <!-- EVERYTHING BELOW IS THE SEARCH RESULT LAYOUT -->
     <!-- USER RESULTS -->
-    <div class="grid">
+    <div class="grid mt-2">
       <div class="grid-item" v-for="userResult in userResults" :key="userResult._id">
         <div class="card result">
           <img :src="userResult.photo">
@@ -119,6 +119,7 @@
             </a>
           </div>
           <p>Author: {{userResult.author}}</p>
+          <button class="btn btn-success card-btn" @click="selectActiveDest(userResult)">View</button>
         </div>
       </div>
 
@@ -128,7 +129,8 @@
         <div class="card result">
           <img id="img" :src="result.photo">
           <strong>{{result.name}}</strong>
-          <button class="btn btn-primary btn-success btn-sm" type="button" data-toggle="modal" data-target="#destModal" @click="selectDest(result)">Add To Trip</button>
+          <p>Provided by Google</p>
+          <button class="btn btn-success card-btn" type="button" data-toggle="modal" data-target="#destModal" @click="selectDest(result)">Add To Trip</button>
           <div class="modal fade" id="destModal" tabindex="-1" role="dialog" aria-labelledby="destModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
@@ -185,12 +187,18 @@
   .topbar {
     width: 70%;
     background-color: white;
+    
     border: 2px double gray;
     box-shadow: 5px 5px rgb(43, 42, 42);
     margin-top: 2vh; 
   }
 
   .topbar-items {
+    margin: auto;
+  }
+
+  .card-btn {
+    width: 20%;
     margin: auto;
   }
 </style>
