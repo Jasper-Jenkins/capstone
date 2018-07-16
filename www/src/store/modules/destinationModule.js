@@ -111,6 +111,7 @@ export default {
         })
     },
     editDest({commit, dispatch}, dest){
+      debugger
       server.put('/api/destinations/'+ dest._id, dest)
       .then(res=> {
         commit('setEditDestination', res.data.destination)

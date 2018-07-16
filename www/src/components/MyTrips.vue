@@ -42,6 +42,6 @@
 <style scoped>
   .my-trips {
     background-image: url(../assets/travel2.jpg);
-    height: 100%;
+    height: 100vh;
   }
 </style>

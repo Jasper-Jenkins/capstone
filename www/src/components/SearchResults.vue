@@ -41,11 +41,11 @@
     border: 2px black;
   }
 
-  .result :hover {
+  /* .result :hover {
     color: white;
     background: rgb(106, 106, 243);
     cursor: pointer;
-  }
+  } */
 
   .search-destinations {
     border: 1px solid;

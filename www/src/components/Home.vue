@@ -166,7 +166,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .grid-item {
-    width: 33%;
+    width: 30%;
   }
 
   .result {
@@ -187,7 +187,6 @@
   .topbar {
     width: 70%;
     background-color: white;
-    
     border: 2px double gray;
     box-shadow: 5px 5px rgb(43, 42, 42);
     margin-top: 2vh; 

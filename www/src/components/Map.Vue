@@ -37,30 +37,32 @@
     },
     methods: {
       buildMap() {
-        this.bounds = new google.maps.LatLngBounds();
-        const element = document.getElementById(this.mapName)
+        if (this.coords.length > 0) {
+          this.bounds = new google.maps.LatLngBounds();
+          const element = document.getElementById(this.mapName)
 
-        this.map = new google.maps.Map(element);
-        this.coords.forEach((coord) => {
-          const position = new google.maps.LatLng(coord.lat, coord.long);
-          const marker = new google.maps.Marker({
-            position,
-            map: this.map,
-            animation: google.maps.Animation.DROP,
-            destination: coord
-          });
-          if (this.name == "destination") {
-            google.maps.event.addListener(marker, "click", (e) => {
-              this.selectActiveDest(marker.destination)
+          this.map = new google.maps.Map(element);
+          this.coords.forEach((coord) => {
+            const position = new google.maps.LatLng(coord.lat, coord.long);
+            const marker = new google.maps.Marker({
+              position,
+              map: this.map,
+              animation: google.maps.Animation.DROP,
+              destination: coord
             });
-          }
-          this.markers.push(marker)
-          this.map.fitBounds(this.bounds.extend(position))
-        });
-        this.map.setCenter(this.bounds.getCenter())
+            if (this.name == "destination") {
+              google.maps.event.addListener(marker, "click", (e) => {
+                this.selectActiveDest(marker.destination)
+              });
+            }
+            this.markers.push(marker)
+            this.map.fitBounds(this.bounds.extend(position))
+          });
+          this.map.setCenter(this.bounds.getCenter())
 
-        if (this.coords.length == 1 && this.name == "destination") {
-          this.map.setZoom(10)
+          if (this.coords.length == 1 && this.name == "destination") {
+            this.map.setZoom(10)
+          }
         }
       },
       selectActiveDest(dest) {

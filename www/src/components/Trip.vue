@@ -5,22 +5,19 @@
         <div class="col add-destination mb-2">
           <add-destination></add-destination>
         </div>
-        <!-- </div> -->
-        <!-- </div> -->
       </div>
       <div class="row">
         <div class="col-12 text-center mb-5">
           <google-map name="destination" :coords="destinations"></google-map>
         </div>
       </div>
-      <div class="row">
-        <div class="card-columns">
-          <div v-for="destination in destinations" :key="destination._id">
-            <edit-destination v-on:setDest="setDest" :destination="destination"></edit-destination>
+      <div class="row grid mt-2">
+        <div class="col-3 grid-item" v-for="destination in destinations" :key="destination._id">
+          <div class="result">
+              <edit-destination v-on:setDest="setDest" :destination="destination"></edit-destination>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -33,8 +30,8 @@
   export default {
     name: 'Trip',
     mounted() {
-      //this.$store.dispatch('authenticate')
       this.$store.dispatch('clearResults')
+      this.masonry(false)
     },
     components: {
       addDestination,
@@ -48,8 +45,16 @@
     },
     computed: {
       destinations() {
-        console.log(this.$store.state.destModule.destinations, "destinations")
-        return this.$store.state.destinations
+        return this.$store.state.destModule.destinations
+      }
+    },
+    watch: {
+      destinations: function () {
+        this.$nextTick(() => {
+          setTimeout(() => {
+            this.masonry(true);
+          }, 500);
+        });
       }
     },
     methods: {
@@ -68,6 +73,22 @@
           return d._id == dest._id
         })
         this.destinations.splice(index, 1, dest);
+      },
+      masonry(rebuild) {
+        if (!rebuild) {
+          var elem = document.querySelector('.grid');
+          this.msnry = new Masonry(elem, {
+            itemSelector: '.grid-item',
+            columnWidth: '.home',
+            percentPosition: true,
+            horizontalOrder: true
+          });
+          this.msnry = new Masonry('.grid', {
+          });
+        } else {
+          this.msnry.reloadItems()
+          this.msnry.layout()
+        }
       }
     }
   }
@@ -94,5 +115,13 @@
 
   .user-destinations {
     background-color: rgba(247, 247, 247, 0.589);
+  }
+
+  .dest-card {
+    margin: 3vh;
+  }
+
+  .grid-item {
+    width: 33%;
   }
 </style>

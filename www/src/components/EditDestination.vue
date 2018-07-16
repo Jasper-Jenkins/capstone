@@ -13,16 +13,16 @@
           </router-link>
 
           <div class="card-text">
-              <button class="btn btn-success" @click="toggleEdit">Edit</button>
-              <form @keyup="updateDest" v-on:submit.prevent="editDestination(edit)" class="form bgform d-flex flex-column" style="width: 80%; margin: auto;" v-if="editBool">
-                <input class="input" type="text" name="title" placeholder=" Title" id="title" v-model="edit.title">
-                <input class="input mt-2" type="text" name="description" placeholder=" Description" id="name" v-model="edit.photo">
-                <button class="btn btn-primary btn-success mb-2 mt-2" type="submit">Submit</button>
-              </form>
-      
-              <button type="button" class="btn btn-primary" @click="publishDest(destination)" v-if="!destination.published">Publish</button>
-              <button type="button" class="btn btn-primary" @click="publishDest(destination)" v-if="!destination.published">Unpublish</button>
-              <button type="button" class="btn btn-danger" @click="deleteDest(destination)">Cancel</button>
+            <button class="btn btn-success" @click="toggleEdit">Edit</button>
+            <form @keyup="updateDest" v-on:submit.prevent="editDestination(edit)" class="form bgform d-flex flex-column" style="width: 80%; margin: auto;"
+              v-if="editBool">
+              <input class="input" type="text" name="title" placeholder=" Title" id="title" v-model="edit.title">
+              <input class="input mt-2" type="text" name="description" placeholder=" Description" id="name" v-model="edit.photo">
+              <button class="btn btn-primary btn-success mb-2 mt-2" type="submit">Submit</button>
+            </form>
+            <button type="button" class="btn btn-danger" @click="deleteDest(destination)">Cancel</button>
+            <input type="checkbox" id="published" v-model="destination.published" @click="publishDest(destination)">
+            <label for="published">Publish</label>
           </div>
         </div>
       </div>
@@ -113,4 +113,9 @@
 </script>
 
 <style scoped>
+  .edit-destination {
+    padding: 5px;
+    border: 2px solid black;
+    margin: 10px;
+  }
 </style>
