@@ -53,6 +53,9 @@ router.get('/api/trips/:id/destinations', (req, res, next) => {
 //ADD
 router.post('/api/destinations', (req, res, next) => {
   var destination = req.body
+  if(destination.photo.length < 1) {
+    destination.photo = "https://d30y9cdsu7xlg0.cloudfront.net/png/18457-200.png"
+  }
   destination.userId = req.session.uid
   Destination.create(destination)
     .then(newDestination => {

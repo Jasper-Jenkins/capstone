@@ -7,27 +7,40 @@
         <google-map name="todos" :coords="todos"></google-map>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <div v-for="(todo, todoIndex) in todos" :key="todo._id">
-          <h4>{{todo.title}}</h4>
-          <h5>{{todo.description}}</h5>
-          <p>Author: {{todo.author}}</p>
-
+    <div class="row mt-3">
+        <div class="col-4 todo-card card" v-for="(todo, todoIndex) in todos" :key="todo._id">
           <div v-if="todo.gallery.length > 0">
             <carousel :gallery="todo.gallery"></carousel>
           </div>
-
-          <button @click="toggleEdit">Edit</button>
-          <form v-on:submit.prevent="editTodo(todo)" class="form" v-if="toggle">
-            <input class="input" type="text" name="comment" placeholder=" comment" id="comment" v-model="todo.title">
-            <input class="input" type="text" name="description" placeholder="description" id="descroption" v-model="todo.description">
-            <input class="input" type="url" name="image" placeholder=" image" id="image" v-model="img">
-            <button class="btn btn-primary btn-success" type="submit">Make Change</button>
-          </form>
+          <h4>{{todo.title}}</h4>
+          <h5>{{todo.description}}</h5>
+          <p>Author: {{todo.author}}</p>
+          <button type="button" data-toggle="modal" data-target="#editTodoModal" @click="selectTodo(todo)">Update</button>
+          <div class="modal fade" id="editTodoModal" tabindex="-1" role="dialog" aria-labelledby="editTodoModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="editTodoModalTitle">Update Todo!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form v-on:submit.prevent="editTodo()" class="form d-flex flex-column" >
+                    <input class="input" type="text" name="comment" placeholder=" comment" id="comment" v-model="newTodo.title">
+                    <input class="input" type="text" name="description" placeholder="description" id="descroption" v-model="newTodo.description">
+                    <input class="input" type="url" name="image" placeholder=" image" id="image" v-model="img">
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  <button class="btn btn-primary btn-primary" data-dismiss="modal" @click="editTodo">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <comment :todo="todo"></comment>
         </div>
-        <comment :todo="todo"></comment>
-      </div>
     </div>
   </div>
 </template>
@@ -49,11 +62,7 @@
         isActive: true,
         toggle: false,
         img: '',
-        todo: {
-          title: "",
-          description: "",
-          gallery: [],
-        }
+        newTodo: {}
       }
     },
     mounted() {
@@ -65,22 +74,29 @@
     },
     computed: {
       todos() {
-        var todos = this.$store.state.todoModule.userTodos
-        console.log(this.$store.state.todoModule.userTodos, "todos are computing and should be empty for now")
-        return todos
+        return this.$store.state.todoModule.userTodos
+      },
+      currentTodo() {
+        return this.$store.state.todoModule.activeTodo
       }
     },
     methods: {
       deleteTodo(todo) {
         this.$store.dispatch('deleteTodo', todo)
       },
-      editTodo(todo) {
-        todo.gallery.unshift(this.img)
-        this.$store.dispatch('editTodo', todo)
+      editTodo() {
+        if(this.img.length > 0) {
+          this.newTodo.gallery.unshift(this.img)
+        }
+        this.$store.dispatch('editTodo', this.newTodo)
         // this.todo.img = ''
       },
       toggleEdit() {
         this.toggle = !this.toggle;
+      },
+      selectTodo(todo) {
+        this.$store.dispatch("selectTodo", todo)
+        this.newTodo = todo
       }
     }
   }
@@ -89,7 +105,11 @@
 
 <style scoped>
   .formatCarousel {
-    width: 60vh;
+    width: 100%;
     margin: auto;
+  }
+
+  .todo-card {
+    margin: 10px;
   }
 </style>

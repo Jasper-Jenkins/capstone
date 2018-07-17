@@ -42,7 +42,7 @@
                   </div>
                   <form v-on:submit.prevent="addImg">
                     <input type="url" name="img" placeholder="Image Url" id="img" v-model="todo.img">
-                    <button class="btn btn-primary btn-success" type="submit">Add</button>
+                    <button class="btn btn-primary btn-success" v-if="todo.img.length > 0" type="submit">Add</button>
                   </form>
                 </div>
                 <div class="modal-footer">
@@ -134,8 +134,9 @@
         }
       },
       addImg() {
-        this.todo.gallery.unshift(this.todo.img)
-        debugger
+        if(this.todo.img.length > 0) {
+          this.todo.gallery.unshift(this.todo.img)
+        }
         this.todo.img = ''
       },
       getPos(position) {

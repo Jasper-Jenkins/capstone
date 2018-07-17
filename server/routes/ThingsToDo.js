@@ -37,8 +37,10 @@ router.get('/api/destinations/:destinationId/thingstodo', (req, res, next) => {
 })
 //ADD
 router.post('/api/thingstodo', (req, res, next) => {
-  console.log(req.body)
   var todo = req.body
+  if(todo.gallery.length < 1) {
+    todo.gallery = ["https://d30y9cdsu7xlg0.cloudfront.net/png/18457-200.png"]
+  }
   todo.userId = req.session.uid
   ToDo.create(todo)
     .then(newThingToDo => {
@@ -51,6 +53,10 @@ router.post('/api/thingstodo', (req, res, next) => {
 
 //EDIT
 router.put('/api/thingstodo/:id', (req, res, next) => {
+  if(req.body.gallery.length > 1 && req.body.gallery.includes("https://d30y9cdsu7xlg0.cloudfront.net/png/18457-200.png")) {
+    var i = req.body.gallery.indexOf("https://d30y9cdsu7xlg0.cloudfront.net/png/18457-200.png")
+    req.body.gallery.splice(i, 1)
+  }
   ToDo.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then(thingtodo => {
       res.status(200).send({ message: "Successfully Updated", thingtodo })

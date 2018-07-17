@@ -13,7 +13,8 @@ export default {
   state: {
     userTodos: [],
     googleTodos: [],
-    todos: []
+    todos: [],
+    activeTodo: {}
   },
   mutations: {
     setUserTodos(state, todos) {
@@ -41,7 +42,9 @@ export default {
     setTodos(state, todos) {
       state.todos = todos
     },
-
+    setTodo(state, todo) {
+      state.activeTodo = todo
+    }
   },
   actions: {
     findTodos({ dispatch, commit, rootState }, category) {
@@ -134,5 +137,8 @@ export default {
           console.log(res.data.thingtodo)
         })
     },
+    selectTodo({dispatch, commit}, todo) {
+      commit("setTodo", todo)
+    }
   }
 }
