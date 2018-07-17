@@ -70,7 +70,6 @@ export default {
        })
     },
     publishTrip({dispatch, commit}, trip) {
-      trip.published = !trip.published
       var pub = {
         published: !trip.published
       }

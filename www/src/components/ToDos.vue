@@ -15,7 +15,7 @@
           <p>Author: {{todo.author}}</p>
 
           <div v-if="todo.gallery.length > 0">
-              <carousel :todo="todo"></carousel>
+            <carousel :gallery="todo.gallery"></carousel>
           </div>
 
           <button @click="toggleEdit">Edit</button>

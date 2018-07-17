@@ -1,7 +1,7 @@
 <template>
   <div id="toggleSwitches" class="carousel slide formatCarousel" data-ride="carousel" data-interval="1000" v-on:change="autoSlide()">
     <div class="carousel-inner">
-      <div v-for="(img, index) in todo.gallery" v-bind:class="{active: index==activeImage, 'carousel-item': true} ">
+      <div v-for="(img, index) in gallery" v-bind:class="{active: index==activeImage, 'carousel-item': true} ">
         <img class="d-block w-100 img-fluid" style="height: 40vh;" :src="img" alt="">
       </div>
     </div>
@@ -24,25 +24,20 @@
   export default {
     name: 'carousel',
     props: {
-      todo: {
-        type: Object,
+      gallery: {
+        type: Array,
         required: true
       }
     },
     data() {
       return {
-        activeImage: 0,
-        timer: null
+        activeImage: 0
       }
-    },
-    mounted() {
-      this.autoSlide(false)
     },
     computed: {},
     methods: {
       nextImage() {
-        this.autoSlide()
-        if (this.activeImage == this.todo.gallery.length - 1) {
+        if (this.activeImage == this.gallery.length - 1) {
           this.activeImage = 0
         } else {
           this.activeImage++
@@ -50,19 +45,11 @@
       },
       prevImage() {
         if (this.activeImage == 0) {
-          this.activeImage = this.todo.gallery.length - 1
+          this.activeImage = this.gallery.length - 1
         } else {
 
           this.activeImage--
         }
-      },
-      autoSlide() {
-        if(this.timer) {
-          clearInterval(this.timer)
-        }
-        this.timer = setInterval(() => {
-            this.nextImage()
-          }, 5000)
       }
     }
   }

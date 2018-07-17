@@ -12,9 +12,9 @@
           <input class="input mt-2" type="text" name="description" placeholder=" Description" id="name" v-model="edit.description">
           <button class="btn btn-primary btn-success mb-2 mt-2" type="submit">Submit</button>
         </form>
-        <button type="button" class="btn btn-primary" @click="publishTrip(trip)" v-if="!trip.published">Publish</button>
-<button type="button" class="btn btn-primary" @click="publishTrip(trip)" v-if="trip.published">Unpublish</button>
         <button type="button" class="btn btn-danger" @click="deleteTrip(trip)">Cancel</button>
+        <label for="published" style="color: black;">Publish</label>
+        <input type="checkbox" id="published" v-model="trip.published" @click="publishTrip(trip)">
       </div>
     </div>
   </div>
@@ -30,7 +30,7 @@
       }
     },
     mounted() {
-   
+
       this.edit = {
         title: this.trip.title,
         description: this.trip.description,
