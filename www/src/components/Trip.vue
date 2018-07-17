@@ -54,6 +54,9 @@
           setTimeout(() => {
             this.masonry(true);
           }, 500);
+          setTimeout(() => {
+            this.masonry(true);
+          }, 3000)
         });
       }
     },

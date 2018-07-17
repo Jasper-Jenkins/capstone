@@ -113,6 +113,7 @@ export default {
         })
     },
     deleteTodo({ commit, dispatch }, todo) {
+      debugger
       var temp = todo
       server.delete('/api/thingstodo/' + todo._id)
         .then(res => {

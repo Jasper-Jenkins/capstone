@@ -1,5 +1,5 @@
 <template>
-  <div id="toggleSwitches" class="carousel slide formatCarousel" data-ride="carousel" data-interval="1000" v-on:change="autoSlide()">
+  <div id="toggleSwitches" class="carousel slide formatCarousel" data-ride="carousel" data-interval="1000">
     <div class="carousel-inner">
       <div v-for="(img, index) in gallery" v-bind:class="{active: index==activeImage, 'carousel-item': true} ">
         <img class="d-block w-100 img-fluid" style="height: 40vh;" :src="img" alt="">
@@ -11,7 +11,7 @@
         <span class="sr-only" @click="prevImage">Previous</span>
       </a>
     </span>
-    <span @click="nextImage(); autoSlide()">
+    <span @click="nextImage">
       <a class="carousel-control-next" href="#toggleSwitches" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>

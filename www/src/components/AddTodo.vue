@@ -1,10 +1,11 @@
 <template>
   <div class="add-todo todo">
-    <div class="find d-flex flex-row">
-      <select name="Category" class="form-control" v-model="category" v-on:change="searchTodos">
-        <option value="Select a Category" hidden>Select a Category</option>
+    <div id="category-drop" class="find d-flex flex-row">
+      <select name="Category" class="form-control" v-model="category">
+        <option value="Search by Category" hidden>Search by Category</option>
         <option v-for="category in categories" :value="category">{{category}}</option>
       </select>
+      <button class="btn btn-success" @change="searchTodos">Search</button>
     </div>
     <div class="results" v-if="usersTodos.length + googleTodos.length > 0">
       <div class="userResults">
@@ -26,7 +27,7 @@
     name: 'addTodo',
     data() {
       return {
-        category: 'Select a Category'
+        category: 'Search by Category'
       }
     },
     mounted(){

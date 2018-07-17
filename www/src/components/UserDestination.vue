@@ -8,9 +8,8 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12">
-          <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#todoModal">Create New Todo</button>
-          <button @click="toggleAdd" class="btn btn-success">Add Todo</button>
+        <div class="col-12 d-flex flex-row justify-content-center">
+          <button class="btn btn-primary create-todo" type="button" data-toggle="modal" data-target="#todoModal">Create New Todo</button>
           <div class="modal fade" id="todoModal" tabindex="-1" role="dialog" aria-labelledby="todoModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
@@ -52,9 +51,9 @@
               </div>
             </div>
           </div>
-          <div class="todos">
-            <add-todo v-if="displayAdd"></add-todo>
-          </div>
+          <add-todo class="add-todo"></add-todo>
+        </div>
+        <div class="col-12">
           <todos></todos>
         </div>
       </div>
@@ -134,7 +133,7 @@
         }
       },
       addImg() {
-        if(this.todo.img.length > 0) {
+        if (this.todo.img.length > 0) {
           this.todo.gallery.unshift(this.todo.img)
         }
         this.todo.img = ''
@@ -160,9 +159,13 @@
     background-color: lightseagreen;
   }
 
-  .todos {
-    width: 50vh;
-    margin: auto;
+  .add-todo {
+    width: 30vh;
+    margin: 1vh;
+  }
+
+  .create-todo {
+    margin: 1vh;
   }
 
   .add-img {

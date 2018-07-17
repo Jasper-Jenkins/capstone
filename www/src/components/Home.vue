@@ -25,7 +25,10 @@
         this.$nextTick(() => {
           setTimeout(() => {
             this.masonry(true);
-          }, 1000);
+          }, 500);
+          setTimeout(() => {
+            this.masonry(true);
+          }, 3000);
         });
       }
     },
