@@ -15,12 +15,3 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
-
-Vue.directive('mason', {
-  update(el, binding, vnode) {
-    var func = binding.value
-    Vue.nextTick(() => {
-      func()
-    }) 
-  }
-})

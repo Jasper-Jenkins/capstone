@@ -60,7 +60,7 @@ export default {
     getGoogleTodos({ dispatch, commit, rootState }, category) {
       var search = {
         categories: category.replace(" ", "_"),
-        coords: rootState.destModule.activeDest.lat + ',' + rootState.activeDest.long
+        coords: rootState.destModule.activeDest.lat + ',' + rootState.destModule.activeDest.long
       }
       server.post('/api/nearby/places', search)
         .then(res => {
@@ -94,6 +94,11 @@ export default {
         lat: todo.geometry.location.lat,
         long: todo.geometry.location.lng
       }
+      if (todo.photos) {
+        newTodo.gallery = todo.photos.map(p => {
+          return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + p.photo_reference + "&key=AIzaSyDwdoKeSFC0xUN1VI8Ud78ZfpadFV7jUwU"
+        })
+      }
       newTodo["author"] = rootState.userModule.user.displayName
       server.post('/api/thingstodo', newTodo)
         .then(res => {
@@ -113,7 +118,6 @@ export default {
         })
     },
     deleteTodo({ commit, dispatch }, todo) {
-      debugger
       var temp = todo
       server.delete('/api/thingstodo/' + todo._id)
         .then(res => {
@@ -138,7 +142,7 @@ export default {
           console.log(res.data.thingtodo)
         })
     },
-    selectTodo({dispatch, commit}, todo) {
+    selectTodo({ dispatch, commit }, todo) {
       commit("setTodo", todo)
     }
   }

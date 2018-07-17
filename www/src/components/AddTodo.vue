@@ -5,7 +5,7 @@
         <option value="Search by Category" hidden>Search by Category</option>
         <option v-for="category in categories" :value="category">{{category}}</option>
       </select>
-      <button class="btn btn-success" @change="searchTodos">Search</button>
+      <button class="btn btn-success" @click="searchTodos">Search</button>
     </div>
     <div class="results" v-if="usersTodos.length + googleTodos.length > 0">
       <div class="userResults">
@@ -83,9 +83,8 @@
   }
 
   .todo-result {
-    
     margin: 0;
-    width: 50vh;
+    width: 20vh;
   }
 
   .googleResults :hover {

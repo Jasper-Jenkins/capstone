@@ -1,7 +1,6 @@
 <template>
   <div class="current-todos">
     <!-- This will be the display for a users current todos at each destination -->
-    <p>Fun activities for your destination!</p>
     <div class="row">
       <div class="col-12">
         <google-map name="todos" :coords="todos"></google-map>
@@ -92,7 +91,6 @@
           this.newTodo.gallery.unshift(this.img)
         }
         this.$store.dispatch('editTodo', this.newTodo)
-        // this.todo.img = ''
       },
       toggleEdit() {
         this.toggle = !this.toggle;
@@ -114,6 +112,8 @@
 
   .todo-card {
     margin: 10px;
+    border: 1px solid black;
+    padding: 5px;
   }
 
   .card-btn {

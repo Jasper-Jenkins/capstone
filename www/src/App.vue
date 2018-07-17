@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-dark bg-primary top-header format">
-        <a href="#" class="navbar-left">
+        <div class="navbar-left">
         <router-link :to="{ name: 'Home'}" class="navbar-brand">
             <a>Home</a>
         </router-link>
         <router-link :to="{ name: 'myTrips'}" class="navbar-brand">
             <a>My Trips</a>
         </router-link>
-        </a>
+      </div>
 
         <img src="./assets/whitelogo.png" width="280px">
      
@@ -59,15 +59,5 @@
   color: #2c3e50;
   margin-top: 0px;
 
-}
-/* .navbar-left{
-   position: absolute;
-   
-} */
-
-.format{
-   /* box-shadow: 0px 5px 10px black; */
-   /* margin-bottom: 15px; */
-   
 }
 </style>
