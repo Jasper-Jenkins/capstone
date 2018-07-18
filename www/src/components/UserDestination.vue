@@ -1,14 +1,10 @@
 <template>
   <div class="user-destination">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col">
-          <h3>{{currentDest.title}}</h3>
-          <p>Author: {{currentDest.author}}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 d-flex flex-row justify-content-center">
+    <div class="row d-flex justify-content-center">
+      <div class="col-6 top-bar">
+        <h3>{{currentDest.title}}</h3>
+        <p>Author: {{currentDest.author}}</p>
+        <div class="d-flex flex-row justify-content-center">
           <button class="btn btn-primary create-todo" type="button" data-toggle="modal" data-target="#todoModal">Create New Todo</button>
           <div class="modal fade" id="todoModal" tabindex="-1" role="dialog" aria-labelledby="todoModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -53,9 +49,11 @@
           </div>
           <add-todo class="add-todo"></add-todo>
         </div>
-        <div class="col-12">
-          <todos></todos>
-        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <todos></todos>
       </div>
     </div>
   </div>
@@ -160,7 +158,7 @@
   }
 
   .add-todo {
-    width: 30vh;
+    width: 40vh;
     margin: 1vh;
   }
 
@@ -170,5 +168,23 @@
 
   .add-img {
     width: 25vh;
+  }
+
+  .user-destination {
+    background-image: url(../assets/7BMcmF.jpg);
+    min-height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .top-bar {
+    width: 70%;
+    background-color: white;
+    border: 2px double gray;
+    box-shadow: 5px 5px rgb(43, 42, 42);
+    margin: 3vh auto;
+    padding: 5px;
   }
 </style>

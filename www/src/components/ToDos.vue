@@ -13,6 +13,10 @@
         </div>
         <h4>{{todo.title}}</h4>
         <h5>{{todo.description}}</h5>
+        <p>Categories: </p>
+        <div class="d-flex flex-row flex-wrap">
+          <p v-for="(category, i) in todo.categories" class="ml-2">{{category}}<span v-if="i < todo.categories.length - 1">,</span></p>
+        </div>
         <p>Author: {{todo.author}}</p>
         <div class="card-btn d-flex flex-row">
           <button class="btn btn-success mr-1" type="button" data-toggle="modal" data-target="#editTodoModal" @click="selectTodo(todo)">Update</button>
@@ -114,6 +118,7 @@
     margin: 10px;
     border: 1px solid black;
     padding: 5px;
+    box-shadow: 5px 5px rgb(43, 42, 42);
   }
 
   .card-btn {

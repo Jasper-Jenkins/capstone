@@ -39,14 +39,20 @@ export default {
           console.log(res.data)
         })
     },
-    authenticate({ commit, dispatch }, bool) {
+    authenticate({ commit, dispatch }) {
       server.get('/authenticate')
         .then(res => {
+          if(res.data.data.email == "demo@demo.com") {
+            dispatch("endDemo")
+          }
+          if(res.data.data._id) {
+            router.push({name: "User"})
+          }
           commit('setUser', res.data.data)
-
-          router.push('/')
+          router.push("/")
         })
         .catch(res => {
+          router.push({name: "User"})
           console.log(res)
         })
     },
@@ -61,7 +67,7 @@ export default {
         })
     },
     endDemo({ dispatch, commit, state }) {
-      if(state.user._id) {
+      if(state.user._id == "5b3fa93e552b6145d8d3be17") {
         server.delete('/end-demo/' + state.user._id)
         .then(res => {
           console.log(res)

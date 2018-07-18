@@ -10,14 +10,17 @@
     <div class="results" v-if="usersTodos.length + googleTodos.length > 0">
       <div class="userResults">
         <a v-for="todo in usersTodos" @click="addTodo(todo)">
-          <p class="todo-result">{{todo.title}}</p>
+          <p class="todo-result">{{todo.title}} - {{todo.author}}</p>
         </a>
       </div>
       <div class="googleResults">
         <a v-for="todo in googleTodos" @click="addGoogleTodo(todo)">
-          <p class="todo-result">{{todo.name}}</p>
+          <p class="todo-result">{{todo.name}} - Google</p>
         </a>
       </div>
+    </div>
+    <div class="close-results" v-if="usersTodos.length + googleTodos.length > 0">
+      <p class="close" @click="closeResults">x</p>
     </div>
   </div>
 </template>
@@ -30,8 +33,8 @@
         category: 'Search by Category'
       }
     },
-    mounted(){
-  
+    mounted() {
+
     },
     computed: {
       categories() {
@@ -56,6 +59,9 @@
       addGoogleTodo(todo) {
         this.$store.dispatch('addGoogleTodo', todo)
         this.$store.dispatch('clearResults')
+      },
+      closeResults() {
+        this.$store.dispatch('clearResults')
       }
     }
   }
@@ -63,7 +69,6 @@
 </script>
 
 <style scoped>
-
   .results {
     z-index: 1;
     position: absolute;
@@ -71,9 +76,10 @@
     max-height: 50vh;
     overflow: auto;
   }
+
   .userResults {
     background: white;
-    margin-bottom: 0; 
+    margin-bottom: 0;
     opacity: 0.9;
   }
 
@@ -84,7 +90,8 @@
 
   .todo-result {
     margin: 0;
-    width: 20vh;
+    width: 30vh;
+    border: 1px solid lightgray;
   }
 
   .googleResults :hover {
@@ -99,7 +106,18 @@
     cursor: pointer;
   }
 
-  label{
-  vertical-align:top;
+  label {
+    vertical-align: top;
+  }
+
+  .close-results {
+    margin-left: 32vh;
+    z-index: 1;
+    position: absolute;
+    display: block;
+  }
+
+  .close {
+    border: 1px solid black;
   }
 </style>

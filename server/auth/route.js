@@ -83,9 +83,12 @@ router.delete('/end-demo/:id', (req, res) => {
         .then(d => {
           Todo.deleteMany({ "userId": req.params.id })
             .then(t => {
+              req.session.destroy(() => {
                 res.send({
                   message: 'You have successfully been logged out. Please come back soon!'
                 })
+
+              })
             })
         })
     })
