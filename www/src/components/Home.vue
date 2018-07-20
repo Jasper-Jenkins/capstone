@@ -65,6 +65,8 @@
       },
       selectActiveDest(userResult) {
         this.$store.dispatch("selectActiveDest", userResult);
+        this.$store.dispatch("getUsersTrips");
+        this.$store.dispatch("getDestTodos", userResult._id)
         this.$router.push("Destination");
       },
       selectDest(dest) {
