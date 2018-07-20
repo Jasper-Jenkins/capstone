@@ -202,7 +202,7 @@
   }
 
   .card-btn {
-    width: 20%;
+    width: 25%;
     margin: auto;
   }
 </style>
